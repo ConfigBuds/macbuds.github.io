@@ -1,781 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mac Buds - Terminal</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-            background: #0a0e0a;
-            color: #00ff41;
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .terminal-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .terminal-window {
-            background: #001100;
-            border-radius: 8px;
-            border: 1px solid #00ff41;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), 0 16px 32px rgba(0, 0, 0, 0.4);
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-
-        .terminal-header {
-            background: #0d1b0d;
-            padding: 12px 16px;
-            border-bottom: 1px solid #00ff41;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .terminal-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .terminal-btn {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .btn-close { background: #ff4444; }
-        .btn-minimize { background: #ffaa00; }
-        .btn-maximize { background: #00ff41; }
-
-        .terminal-title {
-            margin-left: 12px;
-            font-size: 13px;
-            color: #55ff55;
-            font-weight: 500;
-        }
-
-        .terminal-content {
-            padding: 20px;
-            background: #0a0e0a;
-        }
-
-        .prompt {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .prompt-symbol {
-            color: #00ff41;
-            margin-right: 8px;
-            font-weight: 700;
-        }
-
-        .user-host {
-            color: #33ff33;
-            font-weight: 500;
-        }
-
-        .path {
-            color: #55ff55;
-            font-weight: 500;
-        }
-
-        .command {
-            color: #77ff77;
-            font-weight: 400;
-        }
-
-        .output {
-            margin-left: 16px;
-            margin-bottom: 16px;
-            color: #99ff99;
-        }
-
-        .ascii-art {
-            color: #00ff41;
-            font-size: 14px;
-            line-height: 1.2;
-            margin: 20px 0;
-            text-align: center;
-            animation: matrix-glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes matrix-glow {
-            from { text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41; }
-            to { text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41; }
-        }
-
-        .section-header {
-            color: #00ff41;
-            font-size: 16px;
-            font-weight: 700;
-            margin: 24px 0 12px 0;
-            border-bottom: 1px solid #00ff41;
-            padding-bottom: 8px;
-        }
-
-        .download-item {
-            background: #0d1b0d;
-            border: 1px solid #33ff33;
-            border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 12px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .download-item:hover {
-            border-color: #00ff41;
-            background: #112211;
-            transform: translateX(4px);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-        }
-
-        .download-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, #00ff41, #33ff33);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .download-item:hover::before {
-            opacity: 1;
-            box-shadow: 0 0 10px #00ff41;
-        }
-
-        .download-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .download-title {
-            color: #00ff41;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .download-version {
-            color: #55ff55;
-            font-size: 12px;
-            background: rgba(0, 255, 65, 0.1);
-            padding: 2px 8px;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 255, 65, 0.3);
-        }
-
-        .download-description {
-            color: #77ff77;
-            font-size: 12px;
-            margin-bottom: 12px;
-        }
-
-        .download-command {
-            background: #001100;
-            border: 1px solid #33ff33;
-            border-radius: 4px;
-            padding: 8px 12px;
-            font-size: 12px;
-            color: #99ff99;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .download-command:hover {
-            background: #0d1b0d;
-            border-color: #00ff41;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
-            color: #00ff41;
-        }
-
-        .download-command::after {
-            content: 'Click to copy';
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 10px;
-            color: #00ff41;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .download-command:hover::after {
-            opacity: 1;
-        }
-
-        .quick-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .quick-link {
-            background: #0d1b0d;
-            border: 1px solid #33ff33;
-            border-radius: 6px;
-            padding: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .quick-link:hover {
-            border-color: #00ff41;
-            background: #112211;
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-        }
-
-        .quick-link i {
-            color: #00ff41;
-            font-size: 18px;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .quick-link-text {
-            color: #77ff77;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .quick-link:hover .quick-link-text {
-            color: #00ff41;
-        }
-
-        .status-bar {
-            background: #0d1b0d;
-            border-top: 1px solid #00ff41;
-            padding: 8px 16px;
-            font-size: 11px;
-            color: #55ff55;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .status-left {
-            display: flex;
-            gap: 16px;
-        }
-
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #00ff41;
-            box-shadow: 0 0 5px #00ff41;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 5px #00ff41; }
-            50% { box-shadow: 0 0 15px #00ff41, 0 0 25px #00ff41; }
-            100% { box-shadow: 0 0 5px #00ff41; }
-        }
-
-        .blinking-cursor {
-            animation: blink 1s infinite;
-            color: #00ff41;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        .typewriter {
-            overflow: hidden;
-            white-space: nowrap;
-            animation: typing 3s steps(40, end);
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        .github-link {
-            color: #55ff55;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .github-link:hover {
-            color: #00ff41;
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .terminal-container {
-                padding: 10px;
-            }
-            
-            .terminal-content {
-                padding: 12px;
-            }
-            
-            .ascii-art {
-                font-size: 10px;
-            }
-            
-            .quick-links {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .coming-soon {
-            background: rgba(0, 255, 65, 0.1);
-            border: 1px solid rgba(0, 255, 65, 0.3);
-            border-radius: 6px;
-            padding: 16px;
-            margin-top: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .coming-soon:hover {
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-        }
-
-        .coming-soon .icon {
-            color: #00ff41;
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        .coming-soon-title {
-            color: #00ff41;
-            font-weight: 700;
-        }
-
-        .coming-soon-text {
-            color: #77ff77;
-            font-size: 12px;
-            margin-top: 4px;
-        }
-
-        /* Matrix rain effect on page load */
-        .matrix-char {
-            position: fixed;
-            color: #00ff41;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            z-index: -1;
-            animation: matrix-fall 3s linear infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes matrix-fall {
-            0% { transform: translateY(-100vh); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-
-        /* Subtle scan line effect */
-        .terminal-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00ff41, transparent);
-            animation: scan-line 3s linear infinite;
-            opacity: 0.1;
-        }
-
-        @keyframes scan-line {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(500px); }
-        }
-
-        /* Welcome message styling */
-        .welcome-output {
-            margin-left: 16px;
-            margin-bottom: 16px;
-            color: #55ff55;
-        }
-
-        .emoji {
-            filter: hue-rotate(90deg) brightness(1.2);
-        }
-    </style>
-</head>
-<body>
-    <div class="terminal-container">
-        <!-- Main Terminal Window -->
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-buttons">
-                    <div class="terminal-btn btn-close"></div>
-                    <div class="terminal-btn btn-minimize"></div>
-                    <div class="terminal-btn btn-maximize"></div>
-                </div>
-                <div class="terminal-title">macbuds@github.io — zsh — 80×24</div>
-            </div>
-            
-            <div class="terminal-content">
-                <!-- Logo -->
-                <div style="text-align: center; margin: 20px 0;">
-                    <svg viewBox="0 0 512 460" xmlns="http://www.w3.org/2000/svg" style="width: 300px; height: auto;">
-                      <defs>
-                        <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
-                          <stop offset="100%" style="stop-color:#00cc6a;stop-opacity:1" />
-                        </linearGradient>
-                        <linearGradient id="screenGlow" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" style="stop-color:#00ff88;stop-opacity:0.6" />
-                          <stop offset="50%" style="stop-color:#003322;stop-opacity:0.8" />
-                          <stop offset="100%" style="stop-color:#001111;stop-opacity:1" />
-                        </linearGradient>
-                        <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" style="stop-color:#0f0f0f;stop-opacity:1" />
-                          <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
-                        </linearGradient>
-                        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                          <feMerge> 
-                            <feMergeNode in="coloredBlur"/>
-                            <feMergeNode in="SourceGraphic"/>
-                          </feMerge>
-                        </filter>
-                      </defs>
-                      
-                      <!-- Main Container Background -->
-                      <rect x="0" y="0" width="512" height="460" fill="url(#backgroundGradient)" rx="30"/>
-                      
-                      <!-- Central Focus Area - Laptop perfectly centered -->
-                      <g transform="translate(256, 136)">
-                        <!-- Laptop Design - Centered and Proportioned -->
-                        <g transform="translate(-90, -65)">
-                          <!-- Laptop Base -->
-                          <rect x="0" y="98" width="180" height="28" rx="14" fill="#1a1a1a" stroke="#00ff88" stroke-width="2"/>
-                          <!-- Laptop Screen -->
-                          <rect x="20" y="0" width="140" height="105" rx="6" fill="#0d0d0d" stroke="#00ff88" stroke-width="2"/>
-                          <!-- Screen Content -->
-                          <rect x="25" y="6" width="130" height="93" rx="3" fill="url(#screenGlow)"/>
-                          
-                          <!-- Terminal-like content - Better spacing -->
-                          <g opacity="0.9">
-                            <text x="32" y="24" font-family="'Courier New', monospace" font-size="8" fill="#ffffff">&gt; MacBuds_init</text>
-                            <line x1="32" y1="33" x2="120" y2="33" stroke="#00ff88" stroke-width="1.5" opacity="0.8"/>
-                            <line x1="32" y1="42" x2="80" y2="42" stroke="#00ff88" stroke-width="1.5" opacity="0.6"/>
-                            <line x1="32" y1="51" x2="130" y2="51" stroke="#00ff88" stroke-width="1.5" opacity="0.7"/>
-                            <line x1="32" y1="60" x2="65" y2="60" stroke="#00ff88" stroke-width="1.5" opacity="0.5"/>
-                            <line x1="32" y1="69" x2="110" y2="69" stroke="#00ff88" stroke-width="1.5" opacity="0.6"/>
-                            
-                            <!-- Animated Cursor -->
-                            <rect x="115" y="67" width="1.5" height="8" fill="#00ff88">
-                              <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite"/>
-                            </rect>
-                          </g>
-                          
-                          <!-- Laptop hinge detail -->
-                          <rect x="20" y="103" width="140" height="3" rx="1.5" fill="#333" opacity="0.6"/>
-                        </g>
-                      </g>
-                      
-                      <!-- Refined Circuit Pattern - Better positioned -->
-                      <g transform="translate(103, 119)" opacity="0.4">
-                        <path d="M0 0 L29 0 L29 14 L58 14" stroke="#00ff88" stroke-width="1.5" fill="none"/>
-                        <path d="M0 24 L19 24 L19 38 L48 38" stroke="#00ff88" stroke-width="1.5" fill="none"/>
-                        <circle cx="29" cy="0" r="2" fill="#00ff88"/>
-                        <circle cx="29" cy="14" r="1.5" fill="#00ff88"/>
-                        <circle cx="19" cy="24" r="1.5" fill="#00ff88"/>
-                      </g>
-                      
-                      <g transform="translate(354, 119)" opacity="0.4">
-                        <path d="M0 14 L29 14 L29 0 L58 0" stroke="#00ff88" stroke-width="1.5" fill="none"/>
-                        <path d="M0 38 L19 38 L19 24 L48 24" stroke="#00ff88" stroke-width="1.5" fill="none"/>
-                        <circle cx="29" cy="14" r="2" fill="#00ff88"/>
-                        <circle cx="29" cy="0" r="1.5" fill="#00ff88"/>
-                        <circle cx="19" cy="38" r="1.5" fill="#00ff88"/>
-                      </g>
-                      
-                      <!-- MacBuds Text - Better Typography -->
-                      <g transform="translate(256, 253)">
-                        <text text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="700" letter-spacing="-1px">
-                          <tspan fill="#ffffff">Mac</tspan><tspan fill="url(#greenGradient)" filter="url(#glow)">Buds</tspan>
-                        </text>
-                      </g>
-                      
-                      <!-- Updated Tagline --> 
-                      <text x="256" y="278" text-anchor="middle" font-family="'SF Mono', 'Courier New', monospace" font-size="14" fill="#00cc6a" opacity="0.9" letter-spacing="0.5px">
-                        To help mac admins
-                      </text>
-                      
-                      <!-- Subtle Background Pattern -->
-                      <g opacity="0.3">
-                        <text x="40" y="58" font-family="'SF Mono', monospace" font-size="9" fill="#00ff88">0101</text>
-                        <text x="450" y="58" font-family="'SF Mono', monospace" font-size="8" fill="#00ff88">1010</text>
-                        <text x="40" y="375" font-family="'SF Mono', monospace" font-size="10" fill="#00ff88">0110</text>
-                        <text x="450" y="375" font-family="'SF Mono', monospace" font-size="9" fill="#00ff88">0011</text>
-                      </g>
-                      
-                      <!-- Minimal Geometric Accents -->
-                      <g transform="translate(77, 325)" opacity="0.3">
-                        <rect x="0" y="0" width="10" height="10" fill="none" stroke="#00ff88" stroke-width="1"/>
-                        <rect x="16" y="5" width="8" height="8" fill="none" stroke="#00ff88" stroke-width="1"/>
-                        <line x1="10" y1="5" x2="16" y2="9" stroke="#00ff88" stroke-width="1"/>
-                      </g>
-                      
-                      <g transform="translate(416, 325)" opacity="0.3">
-                        <rect x="0" y="0" width="10" height="10" fill="none" stroke="#00ff88" stroke-width="1"/>
-                        <rect x="16" y="5" width="8" height="8" fill="none" stroke="#00ff88" stroke-width="1"/>
-                        <line x1="10" y1="5" x2="16" y2="9" stroke="#00ff88" stroke-width="1"/>
-                      </g>
-                      
-                      <!-- Status Indicator - Moved to top right of green line -->
-                      <g transform="translate(373, 55)">
-                        <circle cx="0" cy="0" r="3" fill="#00ff88" opacity="0.9">
-                          <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2.5s" repeatCount="indefinite"/>
-                        </circle>
-                        <text x="8" y="3" text-anchor="start" font-family="'SF Mono', monospace" font-size="9" fill="#00cc6a" opacity="0.9">online</text>
-                      </g>
-                      
-                      <!-- Corner accent lines -->
-                      <g opacity="0.8">
-                        <!-- Top-left corner -->
-                        <line x1="32" y1="32" x2="64" y2="32" stroke="#00ff88" stroke-width="2"/>
-                        <line x1="32" y1="32" x2="32" y2="64" stroke="#00ff88" stroke-width="2"/>
-                        
-                        <!-- Top-right corner -->
-                        <line x1="448" y1="32" x2="480" y2="32" stroke="#00ff88" stroke-width="2"/>
-                        <line x1="480" y1="32" x2="480" y2="64" stroke="#00ff88" stroke-width="2"/>
-                        
-                        <!-- Bottom-left corner -->
-                        <line x1="32" y1="364" x2="32" y2="396" stroke="#00ff88" stroke-width="2"/>
-                        <line x1="32" y1="396" x2="64" y2="396" stroke="#00ff88" stroke-width="2"/>
-                        
-                        <!-- Bottom-right corner -->
-                        <line x1="480" y1="364" x2="480" y2="396" stroke="#00ff88" stroke-width="2"/>
-                        <line x1="448" y1="396" x2="480" y2="396" stroke="#00ff88" stroke-width="2"/>
-                      </g>
-                      
-                      <!-- Additional decorative elements in the lower space -->
-                      <g transform="translate(256, 340)" opacity="0.7">
-                        <!-- Central connection line -->
-                        <line x1="-80" y1="0" x2="80" y2="0" stroke="#00ff88" stroke-width="1" stroke-dasharray="3,2"/>
-                        
-                        <!-- Side nodes -->
-                        <circle cx="-80" cy="0" r="2" fill="#00ff88"/>
-                        <circle cx="80" cy="0" r="2" fill="#00ff88"/>
-                        <circle cx="0" cy="0" r="1.5" fill="#00ff88"/>
-                      </g>
-                      
-                      <!-- Bottom info text -->
-                      <text x="256" y="335" text-anchor="middle" font-family="'SF Mono', 'Courier New', monospace" font-size="10" fill="#00cc6a" opacity="0.8" letter-spacing="1px">
-                        ADMIN TOOLKIT READY
-                      </text>
-                    </svg>
-                </div>
-
-                <!-- Initial Prompt -->
-                <div class="prompt">
-                    <span class="prompt-symbol">➜</span>
-                    <span class="user-host">macadmin@macbuds</span>
-                    <span style="color: #55ff55;">:</span>
-                    <span class="path">~/apple-device-management</span>
-                    <span style="color: #55ff55;">$</span>
-                    <span class="command typewriter">cat welcome.txt</span>
-                    <span class="blinking-cursor">|</span>
-                </div>
-                
-                <div class="welcome-output">
-                    Welcome Mac Administrators! <span class="emoji">🍎</span><br>
-                    Your central hub for Apple device management resources.<br>
-                    Type 'help' for available commands or browse the resources below.
-                </div>
-
-                <!-- Downloads Section -->
-                <div class="section-header">
-                    <i class="fas fa-download"></i> ./downloads/
-                </div>
-
-                <div class="download-item">
-                    <div class="download-header">
-                        <div class="download-title">macOS Sequoia 15.5</div>
-                        <div class="download-version">latest</div>
-                    </div>
-                    <div class="download-description">
-                        Full installer package for macOS Sequoia - Latest stable release
-                    </div>
-                    <div class="download-command" onclick="copyToClipboard('curl -O https://swcdn.apple.com/content/downloads/51/28/082-44432-A_4NJSZXK8G5/v10fo5dlwd50fja3qbnhj7z9tp1dx41vq2/InstallAssistant.pkg')">
-                        curl -O https://swcdn.apple.com/.../InstallAssistant.pkg
-                    </div>
-                </div>
-
-                <div class="download-item">
-                    <div class="download-header">
-                        <div class="download-title">Safari 18.5</div>
-                        <div class="download-version">sonoma</div>
-                    </div>
-                    <div class="download-description">
-                        Latest Safari browser update with security enhancements
-                    </div>
-                    <div class="download-command" onclick="copyToClipboard('curl -O https://swcdn.apple.com/content/downloads/08/26/082-18361-A_O3VSRCP8K3/5vlwh79cz177ia1ws5w2aep4d46pknikt2/Safari18.5SonomaAuto.pkg')">
-                        curl -O https://swcdn.apple.com/.../Safari18.5SonomaAuto.pkg
-                    </div>
-                </div>
-
-                <!-- Resources Section -->
-                <div class="section-header">
-                    <i class="fas fa-folder"></i> ./resources/
-                </div>
-
-                <div class="quick-links">
-                    <div class="quick-link" onclick="window.location.href='/macOSversion'">
-                        <i class="fas fa-history"></i>
-                        <div class="quick-link-text">macOS Archives</div>
-                    </div>
-                    
-                    <div class="quick-link" onclick="window.open('https://github.com/macbudS', '_blank')">
-                        <i class="fab fa-github"></i>
-                        <div class="quick-link-text">GitHub Repos</div>
-                    </div>
-                    
-                    <div class="quick-link">
-                        <i class="fas fa-script"></i>
-                        <div class="quick-link-text">Admin Scripts</div>
-                    </div>
-                    
-                    <div class="quick-link">
-                        <i class="fas fa-shield-alt"></i>
-                        <div class="quick-link-text">Security Tools</div>
-                    </div>
-                </div>
-
-                <!-- Coming Soon -->
-                <div class="coming-soon">
-                    <div class="icon">🚀</div>
-                    <div class="coming-soon-title">Coming Soon</div>
-                    <div class="coming-soon-text">
-                        More tools, scripts, and documentation for Mac administrators
-                    </div>
-                </div>
-
-                <!-- Current Command Prompt -->
-                <div style="margin-top: 24px;">
-                    <div class="prompt">
-                        <span class="prompt-symbol">➜</span>
-                        <span class="user-host">macadmin@macbuds</span>
-                        <span style="color: #55ff55;">:</span>
-                        <span class="path">~/apple-device-management</span>
-                        <span style="color: #55ff55;">$</span>
-                        <span class="blinking-cursor">|</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Status Bar -->
-            <div class="status-bar">
-                <div class="status-left">
-                    <div class="status-item">
-                        <div class="status-dot"></div>
-                        <span>Connected</span>
-                    </div>
-                    <div class="status-item">
-                        <i class="fab fa-github" style="font-size: 10px;"></i>
-                        <a href="https://github.com/macbudS" class="github-link">macbudS</a>
-                    </div>
-                </div>
-                <div class="status-right">
-                    <span>zsh | UTF-8 | macOS Management Hub</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(function() {
-                // Visual feedback with green theme
-                event.target.style.background = '#1a4c1a';
-                event.target.style.borderColor = '#00ff41';
-                event.target.style.boxShadow = '0 0 15px rgba(0, 255, 65, 0.3)';
-                setTimeout(() => {
-                    event.target.style.background = '#001100';
-                    event.target.style.borderColor = '#33ff33';
-                    event.target.style.boxShadow = 'none';
-                }, 500);
-            });
-        }
-
-        // Add some interactive terminal behavior
-        document.addEventListener('DOMContentLoaded', function() {
-            // Simulate typing effect on load
-            setTimeout(() => {
-                const cursor = document.querySelector('.blinking-cursor');
-                if (cursor) {
-                    cursor.style.animation = 'blink 1s infinite';
-                }
-            }, 3000);
-
-            // Create subtle matrix effect
-            createMatrixEffect();
-        });
-
-        function createMatrixEffect() {
-            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-            
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    const char = document.createElement('div');
-                    char.className = 'matrix-char';
-                    char.textContent = chars[Math.floor(Math.random() * chars.length)];
-                    char.style.left = Math.random() * window.innerWidth + 'px';
-                    char.style.animationDelay = Math.random() * 2 + 's';
-                    document.body.appendChild(char);
-                    
-                    setTimeout(() => {
-                        char.remove();
-                    }, 3000);
-                }, i * 500);
-            }
-        }
-
-        // Add keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.key === 'c') {
-                console.log('Terminal: Process interrupted');
-            }
-        });
-
-        // Refresh matrix effect periodically
-        setInterval(createMatrixEffect, 15000);
-    </script>
-</body>
-</html>
+<svg viewBox="0 0 512 460" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00cc6a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="screenGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ff88;stop-opacity:0.6" />
+      <stop offset="50%" style="stop-color:#003322;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#001111;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0f0f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Main Container Background -->
+  <rect x="0" y="0" width="512" height="460" fill="url(#backgroundGradient)" rx="30"/>
+  
+  <!-- Central Focus Area - Laptop perfectly centered -->
+  <g transform="translate(256, 136)">
+    <!-- Laptop Design - Centered and Proportioned -->
+    <g transform="translate(-90, -65)">
+      <!-- Laptop Base -->
+      <rect x="0" y="98" width="180" height="28" rx="14" fill="#1a1a1a" stroke="#00ff88" stroke-width="2"/>
+      <!-- Laptop Screen -->
+      <rect x="20" y="0" width="140" height="105" rx="6" fill="#0d0d0d" stroke="#00ff88" stroke-width="2"/>
+      <!-- Screen Content -->
+      <rect x="25" y="6" width="130" height="93" rx="3" fill="url(#screenGlow)"/>
+      
+      <!-- Terminal-like content - Better spacing -->
+      <g opacity="0.9">
+        <text x="32" y="24" font-family="'Courier New', monospace" font-size="8" fill="#ffffff">&gt; MacBuds_init</text>
+        <line x1="32" y1="33" x2="120" y2="33" stroke="#00ff88" stroke-width="1.5" opacity="0.8"/>
+        <line x1="32" y1="42" x2="80" y2="42" stroke="#00ff88" stroke-width="1.5" opacity="0.6"/>
+        <line x1="32" y1="51" x2="130" y2="51" stroke="#00ff88" stroke-width="1.5" opacity="0.7"/>
+        <line x1="32" y1="60" x2="65" y2="60" stroke="#00ff88" stroke-width="1.5" opacity="0.5"/>
+        <line x1="32" y1="69" x2="110" y2="69" stroke="#00ff88" stroke-width="1.5" opacity="0.6"/>
+        
+        <!-- Animated Cursor -->
+        <rect x="115" y="67" width="1.5" height="8" fill="#00ff88">
+          <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+      
+      <!-- Laptop hinge detail -->
+      <rect x="20" y="103" width="140" height="3" rx="1.5" fill="#333" opacity="0.6"/>
+    </g>
+  </g>
+  
+  <!-- Refined Circuit Pattern - Better positioned -->
+  <g transform="translate(103, 119)" opacity="0.4">
+    <path d="M0 0 L29 0 L29 14 L58 14" stroke="#00ff88" stroke-width="1.5" fill="none"/>
+    <path d="M0 24 L19 24 L19 38 L48 38" stroke="#00ff88" stroke-width="1.5" fill="none"/>
+    <circle cx="29" cy="0" r="2" fill="#00ff88"/>
+    <circle cx="29" cy="14" r="1.5" fill="#00ff88"/>
+    <circle cx="19" cy="24" r="1.5" fill="#00ff88"/>
+  </g>
+  
+  <g transform="translate(354, 119)" opacity="0.4">
+    <path d="M0 14 L29 14 L29 0 L58 0" stroke="#00ff88" stroke-width="1.5" fill="none"/>
+    <path d="M0 38 L19 38 L19 24 L48 24" stroke="#00ff88" stroke-width="1.5" fill="none"/>
+    <circle cx="29" cy="14" r="2" fill="#00ff88"/>
+    <circle cx="29" cy="0" r="1.5" fill="#00ff88"/>
+    <circle cx="19" cy="38" r="1.5" fill="#00ff88"/>
+  </g>
+  
+  <!-- MacBuds Text - Better Typography -->
+  <g transform="translate(256, 253)">
+    <text text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="700" letter-spacing="-1px">
+      <tspan fill="#ffffff">Mac</tspan><tspan fill="url(#greenGradient)" filter="url(#glow)">Buds</tspan>
+    </text>
+  </g>
+  
+  <!-- Updated Tagline --> 
+  <text x="256" y="278" text-anchor="middle" font-family="'SF Mono', 'Courier New', monospace" font-size="14" fill="#00cc6a" opacity="0.9" letter-spacing="0.5px">
+    To help mac admins
+  </text>
+  
+  <!-- Subtle Background Pattern -->
+  <g opacity="0.3">
+    <text x="40" y="58" font-family="'SF Mono', monospace" font-size="9" fill="#00ff88">0101</text>
+    <text x="450" y="58" font-family="'SF Mono', monospace" font-size="8" fill="#00ff88">1010</text>
+    <text x="40" y="375" font-family="'SF Mono', monospace" font-size="10" fill="#00ff88">0110</text>
+    <text x="450" y="375" font-family="'SF Mono', monospace" font-size="9" fill="#00ff88">0011</text>
+  </g>
+  
+  <!-- Minimal Geometric Accents -->
+  <g transform="translate(77, 325)" opacity="0.3">
+    <rect x="0" y="0" width="10" height="10" fill="none" stroke="#00ff88" stroke-width="1"/>
+    <rect x="16" y="5" width="8" height="8" fill="none" stroke="#00ff88" stroke-width="1"/>
+    <line x1="10" y1="5" x2="16" y2="9" stroke="#00ff88" stroke-width="1"/>
+  </g>
+  
+  <g transform="translate(416, 325)" opacity="0.3">
+    <rect x="0" y="0" width="10" height="10" fill="none" stroke="#00ff88" stroke-width="1"/>
+    <rect x="16" y="5" width="8" height="8" fill="none" stroke="#00ff88" stroke-width="1"/>
+    <line x1="10" y1="5" x2="16" y2="9" stroke="#00ff88" stroke-width="1"/>
+  </g>
+  
+  <!-- Status Indicator - Moved to top right of green line -->
+  <g transform="translate(373, 55)">
+    <circle cx="0" cy="0" r="3" fill="#00ff88" opacity="0.9">
+      <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="8" y="3" text-anchor="start" font-family="'SF Mono', monospace" font-size="9" fill="#00cc6a" opacity="0.9">online</text>
+  </g>
+  
+  <!-- Corner accent lines -->
+  <g opacity="0.8">
+    <!-- Top-left corner -->
+    <line x1="32" y1="32" x2="64" y2="32" stroke="#00ff88" stroke-width="2"/>
+    <line x1="32" y1="32" x2="32" y2="64" stroke="#00ff88" stroke-width="2"/>
+    
+    <!-- Top-right corner -->
+    <line x1="448" y1="32" x2="480" y2="32" stroke="#00ff88" stroke-width="2"/>
+    <line x1="480" y1="32" x2="480" y2="64" stroke="#00ff88" stroke-width="2"/>
+    
+    <!-- Bottom-left corner -->
+    <line x1="32" y1="364" x2="32" y2="396" stroke="#00ff88" stroke-width="2"/>
+    <line x1="32" y1="396" x2="64" y2="396" stroke="#00ff88" stroke-width="2"/>
+    
+    <!-- Bottom-right corner -->
+    <line x1="480" y1="364" x2="480" y2="396" stroke="#00ff88" stroke-width="2"/>
+    <line x1="448" y1="396" x2="480" y2="396" stroke="#00ff88" stroke-width="2"/>
+  </g>
+  
+  <!-- Additional decorative elements in the lower space -->
+  <g transform="translate(256, 340)" opacity="0.7">
+    <!-- Central connection line -->
+    <line x1="-80" y1="0" x2="80" y2="0" stroke="#00ff88" stroke-width="1" stroke-dasharray="3,2"/>
+    
+    <!-- Side nodes -->
+    <circle cx="-80" cy="0" r="2" fill="#00ff88"/>
+    <circle cx="80" cy="0" r="2" fill="#00ff88"/>
+    <circle cx="0" cy="0" r="1.5" fill="#00ff88"/>
+  </g>
+  
+  <!-- Bottom info text -->
+  <text x="256" y="335" text-anchor="middle" font-family="'SF Mono', 'Courier New', monospace" font-size="10" fill="#00cc6a" opacity="0.8" letter-spacing="1px">
+    ADMIN TOOLKIT READY
+  </text>
+</svg>
