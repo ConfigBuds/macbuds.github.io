@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mac Buds - Terminal</title>
+    <title>MacBuds - Mac Admin Toolkit</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
@@ -16,24 +16,52 @@
 
         body {
             font-family: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-            background: #0a0e0a;
+            background: linear-gradient(135deg, #0a0e0a 0%, #000000 100%);
             color: #00ff41;
             line-height: 1.6;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            z-index: 1000;
+            padding: 10px 0;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 54px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-icon:hover {
+            transform: scale(1.1);
+        }
+
         .terminal-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 100px 40px 40px;
         }
 
         .terminal-window {
             background: #001100;
-            border-radius: 8px;
-            border: 1px solid #00ff41;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), 0 16px 32px rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            border: 2px solid #00ff41;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4), 0 20px 40px rgba(0, 0, 0, 0.5);
             margin-bottom: 20px;
             overflow: hidden;
         }
@@ -41,7 +69,7 @@
         .terminal-header {
             background: #0d1b0d;
             padding: 12px 16px;
-            border-bottom: 1px solid #00ff41;
+            border-bottom: 2px solid #00ff41;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -70,8 +98,9 @@
         }
 
         .terminal-content {
-            padding: 20px;
+            padding: 30px;
             background: #0a0e0a;
+            position: relative;
         }
 
         .prompt {
@@ -272,7 +301,7 @@
 
         .status-bar {
             background: #0d1b0d;
-            border-top: 1px solid #00ff41;
+            border-top: 2px solid #00ff41;
             padding: 8px 16px;
             font-size: 11px;
             color: #55ff55;
@@ -339,24 +368,6 @@
             text-decoration: underline;
         }
 
-        @media (max-width: 768px) {
-            .terminal-container {
-                padding: 10px;
-            }
-            
-            .terminal-content {
-                padding: 12px;
-            }
-            
-            .ascii-art {
-                font-size: 10px;
-            }
-            
-            .quick-links {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
         .coming-soon {
             background: rgba(0, 255, 65, 0.1);
             border: 1px solid rgba(0, 255, 65, 0.3);
@@ -388,7 +399,6 @@
             margin-top: 4px;
         }
 
-        /* Matrix rain effect on page load */
         .matrix-char {
             position: fixed;
             color: #00ff41;
@@ -404,7 +414,6 @@
             100% { transform: translateY(100vh); opacity: 0; }
         }
 
-        /* Subtle scan line effect */
         .terminal-content::before {
             content: '';
             position: absolute;
@@ -422,7 +431,6 @@
             100% { transform: translateY(500px); }
         }
 
-        /* Welcome message styling */
         .welcome-output {
             margin-left: 16px;
             margin-bottom: 16px;
@@ -432,64 +440,62 @@
         .emoji {
             filter: hue-rotate(90deg) brightness(1.2);
         }
+
+        @media (max-width: 768px) {
+            .terminal-container {
+                padding: 120px 15px 20px;
+            }
+            
+            .terminal-content {
+                padding: 20px;
+            }
+            
+            .ascii-art {
+                font-size: 10px;
+            }
+            
+            .quick-links {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="terminal-container">
-        <!-- Main Terminal Window -->
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-buttons">
-                    <div class="terminal-btn btn-close"></div>
-                    <div class="terminal-btn btn-minimize"></div>
-                    <div class="terminal-btn btn-maximize"></div>
-                </div>
-                <div class="terminal-title">macbuds@github.io — zsh — 80×24</div>
-            </div>
-            
-            <div class="terminal-content">
-                <!-- Logo -->
-                <div style="text-align: center; margin: 20px 0;">
-                    <svg viewBox="0 0 512 460" xmlns="http://www.w3.org/2000/svg" style="width: 300px; height: auto;">
-                      <defs>
-                        <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                          <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
-                          <stop offset="100%" style="stop-color:#00cc6a;stop-opacity:1" />
-                        </linearGradient>
-                        <linearGradient id="screenGlow" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" style="stop-color:#00ff88;stop-opacity:0.6" />
-                          <stop offset="50%" style="stop-color:#003322;stop-opacity:0.8" />
-                          <stop offset="100%" style="stop-color:#001111;stop-opacity:1" />
-                        </linearGradient>
-                        <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" style="stop-color:#0f0f0f;stop-opacity:1" />
-                          <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
-                        </linearGradient>
-                        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                          <feMerge> 
+    <header class="header">
+        <div class="logo-container">
+            <svg class="logo-icon" viewBox="0 0 512 460" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#00cc6a;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="screenGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#00ff88;stop-opacity:0.6" />
+                        <stop offset="50%" style="stop-color:#003322;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#001111;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#0f0f0f;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+                    </linearGradient>
+                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge> 
                             <feMergeNode in="coloredBlur"/>
                             <feMergeNode in="SourceGraphic"/>
-                          </feMerge>
-                        </filter>
-                      </defs>
-                      
-                      <!-- Main Container Background -->
-                      <rect x="0" y="0" width="512" height="460" fill="url(#backgroundGradient)" rx="30"/>
-                      
-                      <!-- Central Focus Area - Laptop perfectly centered -->
-                      <g transform="translate(256, 136)">
-                        <!-- Laptop Design - Centered and Proportioned -->
-                        <g transform="translate(-90, -65)">
-                          <!-- Laptop Base -->
-                          <rect x="0" y="98" width="180" height="28" rx="14" fill="#1a1a1a" stroke="#00ff88" stroke-width="2"/>
-                          <!-- Laptop Screen -->
-                          <rect x="20" y="0" width="140" height="105" rx="6" fill="#0d0d0d" stroke="#00ff88" stroke-width="2"/>
-                          <!-- Screen Content -->
-                          <rect x="25" y="6" width="130" height="93" rx="3" fill="url(#screenGlow)"/>
-                          
-                          <!-- Terminal-like content - Better spacing -->
-                          <g opacity="0.9">
+                        </feMerge>
+                    </filter>
+                </defs>
+                
+                <rect x="0" y="0" width="512" height="460" fill="url(#backgroundGradient)" rx="30"/>
+                
+                <g transform="translate(256, 136)">
+                    <g transform="translate(-90, -65)">
+                        <rect x="0" y="98" width="180" height="28" rx="14" fill="#1a1a1a" stroke="#00ff88" stroke-width="2"/>
+                        <rect x="20" y="0" width="140" height="105" rx="6" fill="#0d0d0d" stroke="#00ff88" stroke-width="2"/>
+                        <rect x="25" y="6" width="130" height="93" rx="3" fill="url(#screenGlow)"/>
+                        
+                        <g opacity="0.9">
                             <text x="32" y="24" font-family="'Courier New', monospace" font-size="8" fill="#ffffff">&gt; MacBuds_init</text>
                             <line x1="32" y1="33" x2="120" y2="33" stroke="#00ff88" stroke-width="1.5" opacity="0.8"/>
                             <line x1="32" y1="42" x2="80" y2="42" stroke="#00ff88" stroke-width="1.5" opacity="0.6"/>
@@ -497,113 +503,51 @@
                             <line x1="32" y1="60" x2="65" y2="60" stroke="#00ff88" stroke-width="1.5" opacity="0.5"/>
                             <line x1="32" y1="69" x2="110" y2="69" stroke="#00ff88" stroke-width="1.5" opacity="0.6"/>
                             
-                            <!-- Animated Cursor -->
                             <rect x="115" y="67" width="1.5" height="8" fill="#00ff88">
-                              <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite"/>
                             </rect>
-                          </g>
-                          
-                          <!-- Laptop hinge detail -->
-                          <rect x="20" y="103" width="140" height="3" rx="1.5" fill="#333" opacity="0.6"/>
                         </g>
-                      </g>
-                      
-                      <!-- Refined Circuit Pattern - Better positioned -->
-                      <g transform="translate(103, 119)" opacity="0.4">
-                        <path d="M0 0 L29 0 L29 14 L58 14" stroke="#00ff88" stroke-width="1.5" fill="none"/>
-                        <path d="M0 24 L19 24 L19 38 L48 38" stroke="#00ff88" stroke-width="1.5" fill="none"/>
-                        <circle cx="29" cy="0" r="2" fill="#00ff88"/>
-                        <circle cx="29" cy="14" r="1.5" fill="#00ff88"/>
-                        <circle cx="19" cy="24" r="1.5" fill="#00ff88"/>
-                      </g>
-                      
-                      <g transform="translate(354, 119)" opacity="0.4">
-                        <path d="M0 14 L29 14 L29 0 L58 0" stroke="#00ff88" stroke-width="1.5" fill="none"/>
-                        <path d="M0 38 L19 38 L19 24 L48 24" stroke="#00ff88" stroke-width="1.5" fill="none"/>
-                        <circle cx="29" cy="14" r="2" fill="#00ff88"/>
-                        <circle cx="29" cy="0" r="1.5" fill="#00ff88"/>
-                        <circle cx="19" cy="38" r="1.5" fill="#00ff88"/>
-                      </g>
-                      
-                      <!-- MacBuds Text - Better Typography -->
-                      <g transform="translate(256, 253)">
-                        <text text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="700" letter-spacing="-1px">
-                          <tspan fill="#ffffff">Mac</tspan><tspan fill="url(#greenGradient)" filter="url(#glow)">Buds</tspan>
-                        </text>
-                      </g>
-                      
-                      <!-- Updated Tagline --> 
-                      <text x="256" y="278" text-anchor="middle" font-family="'SF Mono', 'Courier New', monospace" font-size="14" fill="#00cc6a" opacity="0.9" letter-spacing="0.5px">
-                        To help mac admins
-                      </text>
-                      
-                      <!-- Subtle Background Pattern -->
-                      <g opacity="0.3">
-                        <text x="40" y="58" font-family="'SF Mono', monospace" font-size="9" fill="#00ff88">0101</text>
-                        <text x="450" y="58" font-family="'SF Mono', monospace" font-size="8" fill="#00ff88">1010</text>
-                        <text x="40" y="375" font-family="'SF Mono', monospace" font-size="10" fill="#00ff88">0110</text>
-                        <text x="450" y="375" font-family="'SF Mono', monospace" font-size="9" fill="#00ff88">0011</text>
-                      </g>
-                      
-                      <!-- Minimal Geometric Accents -->
-                      <g transform="translate(77, 325)" opacity="0.3">
-                        <rect x="0" y="0" width="10" height="10" fill="none" stroke="#00ff88" stroke-width="1"/>
-                        <rect x="16" y="5" width="8" height="8" fill="none" stroke="#00ff88" stroke-width="1"/>
-                        <line x1="10" y1="5" x2="16" y2="9" stroke="#00ff88" stroke-width="1"/>
-                      </g>
-                      
-                      <g transform="translate(416, 325)" opacity="0.3">
-                        <rect x="0" y="0" width="10" height="10" fill="none" stroke="#00ff88" stroke-width="1"/>
-                        <rect x="16" y="5" width="8" height="8" fill="none" stroke="#00ff88" stroke-width="1"/>
-                        <line x1="10" y1="5" x2="16" y2="9" stroke="#00ff88" stroke-width="1"/>
-                      </g>
-                      
-                      <!-- Status Indicator - Moved to top right of green line -->
-                      <g transform="translate(373, 55)">
-                        <circle cx="0" cy="0" r="3" fill="#00ff88" opacity="0.9">
-                          <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2.5s" repeatCount="indefinite"/>
-                        </circle>
-                        <text x="8" y="3" text-anchor="start" font-family="'SF Mono', monospace" font-size="9" fill="#00cc6a" opacity="0.9">online</text>
-                      </g>
-                      
-                      <!-- Corner accent lines -->
-                      <g opacity="0.8">
-                        <!-- Top-left corner -->
-                        <line x1="32" y1="32" x2="64" y2="32" stroke="#00ff88" stroke-width="2"/>
-                        <line x1="32" y1="32" x2="32" y2="64" stroke="#00ff88" stroke-width="2"/>
                         
-                        <!-- Top-right corner -->
-                        <line x1="448" y1="32" x2="480" y2="32" stroke="#00ff88" stroke-width="2"/>
-                        <line x1="480" y1="32" x2="480" y2="64" stroke="#00ff88" stroke-width="2"/>
-                        
-                        <!-- Bottom-left corner -->
-                        <line x1="32" y1="364" x2="32" y2="396" stroke="#00ff88" stroke-width="2"/>
-                        <line x1="32" y1="396" x2="64" y2="396" stroke="#00ff88" stroke-width="2"/>
-                        
-                        <!-- Bottom-right corner -->
-                        <line x1="480" y1="364" x2="480" y2="396" stroke="#00ff88" stroke-width="2"/>
-                        <line x1="448" y1="396" x2="480" y2="396" stroke="#00ff88" stroke-width="2"/>
-                      </g>
-                      
-                      <!-- Additional decorative elements in the lower space -->
-                      <g transform="translate(256, 340)" opacity="0.7">
-                        <!-- Central connection line -->
-                        <line x1="-80" y1="0" x2="80" y2="0" stroke="#00ff88" stroke-width="1" stroke-dasharray="3,2"/>
-                        
-                        <!-- Side nodes -->
-                        <circle cx="-80" cy="0" r="2" fill="#00ff88"/>
-                        <circle cx="80" cy="0" r="2" fill="#00ff88"/>
-                        <circle cx="0" cy="0" r="1.5" fill="#00ff88"/>
-                      </g>
-                      
-                      <!-- Bottom info text -->
-                      <text x="256" y="335" text-anchor="middle" font-family="'SF Mono', 'Courier New', monospace" font-size="10" fill="#00cc6a" opacity="0.8" letter-spacing="1px">
-                        ADMIN TOOLKIT READY
-                      </text>
-                    </svg>
-                </div>
+                        <rect x="20" y="103" width="140" height="3" rx="1.5" fill="#333" opacity="0.6"/>
+                    </g>
+                </g>
+                
+                <g transform="translate(256, 253)">
+                    <text text-anchor="middle" font-family="'SF Pro Display', 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="700" letter-spacing="-1px">
+                        <tspan fill="#ffffff">Mac</tspan><tspan fill="url(#greenGradient)" filter="url(#glow)">Buds</tspan>
+                    </text>
+                </g>
+                
+                <text x="256" y="278" text-anchor="middle" font-family="'SF Mono', 'Courier New', monospace" font-size="14" fill="#00cc6a" opacity="0.9" letter-spacing="0.5px">
+                    To help mac admins
+                </text>
+                
+                <g transform="translate(373, 55)">
+                    <circle cx="0" cy="0" r="3" fill="#00ff88" opacity="0.9">
+                        <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <text x="8" y="3" text-anchor="start" font-family="'SF Mono', monospace" font-size="9" fill="#00cc6a" opacity="0.9">online</text>
+                </g>
+                
+                <text x="256" y="335" text-anchor="middle" font-family="'SF Mono', 'Courier New', monospace" font-size="10" fill="#00cc6a" opacity="0.8" letter-spacing="1px">
+                    ADMIN TOOLKIT READY
+                </text>
+            </svg>
+        </div>
+    </header>
 
-                <!-- Initial Prompt -->
+    <div class="terminal-container">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-btn btn-close"></div>
+                    <div class="terminal-btn btn-minimize"></div>
+                    <div class="terminal-btn btn-maximize"></div>
+                </div>
+                <div class="terminal-title">macadmin@macbuds — zsh — 80×24</div>
+            </div>
+            
+            <div class="terminal-content">
                 <div class="prompt">
                     <span class="prompt-symbol">➜</span>
                     <span class="user-host">macadmin@macbuds</span>
@@ -618,9 +562,21 @@
                     Welcome Mac Administrators! <span class="emoji">🍎</span><br>
                 </div>
 
-                <!-- Downloads Section -->
                 <div class="section-header">
                     <i class="fas fa-download"></i> ./downloads/
+                </div>
+
+                <div class="download-item">
+                    <div class="download-header">
+                        <div class="download-title">macOS Sequoia 15.5 (IPSW)</div>
+                        <div class="download-version">ipsw</div>
+                    </div>
+                    <div class="download-description">
+                        iPhone Software format for Mac deployment and restoration
+                    </div>
+                    <div class="download-command" onclick="copyToClipboard('curl -O https://updates.cdn-apple.com/2024SummerSeed/fullrestores/082-44432/6E3F8B9A-9E5C-4F5A-8B9D-C2E4F7A8B3C1/UniversalMac_15.5_24F44_Restore.ipsw')">
+                        curl -O https://updates.cdn-apple.com/.../UniversalMac_15.5_24F44_Restore.ipsw
+                    </div>
                 </div>
 
                 <div class="download-item">
@@ -649,7 +605,6 @@
                     </div>
                 </div>
 
-                <!-- Resources Section -->
                 <div class="section-header">
                     <i class="fas fa-folder"></i> ./resources/
                 </div>
@@ -676,7 +631,6 @@
                     </div>
                 </div>
 
-                <!-- Coming Soon -->
                 <div class="coming-soon">
                     <div class="icon">🚀</div>
                     <div class="coming-soon-title">Coming Soon</div>
@@ -685,7 +639,6 @@
                     </div>
                 </div>
 
-                <!-- Current Command Prompt -->
                 <div style="margin-top: 24px;">
                     <div class="prompt">
                         <span class="prompt-symbol">➜</span>
@@ -698,7 +651,6 @@
                 </div>
             </div>
 
-            <!-- Status Bar -->
             <div class="status-bar">
                 <div class="status-left">
                     <div class="status-item">
@@ -720,7 +672,6 @@
     <script>
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(function() {
-                // Visual feedback with green theme
                 event.target.style.background = '#1a4c1a';
                 event.target.style.borderColor = '#00ff41';
                 event.target.style.boxShadow = '0 0 15px rgba(0, 255, 65, 0.3)';
@@ -732,9 +683,7 @@
             });
         }
 
-        // Add some interactive terminal behavior
         document.addEventListener('DOMContentLoaded', function() {
-            // Simulate typing effect on load
             setTimeout(() => {
                 const cursor = document.querySelector('.blinking-cursor');
                 if (cursor) {
@@ -742,7 +691,6 @@
                 }
             }, 3000);
 
-            // Create subtle matrix effect
             createMatrixEffect();
         });
 
@@ -765,14 +713,12 @@
             }
         }
 
-        // Add keyboard shortcuts
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.key === 'c') {
                 console.log('Terminal: Process interrupted');
             }
         });
 
-        // Refresh matrix effect periodically
         setInterval(createMatrixEffect, 15000);
     </script>
 </body>
