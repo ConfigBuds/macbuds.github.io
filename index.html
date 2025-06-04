@@ -26,7 +26,7 @@
         .terminal-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 40px 40px 40px;
+            padding: 40px 20px;
         }
 
         .terminal-window {
@@ -40,11 +40,11 @@
 
         .terminal-header {
             background: #0d1b0d;
-            padding: 12px 16px;
+            padding: 16px 20px;
             border-bottom: 2px solid #00ff41;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 20px;
         }
 
         .terminal-left {
@@ -77,56 +77,111 @@
         .terminal-right {
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: flex-end;
+            flex-shrink: 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border: 2px solid #00ff41;
+            border-radius: 8px;
+            background: rgba(0, 255, 65, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+            background: rgba(0, 255, 65, 0.1);
         }
 
         .logo-img {
-            width: 32px;
-            height: 32px;
+            max-width: 120px;
+            max-height: 40px;
+            width: auto;
+            height: auto;
             border-radius: 4px;
-            transition: transform 0.3s ease;
-            border: 1px solid #00ff41;
-            box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
-        }
-
-        .logo-img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            display: block;
         }
 
         .logo-fallback {
-            width: 32px;
-            height: 32px;
+            width: 120px;
+            height: 40px;
             border-radius: 4px;
-            border: 1px solid #00ff41;
-            box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             background: #0d1b0d;
-            transition: transform 0.3s ease;
+            font-size: 24px;
+            color: #00ff41;
         }
 
-        .logo-fallback:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-        }
-
-        .logo-text {
-            font-size: 18px;
-            filter: hue-rotate(90deg) brightness(1.2);
-        }
-
-        .terminal-content {
+        .terminal-content-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
             padding: 30px;
             background: #0a0e0a;
             position: relative;
+        }
+
+        .terminal-main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .terminal-logo-section {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 20px;
+        }
+
+        .main-logo-container {
+            border: 3px solid #00ff41;
+            border-radius: 12px;
+            padding: 16px;
+            background: rgba(0, 255, 65, 0.05);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+
+        .main-logo-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
+            background: rgba(0, 255, 65, 0.1);
+        }
+
+        .main-logo-img {
+            max-width: 200px;
+            max-height: 150px;
+            width: auto;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .main-logo-fallback {
+            width: 200px;
+            height: 150px;
+            border-radius: 8px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: #0d1b0d;
+            font-size: 48px;
+            color: #00ff41;
+            border: 2px solid #33ff33;
         }
 
         .prompt {
             display: flex;
             align-items: center;
             margin-bottom: 8px;
+            flex-wrap: wrap;
         }
 
         .prompt-symbol {
@@ -252,6 +307,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
+            word-break: break-all;
         }
 
         .download-command:hover {
@@ -271,6 +327,9 @@
             color: #00ff41;
             opacity: 0;
             transition: opacity 0.3s ease;
+            background: #0d1b0d;
+            padding: 2px 4px;
+            border-radius: 2px;
         }
 
         .download-command:hover::after {
@@ -434,7 +493,7 @@
             100% { transform: translateY(100vh); opacity: 0; }
         }
 
-        .terminal-content::before {
+        .terminal-content-wrapper::before {
             content: '';
             position: absolute;
             top: 0;
@@ -461,12 +520,39 @@
             filter: hue-rotate(90deg) brightness(1.2);
         }
 
+        @media (max-width: 1024px) {
+            .terminal-content-wrapper {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .terminal-logo-section {
+                order: -1;
+                align-self: center;
+            }
+
+            .main-logo-container {
+                padding: 12px;
+            }
+
+            .main-logo-img {
+                max-width: 150px;
+                max-height: 100px;
+            }
+
+            .main-logo-fallback {
+                width: 150px;
+                height: 100px;
+                font-size: 36px;
+            }
+        }
+
         @media (max-width: 768px) {
             .terminal-container {
-                padding: 20px 15px 20px;
+                padding: 20px 10px;
             }
             
-            .terminal-content {
+            .terminal-content-wrapper {
                 padding: 20px;
             }
             
@@ -480,12 +566,38 @@
 
             .terminal-header {
                 flex-direction: column;
-                gap: 8px;
+                gap: 12px;
                 text-align: center;
             }
 
             .terminal-left, .terminal-right {
                 justify-content: center;
+            }
+
+            .logo-container {
+                padding: 6px;
+            }
+
+            .logo-img {
+                max-width: 80px;
+                max-height: 30px;
+            }
+
+            .logo-fallback {
+                width: 80px;
+                height: 30px;
+                font-size: 16px;
+            }
+
+            .main-logo-img {
+                max-width: 120px;
+                max-height: 80px;
+            }
+
+            .main-logo-fallback {
+                width: 120px;
+                height: 80px;
+                font-size: 24px;
             }
         }
     </style>
@@ -504,117 +616,119 @@
                 </div>
             </div>
             
-            <div class="terminal-row" style="display: flex; align-items: center;">
-    <div class="terminal-content" style="flex: 1;">
-        <div class="prompt">
-            <span class="prompt-symbol">➜</span>
-            <span class="user-host">macadmin@macbuds</span>
-            <span style="color: #55ff55;">:</span>
-            <span class="path">~/apple-device-management</span>
-            <span style="color: #55ff55;">$</span>
-            <span class="command typewriter">cat welcome.txt</span>
-            <span class="blinking-cursor">|</span>
-        </div>
-        <div class="welcome-output">
-            Welcome Mac Administrators! <span class="emoji">🍎</span><br>
-        </div>
-    </div>
-    <div class="terminal-right" style="display:flex; justify-content:flex-end; align-items:center; min-width:200px;">
-        <img src="/assets/images/macbuds.jpg" 
-             alt="MacBuds" 
-             class="logo-img"
-             style="width:180px; height:auto;"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="logo-fallback" style="display: none;">
-            <span class="logo-text">🍎</span>
-        </div>
-    </div>
-</div>
-                <div class="section-header">
-                    <i class="fas fa-download"></i> ./downloads/
-                </div>
-
-                <div class="download-item">
-                    <div class="download-header">
-                        <div class="download-title">macOS Sequoia 15.5 (IPSW)</div>
-                        <div class="download-version">ipsw</div>
-                    </div>
-                    <div class="download-description">
-                        iPhone Software format for Mac deployment and restoration
-                    </div>
-                    <div class="download-command" onclick="copyToClipboard('curl -O https://updates.cdn-apple.com/2024SummerSeed/fullrestores/082-44432/6E3F8B9A-9E5C-4F5A-8B9D-C2E4F7A8B3C1/UniversalMac_15.5_24F44_Restore.ipsw')">
-                        curl -O https://updates.cdn-apple.com/.../UniversalMac_15.5_24F44_Restore.ipsw
-                    </div>
-                </div>
-
-                <div class="download-item">
-                    <div class="download-header">
-                        <div class="download-title">macOS Sequoia 15.5</div>
-                        <div class="download-version">latest</div>
-                    </div>
-                    <div class="download-description">
-                        Full installer package for macOS Sequoia - Latest stable release
-                    </div>
-                    <div class="download-command" onclick="copyToClipboard('curl -O https://swcdn.apple.com/content/downloads/51/28/082-44432-A_4NJSZXK8G5/v10fo5dlwd50fja3qbnhj7z9tp1dx41vq2/InstallAssistant.pkg')">
-                        curl -O https://swcdn.apple.com/.../InstallAssistant.pkg
-                    </div>
-                </div>
-
-                <div class="download-item">
-                    <div class="download-header">
-                        <div class="download-title">Safari 18.5</div>
-                        <div class="download-version">sonoma</div>
-                    </div>
-                    <div class="download-description">
-                        Latest Safari browser update with security enhancements
-                    </div>
-                    <div class="download-command" onclick="copyToClipboard('curl -O https://swcdn.apple.com/content/downloads/08/26/082-18361-A_O3VSRCP8K3/5vlwh79cz177ia1ws5w2aep4d46pknikt2/Safari18.5SonomaAuto.pkg')">
-                        curl -O https://swcdn.apple.com/.../Safari18.5SonomaAuto.pkg
-                    </div>
-                </div>
-
-                <div class="section-header">
-                    <i class="fas fa-folder"></i> ./resources/
-                </div>
-
-                <div class="quick-links">
-                    <div class="quick-link" onclick="window.location.href='/macOSversion'">
-                        <i class="fas fa-history"></i>
-                        <div class="quick-link-text">macOS Archives</div>
-                    </div>
-                    
-                    <div class="quick-link" onclick="window.open('https://github.com/macbudS', '_blank')">
-                        <i class="fab fa-github"></i>
-                        <div class="quick-link-text">GitHub Repos</div>
-                    </div>
-                    
-                    <div class="quick-link">
-                        <i class="fas fa-script"></i>
-                        <div class="quick-link-text">Admin Scripts</div>
-                    </div>
-                    
-                    <div class="quick-link">
-                        <i class="fas fa-shield-alt"></i>
-                        <div class="quick-link-text">Security Tools</div>
-                    </div>
-                </div>
-
-                <div class="coming-soon">
-                    <div class="icon">🚀</div>
-                    <div class="coming-soon-title">Coming Soon</div>
-                    <div class="coming-soon-text">
-                        More tools, scripts, and documentation for Mac administrators
-                    </div>
-                </div>
-
-                <div style="margin-top: 24px;">
+            <div class="terminal-content-wrapper">
+                <div class="terminal-main-content">
                     <div class="prompt">
                         <span class="prompt-symbol">➜</span>
                         <span class="user-host">macadmin@macbuds</span>
                         <span style="color: #55ff55;">:</span>
                         <span class="path">~/apple-device-management</span>
                         <span style="color: #55ff55;">$</span>
+                        <span class="command typewriter">cat welcome.txt</span>
                         <span class="blinking-cursor">|</span>
+                    </div>
+                    <div class="welcome-output">
+                        Welcome Mac Administrators! <span class="emoji">🍎</span><br>
+                    </div>
+
+                    <div class="section-header">
+                        <i class="fas fa-download"></i> ./downloads/
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sequoia 15.5 (IPSW)</div>
+                            <div class="download-version">ipsw</div>
+                        </div>
+                        <div class="download-description">
+                            iPhone Software format for Mac deployment and restoration
+                        </div>
+                        <div class="download-command" onclick="copyToClipboard('curl -O https://updates.cdn-apple.com/2024SummerSeed/fullrestores/082-44432/6E3F8B9A-9E5C-4F5A-8B9D-C2E4F7A8B3C1/UniversalMac_15.5_24F44_Restore.ipsw')">
+                            curl -O https://updates.cdn-apple.com/.../UniversalMac_15.5_24F44_Restore.ipsw
+                        </div>
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sequoia 15.5</div>
+                            <div class="download-version">latest</div>
+                        </div>
+                        <div class="download-description">
+                            Full installer package for macOS Sequoia - Latest stable release
+                        </div>
+                        <div class="download-command" onclick="copyToClipboard('curl -O https://swcdn.apple.com/content/downloads/51/28/082-44432-A_4NJSZXK8G5/v10fo5dlwd50fja3qbnhj7z9tp1dx41vq2/InstallAssistant.pkg')">
+                            curl -O https://swcdn.apple.com/.../InstallAssistant.pkg
+                        </div>
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">Safari 18.5</div>
+                            <div class="download-version">sonoma</div>
+                        </div>
+                        <div class="download-description">
+                            Latest Safari browser update with security enhancements
+                        </div>
+                        <div class="download-command" onclick="copyToClipboard('curl -O https://swcdn.apple.com/content/downloads/08/26/082-18361-A_O3VSRCP8K3/5vlwh79cz177ia1ws5w2aep4d46pknikt2/Safari18.5SonomaAuto.pkg')">
+                            curl -O https://swcdn.apple.com/.../Safari18.5SonomaAuto.pkg
+                        </div>
+                    </div>
+
+                    <div class="section-header">
+                        <i class="fas fa-folder"></i> ./resources/
+                    </div>
+
+                    <div class="quick-links">
+                        <div class="quick-link" onclick="window.location.href='/macOSversion'">
+                            <i class="fas fa-history"></i>
+                            <div class="quick-link-text">macOS Archives</div>
+                        </div>
+                        
+                        <div class="quick-link" onclick="window.open('https://github.com/macbudS', '_blank')">
+                            <i class="fab fa-github"></i>
+                            <div class="quick-link-text">GitHub Repos</div>
+                        </div>
+                        
+                        <div class="quick-link">
+                            <i class="fas fa-script"></i>
+                            <div class="quick-link-text">Admin Scripts</div>
+                        </div>
+                        
+                        <div class="quick-link">
+                            <i class="fas fa-shield-alt"></i>
+                            <div class="quick-link-text">Security Tools</div>
+                        </div>
+                    </div>
+
+                    <div class="coming-soon">
+                        <div class="icon">🚀</div>
+                        <div class="coming-soon-title">Coming Soon</div>
+                        <div class="coming-soon-text">
+                            More tools, scripts, and documentation for Mac administrators
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 24px;">
+                        <div class="prompt">
+                            <span class="prompt-symbol">➜</span>
+                            <span class="user-host">macadmin@macbuds</span>
+                            <span style="color: #55ff55;">:</span>
+                            <span class="path">~/apple-device-management</span>
+                            <span style="color: #55ff55;">$</span>
+                            <span class="blinking-cursor">|</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="terminal-logo-section">
+                    <div class="main-logo-container">
+                        <img src="/assets/images/macbuds.jpg" 
+                             alt="MacBuds Logo" 
+                             class="main-logo-img"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="main-logo-fallback">
+                            🍎
+                        </div>
                     </div>
                 </div>
             </div>
