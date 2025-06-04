@@ -126,16 +126,21 @@
 
         .welcome-section {
             display: flex;
-            align-items: flex-start;
-            gap: 30px;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
             margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+            text-align: center;
         }
 
         .welcome-content {
-            flex: 1;
-            min-width: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
         }
 
         .downloads-section {
@@ -524,9 +529,11 @@
         }
 
         .welcome-output {
-            margin-left: 16px;
-            margin-bottom: 16px;
             color: #55ff55;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            margin: 8px 0;
         }
 
         .emoji {
@@ -534,13 +541,6 @@
         }
 
         @media (max-width: 1024px) {
-            .welcome-section {
-                flex-direction: column;
-                gap: 20px;
-                align-items: center;
-                text-align: center;
-            }
-
             .main-logo-container {
                 padding: 12px;
             }
@@ -630,7 +630,7 @@
                             <span class="blinking-cursor">|</span>
                         </div>
                         <div class="welcome-output">
-                            Welcome Mac Administrators! <span class="emoji">🍎</span><br>
+                            Welcome Mac Administrators! <span class="emoji">🍎</span>
                         </div>
                     </div>
                     
