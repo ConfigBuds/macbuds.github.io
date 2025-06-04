@@ -119,17 +119,31 @@
         }
 
         .terminal-content-wrapper {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
             padding: 30px;
             background: #0a0e0a;
             position: relative;
         }
 
-        .terminal-main-content {
+        .welcome-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+        }
+
+        .welcome-content {
             flex: 1;
             min-width: 0;
+        }
+
+        .downloads-section {
+            margin-bottom: 30px;
+        }
+
+        .resources-section {
+            margin-bottom: 20px;
         }
 
         .terminal-logo-section {
@@ -137,7 +151,6 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding-top: 20px;
         }
 
         .main-logo-container {
@@ -521,14 +534,11 @@
         }
 
         @media (max-width: 1024px) {
-            .terminal-content-wrapper {
+            .welcome-section {
                 flex-direction: column;
-                gap: 30px;
-            }
-
-            .terminal-logo-section {
-                order: -1;
-                align-self: center;
+                gap: 20px;
+                align-items: center;
+                text-align: center;
             }
 
             .main-logo-container {
@@ -556,6 +566,11 @@
                 padding: 20px;
             }
             
+            .welcome-section {
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+            
             .ascii-art {
                 font-size: 10px;
             }
@@ -570,23 +585,8 @@
                 text-align: center;
             }
 
-            .terminal-left, .terminal-right {
+            .terminal-left {
                 justify-content: center;
-            }
-
-            .logo-container {
-                padding: 6px;
-            }
-
-            .logo-img {
-                max-width: 80px;
-                max-height: 30px;
-            }
-
-            .logo-fallback {
-                width: 80px;
-                height: 30px;
-                font-size: 16px;
             }
 
             .main-logo-img {
@@ -617,20 +617,38 @@
             </div>
             
             <div class="terminal-content-wrapper">
-                <div class="terminal-main-content">
-                    <div class="prompt">
-                        <span class="prompt-symbol">➜</span>
-                        <span class="user-host">macadmin@macbuds</span>
-                        <span style="color: #55ff55;">:</span>
-                        <span class="path">~/apple-device-management</span>
-                        <span style="color: #55ff55;">$</span>
-                        <span class="command typewriter">cat welcome.txt</span>
-                        <span class="blinking-cursor">|</span>
+                <!-- Welcome Section with Logo -->
+                <div class="welcome-section">
+                    <div class="welcome-content">
+                        <div class="prompt">
+                            <span class="prompt-symbol">➜</span>
+                            <span class="user-host">macadmin@macbuds</span>
+                            <span style="color: #55ff55;">:</span>
+                            <span class="path">~/apple-device-management</span>
+                            <span style="color: #55ff55;">$</span>
+                            <span class="command typewriter">cat welcome.txt</span>
+                            <span class="blinking-cursor">|</span>
+                        </div>
+                        <div class="welcome-output">
+                            Welcome Mac Administrators! <span class="emoji">🍎</span><br>
+                        </div>
                     </div>
-                    <div class="welcome-output">
-                        Welcome Mac Administrators! <span class="emoji">🍎</span><br>
+                    
+                    <div class="terminal-logo-section">
+                        <div class="main-logo-container">
+                            <img src="/assets/images/macbuds.jpg" 
+                                 alt="MacBuds Logo" 
+                                 class="main-logo-img"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="main-logo-fallback">
+                                🍎
+                            </div>
+                        </div>
                     </div>
+                </div>
 
+                <!-- Downloads Section -->
+                <div class="downloads-section">
                     <div class="section-header">
                         <i class="fas fa-download"></i> ./downloads/
                     </div>
@@ -673,7 +691,10 @@
                             curl -O https://swcdn.apple.com/.../Safari18.5SonomaAuto.pkg
                         </div>
                     </div>
+                </div>
 
+                <!-- Resources Section -->
+                <div class="resources-section">
                     <div class="section-header">
                         <i class="fas fa-folder"></i> ./resources/
                     </div>
@@ -707,28 +728,16 @@
                             More tools, scripts, and documentation for Mac administrators
                         </div>
                     </div>
-
-                    <div style="margin-top: 24px;">
-                        <div class="prompt">
-                            <span class="prompt-symbol">➜</span>
-                            <span class="user-host">macadmin@macbuds</span>
-                            <span style="color: #55ff55;">:</span>
-                            <span class="path">~/apple-device-management</span>
-                            <span style="color: #55ff55;">$</span>
-                            <span class="blinking-cursor">|</span>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="terminal-logo-section">
-                    <div class="main-logo-container">
-                        <img src="/assets/images/macbuds.jpg" 
-                             alt="MacBuds Logo" 
-                             class="main-logo-img"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="main-logo-fallback">
-                            🍎
-                        </div>
+                <div style="margin-top: 24px;">
+                    <div class="prompt">
+                        <span class="prompt-symbol">➜</span>
+                        <span class="user-host">macadmin@macbuds</span>
+                        <span style="color: #55ff55;">:</span>
+                        <span class="path">~/apple-device-management</span>
+                        <span style="color: #55ff55;">$</span>
+                        <span class="blinking-cursor">|</span>
                     </div>
                 </div>
             </div>
