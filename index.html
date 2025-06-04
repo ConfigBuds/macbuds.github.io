@@ -31,9 +31,9 @@
 
         .terminal-window {
             background: #001100;
-            border-radius: 12px;
-            border: 2px solid #00ff41;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4), 0 20px 40px rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            border: 4px solid #00ff41;
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.5), 0 25px 50px rgba(0, 0, 0, 0.6);
             margin-bottom: 20px;
             overflow: hidden;
         }
@@ -41,7 +41,7 @@
         .terminal-header {
             background: #0d1b0d;
             padding: 16px 20px;
-            border-bottom: 2px solid #00ff41;
+            border-bottom: 3px solid #00ff41;
             display: flex;
             align-items: center;
             gap: 20px;
@@ -84,17 +84,18 @@
         .logo-container {
             display: flex;
             align-items: center;
-            padding: 8px;
-            border: 2px solid #00ff41;
-            border-radius: 8px;
+            padding: 10px;
+            border: 3px solid #00ff41;
+            border-radius: 12px;
             background: rgba(0, 255, 65, 0.05);
             transition: all 0.3s ease;
         }
 
         .logo-container:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
             background: rgba(0, 255, 65, 0.1);
+            border-width: 4px;
         }
 
         .logo-img {
@@ -102,14 +103,14 @@
             max-height: 40px;
             width: auto;
             height: auto;
-            border-radius: 4px;
+            border-radius: 6px;
             display: block;
         }
 
         .logo-fallback {
             width: 120px;
             height: 40px;
-            border-radius: 4px;
+            border-radius: 6px;
             display: none;
             align-items: center;
             justify-content: center;
@@ -130,7 +131,7 @@
             gap: 30px;
             margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+            border-bottom: 2px solid rgba(0, 255, 65, 0.3);
         }
 
         .welcome-content {
@@ -154,18 +155,19 @@
         }
 
         .main-logo-container {
-            border: 3px solid #00ff41;
-            border-radius: 12px;
-            padding: 16px;
+            border: 4px solid #00ff41;
+            border-radius: 16px;
+            padding: 20px;
             background: rgba(0, 255, 65, 0.05);
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.3);
         }
 
         .main-logo-container:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
+            box-shadow: 0 0 40px rgba(0, 255, 65, 0.5);
             background: rgba(0, 255, 65, 0.1);
+            border-width: 5px;
         }
 
         .main-logo-img {
@@ -173,21 +175,21 @@
             max-height: 150px;
             width: auto;
             height: auto;
-            border-radius: 8px;
+            border-radius: 10px;
             display: block;
         }
 
         .main-logo-fallback {
             width: 200px;
             height: 150px;
-            border-radius: 8px;
+            border-radius: 10px;
             display: none;
             align-items: center;
             justify-content: center;
             background: #0d1b0d;
             font-size: 48px;
             color: #00ff41;
-            border: 2px solid #33ff33;
+            border: 3px solid #33ff33;
         }
 
         .prompt {
@@ -243,16 +245,16 @@
             font-size: 16px;
             font-weight: 700;
             margin: 24px 0 12px 0;
-            border-bottom: 1px solid #00ff41;
-            padding-bottom: 8px;
+            border-bottom: 2px solid #00ff41;
+            padding-bottom: 10px;
         }
 
         .download-item {
             background: #0d1b0d;
-            border: 1px solid #33ff33;
-            border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 12px;
+            border: 2px solid #33ff33;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 14px;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -260,9 +262,10 @@
 
         .download-item:hover {
             border-color: #00ff41;
+            border-width: 3px;
             background: #112211;
             transform: translateX(4px);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
         }
 
         .download-item::before {
@@ -271,7 +274,7 @@
             left: 0;
             top: 0;
             bottom: 0;
-            width: 3px;
+            width: 5px;
             background: linear-gradient(to bottom, #00ff41, #33ff33);
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -279,7 +282,7 @@
 
         .download-item:hover::before {
             opacity: 1;
-            box-shadow: 0 0 10px #00ff41;
+            box-shadow: 0 0 15px #00ff41;
         }
 
         .download-header {
@@ -299,9 +302,9 @@
             color: #55ff55;
             font-size: 12px;
             background: rgba(0, 255, 65, 0.1);
-            padding: 2px 8px;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 255, 65, 0.3);
+            padding: 3px 10px;
+            border-radius: 16px;
+            border: 2px solid rgba(0, 255, 65, 0.4);
         }
 
         .download-description {
@@ -312,9 +315,9 @@
 
         .download-command {
             background: #001100;
-            border: 1px solid #33ff33;
-            border-radius: 4px;
-            padding: 8px 12px;
+            border: 2px solid #33ff33;
+            border-radius: 8px;
+            padding: 10px 14px;
             font-size: 12px;
             color: #99ff99;
             cursor: pointer;
@@ -326,7 +329,8 @@
         .download-command:hover {
             background: #0d1b0d;
             border-color: #00ff41;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+            border-width: 3px;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
             color: #00ff41;
         }
 
@@ -341,8 +345,9 @@
             opacity: 0;
             transition: opacity 0.3s ease;
             background: #0d1b0d;
-            padding: 2px 4px;
-            border-radius: 2px;
+            padding: 3px 6px;
+            border-radius: 4px;
+            border: 1px solid #00ff41;
         }
 
         .download-command:hover::after {
@@ -352,15 +357,15 @@
         .quick-links {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
+            gap: 14px;
             margin-top: 16px;
         }
 
         .quick-link {
             background: #0d1b0d;
-            border: 1px solid #33ff33;
-            border-radius: 6px;
-            padding: 12px;
+            border: 2px solid #33ff33;
+            border-radius: 10px;
+            padding: 14px;
             text-align: center;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -369,9 +374,10 @@
 
         .quick-link:hover {
             border-color: #00ff41;
+            border-width: 3px;
             background: #112211;
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
         }
 
         .quick-link i {
@@ -393,8 +399,8 @@
 
         .status-bar {
             background: #0d1b0d;
-            border-top: 2px solid #00ff41;
-            padding: 8px 16px;
+            border-top: 3px solid #00ff41;
+            padding: 10px 18px;
             font-size: 11px;
             color: #55ff55;
             display: flex;
@@ -414,18 +420,19 @@
         }
 
         .status-dot {
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: #00ff41;
-            box-shadow: 0 0 5px #00ff41;
+            box-shadow: 0 0 8px #00ff41;
             animation: pulse 2s infinite;
+            border: 1px solid #33ff33;
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 5px #00ff41; }
-            50% { box-shadow: 0 0 15px #00ff41, 0 0 25px #00ff41; }
-            100% { box-shadow: 0 0 5px #00ff41; }
+            0% { box-shadow: 0 0 8px #00ff41; }
+            50% { box-shadow: 0 0 20px #00ff41, 0 0 30px #00ff41; }
+            100% { box-shadow: 0 0 8px #00ff41; }
         }
 
         .blinking-cursor {
@@ -462,16 +469,17 @@
 
         .coming-soon {
             background: rgba(0, 255, 65, 0.1);
-            border: 1px solid rgba(0, 255, 65, 0.3);
-            border-radius: 6px;
-            padding: 16px;
+            border: 3px solid rgba(0, 255, 65, 0.4);
+            border-radius: 10px;
+            padding: 20px;
             margin-top: 20px;
             text-align: center;
             transition: all 0.3s ease;
         }
 
         .coming-soon:hover {
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            border-color: rgba(0, 255, 65, 0.6);
         }
 
         .coming-soon .icon {
@@ -512,10 +520,10 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, #00ff41, transparent);
             animation: scan-line 3s linear infinite;
-            opacity: 0.1;
+            opacity: 0.15;
         }
 
         @keyframes scan-line {
@@ -542,7 +550,7 @@
             }
 
             .main-logo-container {
-                padding: 12px;
+                padding: 16px;
             }
 
             .main-logo-img {
@@ -598,6 +606,22 @@
                 width: 120px;
                 height: 80px;
                 font-size: 24px;
+            }
+
+            .terminal-window {
+                border-width: 3px;
+            }
+
+            .download-item {
+                border-width: 2px;
+            }
+
+            .download-command {
+                border-width: 2px;
+            }
+
+            .quick-link {
+                border-width: 2px;
             }
         }
     </style>
