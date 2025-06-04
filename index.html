@@ -126,21 +126,20 @@
 
         .welcome-section {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
+            align-items: flex-start;
+            gap: 30px;
             margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 1px solid rgba(0, 255, 65, 0.2);
-            text-align: center;
         }
 
         .welcome-content {
-            width: 100%;
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 12px;
+            text-align: center;
         }
 
         .downloads-section {
@@ -541,6 +540,16 @@
         }
 
         @media (max-width: 1024px) {
+            .welcome-section {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .welcome-content {
+                text-align: center;
+            }
+
             .main-logo-container {
                 padding: 12px;
             }
