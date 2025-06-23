@@ -44,7 +44,7 @@
             border-bottom: 2px solid #00ff41;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 20px;
         }
 
         .terminal-left {
@@ -77,6 +77,8 @@
         .terminal-right {
             display: flex;
             align-items: center;
+            justify-content: flex-end;
+            flex-shrink: 0;
         }
 
         .logo-container {
@@ -95,17 +97,25 @@
             background: rgba(0, 255, 65, 0.1);
         }
 
+        .logo-img {
+            max-width: 120px;
+            max-height: 40px;
+            width: auto;
+            height: auto;
+            border-radius: 4px;
+            display: block;
+        }
+
         .logo-fallback {
             width: 120px;
             height: 40px;
             border-radius: 4px;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             background: #0d1b0d;
             font-size: 24px;
             color: #00ff41;
-            font-weight: bold;
         }
 
         .terminal-content-wrapper {
@@ -137,7 +147,7 @@
         }
 
         .resources-section {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .terminal-logo-section {
@@ -162,18 +172,26 @@
             background: rgba(0, 255, 65, 0.1);
         }
 
+        .main-logo-img {
+            max-width: 200px;
+            max-height: 150px;
+            width: auto;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+        }
+
         .main-logo-fallback {
             width: 200px;
             height: 150px;
             border-radius: 8px;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             background: #0d1b0d;
             font-size: 48px;
             color: #00ff41;
             border: 2px solid #33ff33;
-            font-weight: bold;
         }
 
         .prompt {
@@ -208,6 +226,20 @@
             margin-left: 16px;
             margin-bottom: 16px;
             color: #99ff99;
+        }
+
+        .ascii-art {
+            color: #00ff41;
+            font-size: 14px;
+            line-height: 1.2;
+            margin: 20px 0;
+            text-align: center;
+            animation: matrix-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes matrix-glow {
+            from { text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41; }
+            to { text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41; }
         }
 
         .section-header {
@@ -279,6 +311,7 @@
         .download-description {
             color: #77ff77;
             font-size: 12px;
+            margin-bottom: 12px;
         }
 
         .download-command {
@@ -291,8 +324,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
-            text-decoration: none;
-            display: inline-block;
             word-break: break-all;
         }
 
@@ -304,7 +335,7 @@
         }
 
         .download-command::after {
-            content: 'Click to download';
+            content: 'Click to downlod';
             position: absolute;
             right: 8px;
             top: 50%;
@@ -523,6 +554,11 @@
                 padding: 12px;
             }
 
+            .main-logo-img {
+                max-width: 150px;
+                max-height: 100px;
+            }
+
             .main-logo-fallback {
                 width: 150px;
                 height: 100px;
@@ -544,6 +580,10 @@
                 margin-bottom: 20px;
             }
             
+            .ascii-art {
+                font-size: 10px;
+            }
+            
             .quick-links {
                 grid-template-columns: 1fr 1fr;
             }
@@ -558,19 +598,15 @@
                 justify-content: center;
             }
 
+            .main-logo-img {
+                max-width: 120px;
+                max-height: 80px;
+            }
+
             .main-logo-fallback {
                 width: 120px;
                 height: 80px;
                 font-size: 24px;
-            }
-
-            .download-item > div {
-                flex-direction: column !important;
-                gap: 8px !important;
-            }
-
-            .download-command {
-                align-self: flex-start;
             }
         }
     </style>
@@ -586,11 +622,6 @@
                         <div class="terminal-btn btn-maximize"></div>
                     </div>
                     <div class="terminal-title">macadmin@macbuds — zsh — 80×24</div>
-                </div>
-                <div class="terminal-right">
-                    <div class="logo-container">
-                        <div class="logo-fallback">MacBuds</div>
-                    </div>
                 </div>
             </div>
             
@@ -614,7 +645,13 @@
                     
                     <div class="terminal-logo-section">
                         <div class="main-logo-container">
-                            <div class="main-logo-fallback">🍎</div>
+                            <img src="/assets/images/macbuds.jpg" 
+                                 alt="MacBuds Logo" 
+                                 class="main-logo-img"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="main-logo-fallback">
+                                🍎
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -625,6 +662,7 @@
                         <i class="fas fa-folder"></i> macadmin@macbuds:~./resources/
                     </div>
 
+                    
                     <div class="quick-links">
                         <div class="quick-link">
                             <i class="fab fa-apple"></i>
@@ -642,75 +680,51 @@
                             <i class="fab fa-windows"></i>
                             <div class="quick-link-text">Windows</div>
                         </div>
+                        
                     </div>
                 </div>
 
                 <!-- Downloads Section -->
-                <div class="downloads-section">
-                    <div class="section-header">
-                        <i class="fas fa-download"></i> macadmin@macbuds:~./downloads/
-                    </div>
-
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sequoia 15.5 (IPSW)</div>
-                            <div class="download-version">ipsw</div>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-                            <div class="download-description" style="margin-bottom: 0; flex: 1; min-width: 200px;">
-                                iPhone Software format for Mac deployment and restoration
-                            </div>
-                            <a href="https://updates.cdn-apple.com/2025SpringFCS/fullrestores/082-44534/CE6C1054-99A3-4F67-A823-3EE9E6510CDE/UniversalMac_15.5_24F74_Restore.ipsw" class="download-command" download style="margin: 0; flex-shrink: 0;">Download latest ipsw</a>
-                        </div>
-                    </div>
+               <div class="download-item">
+        <div class="download-header">
+            <div class="download-title">macOS Sequoia 15.5 (IPSW)</div>
+            <div class="download-version">ipsw</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <div class="download-description" style="margin-bottom: 0; flex: 1; min-width: 200px;">
+                iPhone Software format for Mac deployment and restoration
+            </div>
+            <a href="https://updates.cdn-apple.com/2025SpringFCS/fullrestores/082-44534/CE6C1054-99A3-4F67-A823-3EE9E6510CDE/UniversalMac_15.5_24F74_Restore.ipsw" class="download-command" download style="margin: 0; flex-shrink: 0;">Download latest ipsw</a>
+        </div>
+    </div>
 
                     <div class="download-item">
                         <div class="download-header">
                             <div class="download-title">macOS Sequoia 15.5</div>
                             <div class="download-version">Latest</div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-                            <div class="download-description" style="margin-bottom: 0; flex: 1; min-width: 200px;">
-                                Full installer package for macOS Sequoia - Latest stable release
-                            </div>
-                            <a href="https://swcdn.apple.com/content/downloads/51/28/082-44432-A_4NJSZXK8G5/v10fo5dlwd50fja3qbnhj7z9tp1dx41vq2/InstallAssistant.pkg" class="download-command" download style="margin: 0; flex-shrink: 0;">Download latest macOS setup file</a>
-                        </div>
-                    </div>
+
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <div class="download-description" style="margin-bottom: 0; flex: 1; min-width: 200px;">
+                Full installer package for macOS Sequoia - Latest stable release
+            </div>
+            <a href="https://swcdn.apple.com/content/downloads/51/28/082-44432-A_4NJSZXK8G5/v10fo5dlwd50fja3qbnhj7z9tp1dx41vq2/InstallAssistant.pkg" class="download-command" download style="margin: 0; flex-shrink: 0;">Download latest macOS setup file</a>
+        </div>
+    </div>
+
 
                     <div class="download-item">
                         <div class="download-header">
                             <div class="download-title">Safari 18.5</div>
                             <div class="download-version">Safari</div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-                            <div class="download-description" style="margin-bottom: 0; flex: 1; min-width: 200px;">
-                                Latest Safari browser update with security enhancements
-                            </div>
-                            <a href="https://swcdn.apple.com/content/downloads/08/26/082-18361-A_O3VSRCP8K3/5vlwh79cz177ia1ws5w2aep4d46pknikt2/Safari18.5SonomaAuto.pkg" class="download-command" download style="margin: 0; flex-shrink: 0;">Download latest Safari setup file</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Archives Files Section -->
-                <div class="resources-macos-archives" style="margin-bottom: 30px;">
-                    <div class="section-header">
-                        <i class="fas fa-history"></i> macadmin@macbuds:~./archives(older_setup_files)/
-                    </div>
-                    <div class="quick-links">
-                        <div class="quick-link" onclick="window.location.href='/macOSversion'">
-                            <i class="fas fa-history"></i>
-                            <div class="quick-link-text">macOS Archives</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="coming-soon">
-                    <div class="icon">🚀</div>
-                    <div class="coming-soon-title">Coming Soon</div>
-                    <div class="coming-soon-text">
-                        More tools, scripts, and documentation for Mac administrators
-                    </div>
-                </div>
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <div class="download-description" style="margin-bottom: 0; flex: 1; min-width: 200px;">
+               Latest Safari browser update with security enhancements
+            </div>
+            <a href="https://swcdn.apple.com/content/downloads/08/26/082-18361-A_O3VSRCP8K3/5vlwh79cz177ia1ws5w2aep4d46pknikt2/Safari18.5SonomaAuto.pkg" class="download-command" download style="margin: 0; flex-shrink: 0;">Download latest Safari setup file</a>
+        </div>
+    </div>
 
                 <div style="margin-top: 24px;">
                     <div class="prompt">
@@ -720,6 +734,25 @@
                         <span class="path">~/apple-device-management</span>
                         <span style="color: #55ff55;">$</span>
                         <span class="blinking-cursor">|</span>
+                    </div>
+                </div>
+ <!-- Archives Files Section above Coming Soon -->
+ <div class="resources-macos-archives" style="margin-top:32px;">
+    <div class="section-header">
+        <i class="fas fa-history"></i> macadmin@macbuds:~./archives(older_setup_files)/
+    </div>
+    <div class="quick-links">
+        <div class="quick-link" onclick="window.location.href='/macOSversion'">
+            <i class="fas fa-history"></i>
+            <div class="quick-link-text">macOS Archives</div>
+        </div>
+    </div>
+</div>
+                <div class="coming-soon">
+                    <div class="icon">🚀</div>
+                    <div class="coming-soon-title">Coming Soon</div>
+                    <div class="coming-soon-text">
+                        More tools, scripts, and documentation for Mac administrators
                     </div>
                 </div>
             </div>
