@@ -194,12 +194,13 @@
             color: #00ff41;
             border: 2px solid #33ff33;
         }
-.search-container {
+
+        .search-container {
             width: 100%;
-    max-width: 250px;
-    margin: 0 auto;         /* Ensures centering if parent allows */
-    display: flex;
-    justify-content: bottom;
+            max-width: 250px;
+            margin: 0 auto;         /* Ensures centering if parent allows */
+            display: flex;
+            justify-content: bottom;
         }
 
         .search-box {
@@ -763,15 +764,14 @@
                         </div>
                     </div>
                     
-                    <div class="terminal-logo-section">
-                        <div class="search-container">
+                    <div class="terminal-logo-section" style="display: flex; flex-direction: row; align-items: center; gap: 16px;">
+                        <div class="search-container" style="margin-bottom: 0; margin-right: 12px;">
                             <div class="search-box">
                                 <i class="fas fa-search search-icon"></i>
                                 <input type="text" id="siteSearch" placeholder="Search tools, resources..." class="search-input">
                                 <div class="search-results" id="searchResults"></div>
                             </div>
                         </div>
-                        
                         <div class="main-logo-container">
                             <img src="/assets/images/macbuds.jpg" 
                                  alt="MacBuds Logo" 
@@ -902,4 +902,81 @@
                     </div>
                     <div class="status-item">
                         <i class="fab fa-github" style="font-size: 10px;"></i>
-                        <a href="https://github.com/macbuds" class="github-link">mac
+                        <a href="https://github.com/macbuds" class="github-link">macbuds</a>
+                    </div>
+                </div>
+                <div class="status-right">
+                    <span>© 2024 MacBuds</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // Simple site search for all visible text content
+    const searchInput = document.getElementById('siteSearch');
+    const searchResults = document.getElementById('searchResults');
+
+    function getAllTextNodes(node) {
+        let textNodes = [];
+        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
+            textNodes.push(node);
+        } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE' && node.tagName !== 'NOSCRIPT') {
+            for (let child of node.childNodes) {
+                textNodes = textNodes.concat(getAllTextNodes(child));
+            }
+        }
+        return textNodes;
+    }
+
+    function getSearchableContent() {
+        // Only search inside the main content area
+        const wrapper = document.querySelector('.terminal-content-wrapper');
+        if (!wrapper) return [];
+        const nodes = getAllTextNodes(wrapper);
+        return nodes.map(node => ({
+            text: node.textContent.trim(),
+            node
+        })).filter(item => item.text.length > 0);
+    }
+
+    function highlightMatch(text, query) {
+        const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+        return text.replace(re, '<mark>$1</mark>');
+    }
+
+    searchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+        searchResults.innerHTML = '';
+        if (!query) {
+            searchResults.style.display = 'none';
+            return;
+        }
+        const content = getSearchableContent();
+        const matches = content.filter(item => item.text.toLowerCase().includes(query.toLowerCase()));
+        if (matches.length === 0) {
+            searchResults.innerHTML = '<div class="no-results">No results found</div>';
+            searchResults.style.display = 'block';
+            return;
+        }
+        matches.slice(0, 20).forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'search-result-item';
+            div.innerHTML = `<span class='search-result-title'>${highlightMatch(item.text, query)}</span>`;
+            div.onclick = () => {
+                // Scroll to the node in the page
+                item.node.parentElement.scrollIntoView({behavior: 'smooth', block: 'center'});
+                searchResults.style.display = 'none';
+            };
+            searchResults.appendChild(div);
+        });
+        searchResults.style.display = 'block';
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!searchResults.contains(e.target) && e.target !== searchInput) {
+            searchResults.style.display = 'none';
+        }
+    });
+    </script>
+</body>
+</html>
