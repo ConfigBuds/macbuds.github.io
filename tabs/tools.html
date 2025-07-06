@@ -655,10 +655,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.98);
-            z-index: 99999;
+            z-index: 10;
         }
         .timer-overlay.active {
             display: flex;
@@ -691,8 +691,13 @@
                 </div>
             </div>
             <div class="terminal-content-wrapper">
-                <!-- Add your content here -->
                 <button class="tools-btn" id="startTimerBtn"><i class="fas fa-clock"></i> Start Focus Timer</button>
+                <div class="timer-overlay" id="timerOverlay">
+                    <div class="timer-display" id="timerDisplay">00:00:00</div>
+                    <div class="timer-controls">
+                        <button class="tools-btn" id="stopTimerBtn"><i class="fas fa-stop"></i> Stop & Exit</button>
+                    </div>
+                </div>
             </div>
             <div class="status-bar">
                 <div class="status-left">
@@ -709,12 +714,6 @@
                     <span>© 2025 MacBuds</span>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="timer-overlay" id="timerOverlay">
-        <div class="timer-display" id="timerDisplay">00:00:00</div>
-        <div class="timer-controls">
-            <button class="tools-btn" id="stopTimerBtn"><i class="fas fa-stop"></i> Stop & Exit</button>
         </div>
     </div>
     <script>
