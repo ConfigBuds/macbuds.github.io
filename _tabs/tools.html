@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools - MacBuds</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #00ff41;
+            font-family: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+        .tools-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .tools-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 32px;
+            color: #00ff41;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41;
+        }
+        .tools-btn {
+            background: #0d1b0d;
+            color: #00ff41;
+            border: 2px solid #00ff41;
+            border-radius: 12px;
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 24px;
+            box-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41 inset;
+        }
+        .tools-btn:hover {
+            background: #112211;
+        }
+        .timer-overlay {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.98);
+            z-index: 99999;
+        }
+        .timer-overlay.active {
+            display: flex;
+        }
+        .timer-display {
+            color: #00ff41;
+            font-size: 8vw;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 48px;
+            text-shadow: 0 0 20px #00ff41, 0 0 40px #00ff41;
+        }
+        .timer-controls {
+            display: flex;
+            gap: 32px;
+        }
+        .timer-btn {
+            background: #0d1b0d;
+            color: #00ff41;
+            border: 2px solid #00ff41;
+            border-radius: 12px;
+            padding: 20px 60px;
+            font-size: 2vw;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .timer-btn:hover {
+            background: #112211;
+        }
+    </style>
+</head>
+<body>
+    <div class="tools-container">
+        <div class="tools-title"><i class="fas fa-wrench"></i> Tools</div>
+        <button class="tools-btn" id="startTimerBtn"><i class="fas fa-clock"></i> Start Focus Timer</button>
+    </div>
+    <div class="timer-overlay" id="timerOverlay">
+        <div class="timer-display" id="timerDisplay">00:00:00</div>
+        <div class="timer-controls">
+            <button class="timer-btn" id="stopTimerBtn"><i class="fas fa-stop"></i> Stop & Exit</button>
+        </div>
+    </div>
+    <script>
+    let timerInterval, timerStart;
+    const startTimerBtn = document.getElementById('startTimerBtn');
+    const timerOverlay = document.getElementById('timerOverlay');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const stopTimerBtn = document.getElementById('stopTimerBtn');
+
+    function formatTime(ms) {
+        const totalSeconds = Math.floor(ms / 1000);
+        const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+        const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+        const s = String(totalSeconds % 60).padStart(2, '0');
+        return `${h}:${m}:${s}`;
+    }
+
+    function moveMouseSlightly() {
+        // Try to move the mouse by 1px and back to prevent inactivity lock
+        const evt = new MouseEvent('mousemove', {
+            bubbles: true,
+            clientX: Math.floor(Math.random() * window.innerWidth),
+            clientY: Math.floor(Math.random() * window.innerHeight)
+        });
+        document.body.dispatchEvent(evt);
+    }
+
+    function startTimer() {
+        timerStart = Date.now();
+        timerDisplay.textContent = '00:00:00';
+        timerOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (timerOverlay.requestFullscreen) timerOverlay.requestFullscreen();
+        timerInterval = setInterval(() => {
+            const elapsed = Date.now() - timerStart;
+            timerDisplay.textContent = formatTime(elapsed);
+            if (elapsed % 30000 < 1000) moveMouseSlightly(); // every ~30s
+        }, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        if (document.fullscreenElement) document.exitFullscreen();
+    }
+
+    startTimerBtn.onclick = startTimer;
+    stopTimerBtn.onclick = stopTimer;
+    document.addEventListener('keydown', e => {
+        if (timerOverlay.classList.contains('active') && (e.key === 'Escape' || e.key === 'Esc')) stopTimer();
+    });
+    </script>
+</body>
+</html> 
