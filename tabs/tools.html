@@ -745,7 +745,8 @@
         timerDisplay.textContent = '00:00:00';
         timerOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
-        if (timerOverlay.requestFullscreen) timerOverlay.requestFullscreen();
+        const terminalWindow = document.querySelector('.terminal-window');
+        if (terminalWindow.requestFullscreen) terminalWindow.requestFullscreen();
         timerInterval = setInterval(() => {
             const elapsed = Date.now() - timerStart;
             timerDisplay.textContent = formatTime(elapsed);
