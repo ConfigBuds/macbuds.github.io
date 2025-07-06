@@ -639,6 +639,31 @@
         .tools-btn:hover {
             background: #112211;
         }
+        .timer-overlay {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.98);
+            z-index: 99999;
+        }
+        .timer-overlay.active {
+            display: flex;
+        }
+        .timer-display {
+            color: #00ff41;
+            font-size: 8vw;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 48px;
+            text-shadow: 0 0 20px #00ff41, 0 0 40px #00ff41;
+            animation: matrix-glow 2s ease-in-out infinite alternate;
+        }
+        .timer-controls {
+            display: flex;
+            gap: 32px;
+        }
     </style>
 </head>
 <body>
@@ -675,8 +700,13 @@
             </div>
         </div>
     </div>
-    <!-- Scripts and closing tags omitted for brevity -->
-     <script>
+    <div class="timer-overlay" id="timerOverlay">
+        <div class="timer-display" id="timerDisplay">00:00:00</div>
+        <div class="timer-controls">
+            <button class="tools-btn" id="stopTimerBtn"><i class="fas fa-stop"></i> Stop & Exit</button>
+        </div>
+    </div>
+    <script>
     let timerInterval, timerStart;
     const startTimerBtn = document.getElementById('startTimerBtn');
     const timerOverlay = document.getElementById('timerOverlay');
@@ -692,7 +722,6 @@
     }
 
     function moveMouseSlightly() {
-        // Try to move the mouse by 1px and back to prevent inactivity lock
         const evt = new MouseEvent('mousemove', {
             bubbles: true,
             clientX: Math.floor(Math.random() * window.innerWidth),
@@ -710,7 +739,7 @@
         timerInterval = setInterval(() => {
             const elapsed = Date.now() - timerStart;
             timerDisplay.textContent = formatTime(elapsed);
-            if (elapsed % 30000 < 1000) moveMouseSlightly(); // every ~30s
+            if (elapsed % 30000 < 1000) moveMouseSlightly();
         }, 1000);
     }
 
@@ -721,8 +750,8 @@
         if (document.fullscreenElement) document.exitFullscreen();
     }
 
-    startTimerBtn.onclick = startTimer;
-    stopTimerBtn.onclick = stopTimer;
+    if (startTimerBtn) startTimerBtn.onclick = startTimer;
+    if (stopTimerBtn) stopTimerBtn.onclick = stopTimer;
     document.addEventListener('keydown', e => {
         if (timerOverlay.classList.contains('active') && (e.key === 'Escape' || e.key === 'Esc')) stopTimer();
     });
