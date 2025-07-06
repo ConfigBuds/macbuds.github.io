@@ -539,6 +539,110 @@
             filter: hue-rotate(90deg) brightness(1.2);
         }
 
+        .search-container {
+            margin-top: 16px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            background: #0d1b0d;
+            border: 2px solid #33ff33;
+            border-radius: 8px;
+            padding: 12px 16px 12px 40px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: #00ff41;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .search-input::placeholder {
+            color: #55ff55;
+            opacity: 0.7;
+        }
+
+        .search-input:focus {
+            border-color: #00ff41;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+            background: #112211;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #55ff55;
+            font-size: 14px;
+            z-index: 1;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #0d1b0d;
+            border: 2px solid #33ff33;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .search-result-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(51, 255, 51, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-result-item:hover {
+            background: #112211;
+            border-left: 3px solid #00ff41;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-title {
+            color: #00ff41;
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .search-result-desc {
+            color: #77ff77;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        .search-result-category {
+            color: #55ff55;
+            font-size: 10px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .no-results {
+            padding: 16px;
+            text-align: center;
+            color: #77ff77;
+            font-size: 12px;
+        }
+
         @media (max-width: 1024px) {
             .welcome-section {
                 flex-direction: column;
@@ -608,6 +712,20 @@
                 height: 80px;
                 font-size: 24px;
             }
+
+            .search-container {
+                max-width: 300px;
+            }
+
+            .search-input {
+                font-size: 12px;
+                padding: 10px 14px 10px 36px;
+            }
+
+            .search-icon {
+                font-size: 12px;
+                left: 10px;
+            }
         }
     </style>
 </head>
@@ -641,6 +759,13 @@
                         <div class="welcome-output">
                             Welcome Mac Administrators! <span class="emoji">🍎</span>
                         </div>
+                        <div class="search-container">
+                            <div class="search-box">
+                                <i class="fas fa-search search-icon"></i>
+                                <input type="text" id="siteSearch" placeholder="Search tools, downloads, resources..." class="search-input">
+                                <div class="search-results" id="searchResults"></div>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="terminal-logo-section">
@@ -656,27 +781,25 @@
                     </div>
                 </div>
 
-<!-- Announcement Section -->
- <div class="announcement-section" style="margin-top:32px;">
-    <div class="section-header">
-        <i class="fas fa-bullhorn"></i> macadmin@macbuds:~/announcements/
-    </div>
-    <div class="coming-soon">
-                    <div class="icon">🛠</div>
-                    
-            <span class="blinking-cursor">comming soon...!|</span>
-            <div class="coming-soon-text">
-                        More tools, scripts, and documentation for Mac administrators
-        </div>
-    </div>
-</div>
+                <!-- Announcement Section -->
+                <div class="announcement-section" style="margin-top:32px;">
+                    <div class="section-header">
+                        <i class="fas fa-bullhorn"></i> macadmin@macbuds:~/announcements/
+                    </div>
+                    <div class="coming-soon">
+                        <div class="icon">🛠</div>
+                        <span class="blinking-cursor">comming soon...!|</span>
+                        <div class="coming-soon-text">
+                            More tools, scripts, and documentation for Mac administrators
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Resources Section -->
                 <div class="resources-section">
                     <div class="section-header">
                         <i class="fas fa-folder"></i> macadmin@macbuds:~./resources/
                     </div>
-
                     
                     <div class="quick-links">
                         <div class="quick-link">
@@ -695,70 +818,68 @@
                             <i class="fab fa-windows"></i>
                             <div class="quick-link-text">Windows</div>
                         </div>
-                        
                     </div>
                 </div>
 
                 <!-- Downloads Section -->
-                 <div class="resources-section">
+                <div class="resources-section">
                     <div class="section-header">
                         <i class="fas fa-download"></i> macadmin@macbuds:~./downloads/
                     </div>
-               <div class="download-item">
-        <div class="download-header">
-            <div class="download-title">macOS Sequoia 15.5 (IPSW)</div>
-            <div class="download-version">ipsw</div>
-        </div>
-        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-            <div class="download-description" style="margin-bottom: 0; flex: 1; min-width: 200px;">
-                iPhone Software format for Mac deployment and restoration
-            </div>
-            <a href="https://updates.cdn-apple.com/2025SpringFCS/fullrestores/082-44534/CE6C1054-99A3-4F67-A823-3EE9E6510CDE/UniversalMac_15.5_24F74_Restore.ipsw" class="download-command" download style="margin: 0; flex-shrink: 0;">Download latest ipsw</a>
-        </div>
-    </div>
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sequoia 15.5 (IPSW)</div>
+                            <div class="download-version">ipsw</div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <div class="download-description" style="margin-bottom: 0; flex: 1; min-width: 200px;">
+                                iPhone Software format for Mac deployment and restoration
+                            </div>
+                            <a href="https://updates.cdn-apple.com/2025SpringFCS/fullrestores/082-44534/CE6C1054-99A3-4F67-A823-3EE9E6510CDE/UniversalMac_15.5_24F74_Restore.ipsw" class="download-command" download style="margin: 0; flex-shrink: 0;">Download latest ipsw</a>
+                        </div>
+                    </div>
 
                     <div class="download-item">
                         <div class="download-header">
                             <div class="download-title">macOS Sequoia 15.5</div>
                             <div class="download-version">Latest</div>
                         </div>
-
-<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-            <div class="download-description" style="margin-bottom: 0; flex: 1; min-width: 200px;">
-                Full installer package for macOS Sequoia - Latest stable release
-            </div>
-            <a href="https://swcdn.apple.com/content/downloads/51/28/082-44432-A_4NJSZXK8G5/v10fo5dlwd50fja3qbnhj7z9tp1dx41vq2/InstallAssistant.pkg" class="download-command" download style="margin: 0; flex-shrink: 0;">Download latest macOS setup file</a>
-        </div>
-    </div>
-
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <div class="download-description" style="margin-bottom: 0; flex: 1; min-width: 200px;">
+                                Full installer package for macOS Sequoia - Latest stable release
+                            </div>
+                            <a href="https://swcdn.apple.com/content/downloads/51/28/082-44432-A_4NJSZXK8G5/v10fo5dlwd50fja3qbnhj7z9tp1dx41vq2/InstallAssistant.pkg" class="download-command" download style="margin: 0; flex-shrink: 0;">Download latest macOS setup file</a>
+                        </div>
+                    </div>
 
                     <div class="download-item">
                         <div class="download-header">
                             <div class="download-title">Safari 18.5</div>
                             <div class="download-version">Safari</div>
                         </div>
-<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-            <div class="download-description" style="margin-bottom: 0; flex: 1; min-width: 200px;">
-               Latest Safari browser update with security enhancements
-            </div>
-            <a href="https://swcdn.apple.com/content/downloads/08/26/082-18361-A_O3VSRCP8K3/5vlwh79cz177ia1ws5w2aep4d46pknikt2/Safari18.5SonomaAuto.pkg" class="download-command" download style="margin: 0; flex-shrink: 0;">Download latest Safari setup file</a>
-        </div>
-    </div>
-
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <div class="download-description" style="margin-bottom: 0; flex: 1; min-width: 200px;">
+                               Latest Safari browser update with security enhancements
+                            </div>
+                            <a href="https://swcdn.apple.com/content/downloads/08/26/082-18361-A_O3VSRCP8K3/5vlwh79cz177ia1ws5w2aep4d46pknikt2/Safari18.5SonomaAuto.pkg" class="download-command" download style="margin: 0; flex-shrink: 0;">Download latest Safari setup file</a>
+                        </div>
+                    </div>
+                </div>
             
- <!-- Archives Files Section above Coming Soon -->
- <div class="resources-macos-archives" style="margin-top:32px;">
-    <div class="section-header">
-        <i class="fas fa-history"></i> macadmin@macbuds:~./archives(older_setup_files)/
-    </div>
-    <div class="quick-links">
-        <div class="quick-link" onclick="window.location.href='/macOSversion'">
-            <i class="fas fa-history"></i>
-            <div class="quick-link-text">macOS Archives</div>
-        </div>
-    </div>
-</div>
-<div style="margin-top: 24px;">
+                <!-- Archives Files Section above Coming Soon -->
+                <div class="resources-macos-archives" style="margin-top:32px;">
+                    <div class="section-header">
+                        <i class="fas fa-history"></i> macadmin@macbuds:~./archives(older_setup_files)/
+                    </div>
+                    <div class="quick-links">
+                        <div class="quick-link" onclick="window.location.href='/macOSversion'">
+                            <i class="fas fa-history"></i>
+                            <div class="quick-link-text">macOS Archives</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 24px;">
                     <div class="prompt">
                         <span class="prompt-symbol">➜</span>
                         <span class="user-host">macadmin@macbuds</span>
@@ -769,6 +890,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="status-bar">
                 <div class="status-left">
                     <div class="status-item">
@@ -781,63 +903,4 @@
                     </div>
                 </div>
                 <div class="status-right">
-                    <span>zsh | UTF-8 | macOS Management Hub</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(function() {
-                event.target.style.background = '#1a4c1a';
-                event.target.style.borderColor = '#00ff41';
-                event.target.style.boxShadow = '0 0 15px rgba(0, 255, 65, 0.3)';
-                setTimeout(() => {
-                    event.target.style.background = '#001100';
-                    event.target.style.borderColor = '#33ff33';
-                    event.target.style.boxShadow = 'none';
-                }, 500);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                const cursor = document.querySelector('.blinking-cursor');
-                if (cursor) {
-                    cursor.style.animation = 'blink 1s infinite';
-                }
-            }, 3000);
-
-            createMatrixEffect();
-        });
-
-        function createMatrixEffect() {
-            const chars = '010101100101010100101010000100011011100001010';
-            
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    const char = document.createElement('div');
-                    char.className = 'matrix-char';
-                    char.textContent = chars[Math.floor(Math.random() * chars.length)];
-                    char.style.left = Math.random() * window.innerWidth + 'px';
-                    char.style.animationDelay = Math.random() * 2 + 's';
-                    document.body.appendChild(char);
-                    
-                    setTimeout(() => {
-                        char.remove();
-                    }, 3000);
-                }, i * 500);
-            }
-        }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.key === 'c') {
-                console.log('Terminal: Process interrupted');
-            }
-        });
-
-        setInterval(createMatrixEffect, 15000);
-    </script>
-</body>
-</html>
+                    <span>zsh |
