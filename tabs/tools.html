@@ -722,7 +722,6 @@
     const timerOverlay = document.getElementById('timerOverlay');
     const timerDisplay = document.getElementById('timerDisplay');
     const stopTimerBtn = document.getElementById('stopTimerBtn');
-    const MAX_TIME_MS = 1152 * 60 * 60 * 1000; // 1152 hours in milliseconds
 
     function formatTime(ms) {
         const totalSeconds = Math.floor(ms / 1000);
@@ -752,7 +751,6 @@
             const elapsed = Date.now() - timerStart;
             timerDisplay.textContent = formatTime(elapsed);
             if (elapsed % 30000 < 1000) moveMouseSlightly();
-            if (elapsed >= MAX_TIME_MS) stopTimer();
         }, 1000);
     }
 
