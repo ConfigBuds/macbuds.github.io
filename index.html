@@ -815,9 +815,9 @@
                             <i class="fab fa-github"></i>
                             <div class="quick-link-text">GitHub Repos</div>
                         </div>
-                        <div class="quick-link">
-                            <i class="fas fa-shield-alt"></i>
-                            <div class="quick-link-text">Security Tools</div>
+                        <div class="quick-link" onclick="window.open('tools.html', '_blank')">
+                            <i class="fas fa-wrench"></i>
+                            <div class="quick-link-text">Tools</div>
                         </div>
                         <div class="quick-link">
                             <i class="fab fa-windows"></i>
@@ -979,6 +979,60 @@
             searchResults.style.display = 'none';
         }
     });
+
+    // Timer Script for Fullscreen Focus Mode
+    let timerInterval, timerStart;
+    const showTimerBtn = document.getElementById('showTimerBtn');
+    const timerOverlay = document.getElementById('timerOverlay');
+    const timerDisplay = document.getElementById('timerDisplay');
+    const stopTimerBtn = document.getElementById('stopTimerBtn');
+
+    function formatTime(ms) {
+        const totalSeconds = Math.floor(ms / 1000);
+        const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+        const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+        const s = String(totalSeconds % 60).padStart(2, '0');
+        return `${h}:${m}:${s}`;
+    }
+
+    function moveMouseSlightly() {
+        // Try to move the mouse by 1px and back to prevent inactivity lock
+        const evt = new MouseEvent('mousemove', {
+            bubbles: true,
+            clientX: Math.floor(Math.random() * window.innerWidth),
+            clientY: Math.floor(Math.random() * window.innerHeight)
+        });
+        document.body.dispatchEvent(evt);
+    }
+
+    function startTimer() {
+        timerStart = Date.now();
+        timerDisplay.textContent = '00:00:00';
+        timerOverlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        if (timerOverlay.requestFullscreen) timerOverlay.requestFullscreen();
+        timerInterval = setInterval(() => {
+            const elapsed = Date.now() - timerStart;
+            timerDisplay.textContent = formatTime(elapsed);
+            if (elapsed % 30000 < 1000) moveMouseSlightly(); // every ~30s
+        }, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+        timerOverlay.style.display = 'none';
+        document.body.style.overflow = '';
+        if (document.fullscreenElement) document.exitFullscreen();
+    }
+
+    if (showTimerBtn && timerOverlay && timerDisplay && stopTimerBtn) {
+        showTimerBtn.onclick = startTimer;
+        stopTimerBtn.onclick = stopTimer;
+        // Escape key exits timer
+        document.addEventListener('keydown', e => {
+            if (timerOverlay.style.display === 'flex' && (e.key === 'Escape' || e.key === 'Esc')) stopTimer();
+        });
+    }
     </script>
 </body>
 </html>
