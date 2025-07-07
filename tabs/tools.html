@@ -289,6 +289,17 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        
+        /* Hidden video for sleep prevention */
+        .sleep-prevention-video {
+            position: absolute;
+            top: -1000px;
+            left: -1000px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -310,7 +321,7 @@
                 </button>
                 <div class="timer-overlay" id="timerOverlay">
                     <div class="timer-info" id="timerInfo">Focus Timer Active</div>
-                    <div class="wake-lock-status" id="wakeLockStatus">Screen Wake Lock: Inactive</div>
+                    <div class="wake-lock-status" id="wakeLockStatus">Sleep Prevention: Inactive</div>
                     <div class="timer-display" id="timerDisplay">00:00:00</div>
                     <div class="timer-controls">
                         <button class="tools-btn" id="stopTimerBtn">
@@ -318,7 +329,7 @@
                         </button>
                     </div>
                     <div class="timer-instructions">
-                        Hover to show controls • Press ESC to exit • Move mouse to prevent sleep
+                        Hover to show controls • Press ESC to exit
                     </div>
                 </div>
             </div>
@@ -340,14 +351,22 @@
         </div>
     </div>
 
+    <!-- Hidden video for sleep prevention -->
+    <video class="sleep-prevention-video" id="sleepPreventionVideo" muted loop>
+        <source src="data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAAM5tZGF0AAACrwYF//+p3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE2MyByMzA2MCA1ZGI2YWE2IC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAyMSAtIGh0dHA6Ly93d3cudmlkZW9sYW4ub3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOjA6MCBhbmFseXNlPTB4MzoweDExMyBtZT1oZXggc3VibWU9NyBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVkX3JlZj0xIG1lX3JhbmdlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MSA4eDhkY3Q9MSBjcW09MCBkZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3FwX29mZnNldD0tMiB0aHJlYWRzPTEgbG9va2FoZWFkX3RocmVhZHM9MSBzbGljZWRfdGhyZWFkcz0wIG5yPTAgZGVjaW1hdGU9MSBpbnRlcmxhY2VkPTAgYmx1cmF5X2NvbXBhdD0wIGNvbnN0cmFpbmVkX2ludHJhPTAgYnVyYW1lcz0xIGNyZj0yMy4wIHFwPTAgaXBfcmF0aW89MS40MCAqPV8=" type="video/mp4">
+    </video>
+
     <script>
-        let timerInterval, timerStart, wakeLock = null, mouseMoveInterval;
+        let timerInterval, timerStart, wakeLock = null;
+        let sleepPreventionInterval, videoPlayInterval, keyboardSimulationInterval;
+        let audioContext, oscillator;
+        
         const startTimerBtn = document.getElementById('startTimerBtn');
         const timerOverlay = document.getElementById('timerOverlay');
         const timerDisplay = document.getElementById('timerDisplay');
         const stopTimerBtn = document.getElementById('stopTimerBtn');
         const wakeLockStatus = document.getElementById('wakeLockStatus');
-        const timerInfo = document.getElementById('timerInfo');
+        const sleepPreventionVideo = document.getElementById('sleepPreventionVideo');
 
         function formatTime(ms) {
             const totalSeconds = Math.floor(ms / 1000);
@@ -357,40 +376,160 @@
             return `${h}:${m}:${s}`;
         }
 
-        function simulateMouseMove() {
-            // Create a very small mouse movement to prevent screen sleep
-            const event = new MouseEvent('mousemove', {
-                view: window,
-                bubbles: true,
-                cancelable: true,
-                clientX: Math.random() * 5,
-                clientY: Math.random() * 5
-            });
-            document.dispatchEvent(event);
+        // Create a minimal video data URL for sleep prevention
+        function createSleepPreventionVideo() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1;
+            canvas.height = 1;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, 1, 1);
+            
+            const stream = canvas.captureStream(1);
+            sleepPreventionVideo.srcObject = stream;
+            sleepPreventionVideo.play().catch(e => console.log('Video play failed:', e));
+        }
+
+        // Enhanced sleep prevention techniques
+        function startSleepPrevention() {
+            let counter = 0;
+            
+            // Method 1: Continuous video playback
+            createSleepPreventionVideo();
+            
+            // Method 2: Periodic invisible mouse movements
+            sleepPreventionInterval = setInterval(() => {
+                // Create multiple types of events
+                const events = [
+                    new MouseEvent('mousemove', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        clientX: Math.random() * 10,
+                        clientY: Math.random() * 10
+                    }),
+                    new KeyboardEvent('keydown', {
+                        key: 'F15', // F15 key rarely used, won't interfere
+                        bubbles: true,
+                        cancelable: true
+                    }),
+                    new Event('scroll', { bubbles: true })
+                ];
+                
+                events.forEach(event => {
+                    document.dispatchEvent(event);
+                });
+                
+                counter++;
+                if (counter % 10 === 0) {
+                    console.log('Sleep prevention active:', counter);
+                }
+            }, 5000); // Every 5 seconds
+            
+            // Method 3: Rapid video restart
+            videoPlayInterval = setInterval(() => {
+                if (sleepPreventionVideo.paused) {
+                    sleepPreventionVideo.play().catch(e => console.log('Video restart failed:', e));
+                }
+                // Force video to restart
+                sleepPreventionVideo.currentTime = 0;
+            }, 10000); // Every 10 seconds
+            
+            // Method 4: Audio context to prevent audio sleep
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                // Inaudible frequency
+                oscillator.frequency.setValueAtTime(20000, audioContext.currentTime);
+                gainNode.gain.setValueAtTime(0.001, audioContext.currentTime);
+                
+                oscillator.start();
+                console.log('Audio context created for sleep prevention');
+            } catch (e) {
+                console.log('Audio context creation failed:', e);
+            }
+            
+            // Method 5: Keyboard simulation
+            keyboardSimulationInterval = setInterval(() => {
+                const keyEvent = new KeyboardEvent('keypress', {
+                    key: 'F24', // F24 key rarely used
+                    bubbles: true,
+                    cancelable: true
+                });
+                document.dispatchEvent(keyEvent);
+            }, 15000); // Every 15 seconds
+            
+            // Method 6: Page focus and blur simulation
+            setInterval(() => {
+                window.dispatchEvent(new Event('focus'));
+                setTimeout(() => {
+                    window.dispatchEvent(new Event('blur'));
+                }, 100);
+            }, 30000); // Every 30 seconds
+        }
+
+        function stopSleepPrevention() {
+            // Clear all intervals
+            if (sleepPreventionInterval) {
+                clearInterval(sleepPreventionInterval);
+                sleepPreventionInterval = null;
+            }
+            
+            if (videoPlayInterval) {
+                clearInterval(videoPlayInterval);
+                videoPlayInterval = null;
+            }
+            
+            if (keyboardSimulationInterval) {
+                clearInterval(keyboardSimulationInterval);
+                keyboardSimulationInterval = null;
+            }
+            
+            // Stop video
+            if (sleepPreventionVideo.srcObject) {
+                sleepPreventionVideo.srcObject.getTracks().forEach(track => track.stop());
+                sleepPreventionVideo.srcObject = null;
+            }
+            
+            // Stop audio
+            if (oscillator) {
+                oscillator.stop();
+                oscillator = null;
+            }
+            
+            if (audioContext) {
+                audioContext.close();
+                audioContext = null;
+            }
         }
 
         async function requestWakeLock() {
             try {
                 if ('wakeLock' in navigator) {
                     wakeLock = await navigator.wakeLock.request('screen');
-                    wakeLockStatus.textContent = 'Screen Wake Lock: Active';
+                    wakeLockStatus.textContent = 'Sleep Prevention: Wake Lock Active';
                     wakeLockStatus.className = 'wake-lock-status wake-lock-active';
                     console.log('Wake lock activated');
                     
                     wakeLock.addEventListener('release', () => {
-                        wakeLockStatus.textContent = 'Screen Wake Lock: Released';
+                        wakeLockStatus.textContent = 'Sleep Prevention: Wake Lock Released';
                         wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
                         console.log('Wake lock released');
                     });
                 } else {
-                    wakeLockStatus.textContent = 'Screen Wake Lock: Not Supported';
-                    wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
-                    console.log('Wake Lock API not supported');
+                    wakeLockStatus.textContent = 'Sleep Prevention: Manual Mode';
+                    wakeLockStatus.className = 'wake-lock-status wake-lock-active';
+                    console.log('Wake Lock API not supported, using manual prevention');
                 }
             } catch (err) {
-                wakeLockStatus.textContent = 'Screen Wake Lock: Failed';
-                wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
-                console.error('Wake lock failed:', err);
+                wakeLockStatus.textContent = 'Sleep Prevention: Manual Mode';
+                wakeLockStatus.className = 'wake-lock-status wake-lock-active';
+                console.error('Wake lock failed, using manual prevention:', err);
             }
         }
 
@@ -437,6 +576,9 @@
             // Enter fullscreen
             await enterFullscreen();
             
+            // Start aggressive sleep prevention
+            startSleepPrevention();
+            
             // Request wake lock
             await requestWakeLock();
             
@@ -445,26 +587,17 @@
                 const elapsed = Date.now() - timerStart;
                 timerDisplay.textContent = formatTime(elapsed);
             }, 1000);
-            
-            // Start mouse movement simulation every 30 seconds
-            mouseMoveInterval = setInterval(simulateMouseMove, 30000);
-            
-            // Also simulate mouse movement every 2 minutes as backup
-            setTimeout(() => {
-                const backupInterval = setInterval(() => {
-                    if (timerOverlay.classList.contains('active')) {
-                        simulateMouseMove();
-                    } else {
-                        clearInterval(backupInterval);
-                    }
-                }, 120000);
-            }, 5000);
         }
 
         function stopTimer() {
-            // Clear intervals
-            clearInterval(timerInterval);
-            clearInterval(mouseMoveInterval);
+            // Clear timer interval
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            
+            // Stop sleep prevention
+            stopSleepPrevention();
             
             // Release wake lock
             releaseWakeLock();
@@ -480,7 +613,7 @@
             document.body.style.cursor = '';
             
             // Reset status
-            wakeLockStatus.textContent = 'Screen Wake Lock: Inactive';
+            wakeLockStatus.textContent = 'Sleep Prevention: Inactive';
             wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
         }
 
@@ -502,11 +635,11 @@
             }
         });
 
-        // Handle visibility change (when user switches tabs or minimizes)
+        // Handle visibility change
         document.addEventListener('visibilitychange', async () => {
             if (timerOverlay.classList.contains('active') && !document.hidden) {
-                // Re-request wake lock when page becomes visible again
                 await requestWakeLock();
+                startSleepPrevention();
             }
         });
 
@@ -521,7 +654,6 @@
         // Handle fullscreen change
         document.addEventListener('fullscreenchange', () => {
             if (!document.fullscreenElement && timerOverlay.classList.contains('active')) {
-                // If fullscreen is exited but timer is still active, try to re-enter
                 setTimeout(() => {
                     if (timerOverlay.classList.contains('active')) {
                         enterFullscreen();
@@ -530,25 +662,21 @@
             }
         });
 
-        // Additional mouse movement on user interaction
-        let lastUserInteraction = Date.now();
-        
-        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
-            document.addEventListener(event, () => {
-                lastUserInteraction = Date.now();
-            });
+        // Page focus management
+        window.addEventListener('focus', () => {
+            if (timerOverlay.classList.contains('active')) {
+                requestWakeLock();
+            }
         });
 
-        // Periodic check for user inactivity
-        setInterval(() => {
+        window.addEventListener('blur', () => {
             if (timerOverlay.classList.contains('active')) {
-                const timeSinceLastInteraction = Date.now() - lastUserInteraction;
-                // If no user interaction for 60 seconds, simulate mouse move
-                if (timeSinceLastInteraction > 60000) {
-                    simulateMouseMove();
-                }
+                // Immediately try to regain focus
+                setTimeout(() => {
+                    window.focus();
+                }, 100);
             }
-        }, 60000);
+        });
     </script>
 </body>
 </html>
