@@ -393,9 +393,9 @@
                         <div class="terminal-btn btn-minimize"></div>
                         <div class="terminal-btn btn-maximize"></div>
                     </div>
-                    <div class="terminal-title">macadmin@macbuds — zsh — 80×24</div>
+                    <div class="terminal-title">macadmin@macbuds — timer — fullscreen</div>
                 </div>
-                <div class="wake-lock-status" id="wakeLockStatus">Sleep Prevention: Inactive</div>
+                <div class="wake-lock-status" id="wakeLockStatus"></div>
             </div>
             <div class="timer-terminal-content">
                 <div class="timer-display" id="timerDisplay">00:00:00</div>
@@ -403,12 +403,6 @@
                     <button class="tools-btn" id="stopTimerBtn">
                         <i class="fas fa-stop"></i> Stop & Exit
                     </button>
-                </div>
-                <div class="timer-info">
-                    Timer Active - Press ESC to exit
-                </div>
-                <div class="timer-instructions">
-                    Hover to show controls • ESC to exit • Fullscreen active
                 </div>
             </div>
             <div class="timer-terminal-status">
@@ -698,7 +692,7 @@
                 document.body.style.cursor = '';
                 
                 // Reset status
-                wakeLockStatus.textContent = 'Sleep Prevention: Inactive';
+                wakeLockStatus.textContent = '';
                 wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
                 
                 console.log('Timer stopped successfully');
