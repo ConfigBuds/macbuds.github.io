@@ -815,7 +815,7 @@
                             <i class="fab fa-github"></i>
                             <div class="quick-link-text">GitHub Repos</div>
                         </div>
-                        <div class="quick-link" onclick="window.open('tabs/tools.html', '_self')">
+                        <div class="quick-link" onclick="window.open('tabs/tools.html', '_blank')">
                             <i class="fas fa-wrench"></i>
                             <div class="quick-link-text">Tools</div>
                         </div>
@@ -908,78 +908,310 @@
                     </div>
                 </div>
                 <div class="status-right">
-                    <span>© 2025 MacBuds</span>
+                    <span>© 2024 MacBuds</span>
                 </div>
             </div>
         </div>
     </div>
     <script>
-    // Simple site search for all visible text content
-    const searchInput = document.getElementById('siteSearch');
-    const searchResults = document.getElementById('searchResults');
-
-    function getAllTextNodes(node) {
-        let textNodes = [];
-        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0) {
-            textNodes.push(node);
-        } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE' && node.tagName !== 'NOSCRIPT') {
-            for (let child of node.childNodes) {
-                textNodes = textNodes.concat(getAllTextNodes(child));
-            }
-        }
-        return textNodes;
+// --- BEGIN TerminalSearch from test.js ---
+class TerminalSearch {
+    constructor() {
+        this.searchInput = document.getElementById('siteSearch');
+        this.searchResults = document.getElementById('searchResults');
+        this.currentHighlight = -1;
+        this.searchableItems = [];
+        this.init();
     }
 
-    function getSearchableContent() {
-        // Only search inside the main content area
-        const wrapper = document.querySelector('.terminal-content-wrapper');
-        if (!wrapper) return [];
-        const nodes = getAllTextNodes(wrapper);
-        return nodes.map(node => ({
-            text: node.textContent.trim(),
-            node
-        })).filter(item => item.text.length > 0);
+    init() {
+        this.buildSearchDatabase();
+        this.setupEventListeners();
     }
 
-    function highlightMatch(text, query) {
-        const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-        return text.replace(re, '<mark>$1</mark>');
-    }
+    buildSearchDatabase() {
+        // Build database of searchable items
+        this.searchableItems = [];
 
-    searchInput.addEventListener('input', function() {
-        const query = this.value.trim();
-        searchResults.innerHTML = '';
-        if (!query) {
-            searchResults.style.display = 'none';
-            return;
-        }
-        const content = getSearchableContent();
-        const matches = content.filter(item => item.text.toLowerCase().includes(query.toLowerCase()));
-        if (matches.length === 0) {
-            searchResults.innerHTML = '<div class="no-results">No results found</div>';
-            searchResults.style.display = 'block';
-            return;
-        }
-        matches.slice(0, 20).forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'search-result-item';
-            div.innerHTML = `<span class='search-result-title'>${highlightMatch(item.text, query)}</span>`;
-            div.onclick = () => {
-                // Scroll to the node in the page
-                item.node.parentElement.scrollIntoView({behavior: 'smooth', block: 'center'});
-                searchResults.style.display = 'none';
-            };
-            searchResults.appendChild(div);
+        // Add quick links
+        document.querySelectorAll('.quick-link').forEach(link => {
+            const text = link.querySelector('.quick-link-text').textContent;
+            const keywords = link.getAttribute('data-searchable') || '';
+            this.searchableItems.push({
+                title: text,
+                description: `Quick access to ${text.toLowerCase()} tools and resources`,
+                category: 'Resources',
+                keywords: keywords.toLowerCase(),
+                element: link,
+                action: () => link.click()
+            });
         });
-        searchResults.style.display = 'block';
-    });
 
-    document.addEventListener('click', function(e) {
-        if (!searchResults.contains(e.target) && e.target !== searchInput) {
-            searchResults.style.display = 'none';
+        // Add download items
+        document.querySelectorAll('.download-item').forEach(item => {
+            const title = item.querySelector('.download-title').textContent;
+            const description = item.querySelector('.download-description').textContent;
+            const keywords = item.getAttribute('data-searchable') || '';
+            const downloadLink = item.querySelector('.download-command');
+            this.searchableItems.push({
+                title: title,
+                description: description,
+                category: 'Downloads',
+                keywords: keywords.toLowerCase(),
+                element: item,
+                action: () => downloadLink.click()
+            });
+        });
+
+        // Add terminal commands
+        const terminalCommands = [
+            { title: 'ls', description: 'List directory contents', category: 'Commands' },
+            { title: 'cd', description: 'Change directory', category: 'Commands' },
+            { title: 'pwd', description: 'Print working directory', category: 'Commands' },
+            { title: 'cat', description: 'Display file contents', category: 'Commands' },
+            { title: 'grep', description: 'Search text patterns', category: 'Commands' },
+            { title: 'find', description: 'Search for files and directories', category: 'Commands' },
+            { title: 'sudo', description: 'Execute commands as another user', category: 'Commands' },
+            { title: 'chmod', description: 'Change file permissions', category: 'Commands' },
+            { title: 'diskutil', description: 'Disk utility commands', category: 'macOS Commands' },
+            { title: 'dscl', description: 'Directory Service command line', category: 'macOS Commands' },
+            { title: 'profiles', description: 'Configuration profiles utility', category: 'macOS Commands' },
+            { title: 'jamf', description: 'Jamf Pro management commands', category: 'macOS Commands' },
+            { title: 'softwareupdate', description: 'Software update utility', category: 'macOS Commands' },
+            { title: 'system_profiler', description: 'System information utility', category: 'macOS Commands' },
+            { title: 'defaults', description: 'Access user defaults system', category: 'macOS Commands' },
+            { title: 'launchctl', description: 'Control system and user agents', category: 'macOS Commands' },
+            { title: 'ps', description: 'Display running processes', category: 'Commands' },
+            { title: 'kill', description: 'Terminate processes', category: 'Commands' },
+            { title: 'top', description: 'Display system processes', category: 'Commands' },
+            { title: 'df', description: 'Display filesystem disk space usage', category: 'Commands' },
+            { title: 'du', description: 'Display directory space usage', category: 'Commands' },
+            { title: 'tar', description: 'Archive utility', category: 'Commands' },
+            { title: 'curl', description: 'Transfer data from servers', category: 'Commands' },
+            { title: 'wget', description: 'Download files from web', category: 'Commands' },
+            { title: 'ssh', description: 'Secure Shell remote login', category: 'Commands' },
+            { title: 'scp', description: 'Secure copy files over SSH', category: 'Commands' },
+            { title: 'rsync', description: 'Remote file synchronization', category: 'Commands' }
+        ];
+
+        terminalCommands.forEach(cmd => {
+            this.searchableItems.push({
+                title: cmd.title,
+                description: cmd.description,
+                category: cmd.category,
+                keywords: `${cmd.title} ${cmd.description}`.toLowerCase(),
+                element: null,
+                action: () => this.executeCommand(cmd.title)
+            });
+        });
+    }
+
+    setupEventListeners() {
+        if (!this.searchInput) return;
+
+        this.searchInput.addEventListener('input', (e) => {
+            this.handleSearch(e.target.value);
+        });
+
+        this.searchInput.addEventListener('keydown', (e) => {
+            this.handleKeyNavigation(e);
+        });
+
+        this.searchInput.addEventListener('focus', () => {
+            this.showSearchResults();
+        });
+
+        // Close search results when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!this.searchInput.contains(e.target) && !this.searchResults.contains(e.target)) {
+                this.hideSearchResults();
+            }
+        });
+    }
+
+    handleSearch(query) {
+        if (!query.trim()) {
+            this.hideSearchResults();
+            return;
         }
-    });
 
+        const results = this.searchItems(query);
+        this.displayResults(results);
+        this.currentHighlight = -1;
+    }
+
+    searchItems(query) {
+        const searchTerm = query.toLowerCase();
+        const results = [];
+
+        this.searchableItems.forEach(item => {
+            let score = 0;
+            const titleMatch = item.title.toLowerCase().includes(searchTerm);
+            const descriptionMatch = item.description.toLowerCase().includes(searchTerm);
+            const keywordsMatch = item.keywords && item.keywords.includes(searchTerm);
+
+            if (titleMatch) score += 10;
+            if (descriptionMatch) score += 5;
+            if (keywordsMatch) score += 3;
+
+            // Boost score for exact matches
+            if (item.title.toLowerCase() === searchTerm) score += 20;
+            if (item.title.toLowerCase().startsWith(searchTerm)) score += 5;
+
+            if (score > 0) {
+                results.push({ ...item, score });
+            }
+        });
+
+        return results.sort((a, b) => b.score - a.score);
+    }
+
+    displayResults(results) {
+        if (!this.searchResults) return;
+
+        if (results.length === 0) {
+            this.searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+            this.showSearchResults();
+            return;
+        }
+
+        const groupedResults = this.groupResultsByCategory(results);
+        let html = '';
+
+        Object.keys(groupedResults).forEach(category => {
+            html += `<div class="search-category">
+                <div class="search-category-title">${category}</div>
+                <div class="search-category-items">`;
+
+            groupedResults[category].forEach((item, index) => {
+                html += `
+                    <div class="search-result-item" data-index="${index}">
+                        <div class="search-result-title">${this.highlightMatch(item.title, this.searchInput.value)}</div>
+                        <div class="search-result-description">${this.highlightMatch(item.description, this.searchInput.value)}</div>
+                    </div>
+                `;
+            });
+
+            html += '</div></div>';
+        });
+
+        this.searchResults.innerHTML = html;
+        this.showSearchResults();
+        this.setupResultListeners(results);
+    }
+
+    groupResultsByCategory(results) {
+        const grouped = {};
+        results.forEach(item => {
+            if (!grouped[item.category]) {
+                grouped[item.category] = [];
+            }
+            grouped[item.category].push(item);
+        });
+        return grouped;
+    }
+
+    highlightMatch(text, query) {
+        if (!query) return text;
+        const regex = new RegExp(`(${query})`, 'gi');
+        return text.replace(regex, '<mark>$1</mark>');
+    }
+
+    setupResultListeners(results) {
+        const resultItems = this.searchResults.querySelectorAll('.search-result-item');
+        resultItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                this.selectResult(results[index]);
+            });
+        });
+    }
+
+    handleKeyNavigation(e) {
+        const resultItems = this.searchResults.querySelectorAll('.search-result-item');
+        
+        switch (e.key) {
+            case 'ArrowDown':
+                e.preventDefault();
+                this.currentHighlight = Math.min(this.currentHighlight + 1, resultItems.length - 1);
+                this.updateHighlight();
+                break;
+            case 'ArrowUp':
+                e.preventDefault();
+                this.currentHighlight = Math.max(this.currentHighlight - 1, -1);
+                this.updateHighlight();
+                break;
+            case 'Enter':
+                e.preventDefault();
+                if (this.currentHighlight >= 0) {
+                    resultItems[this.currentHighlight].click();
+                }
+                break;
+            case 'Escape':
+                this.hideSearchResults();
+                this.searchInput.blur();
+                break;
+        }
+    }
+
+    updateHighlight() {
+        const resultItems = this.searchResults.querySelectorAll('.search-result-item');
+        resultItems.forEach((item, index) => {
+            item.classList.toggle('highlighted', index === this.currentHighlight);
+        });
+    }
+
+    selectResult(item) {
+        if (item.action) {
+            item.action();
+        }
+        this.hideSearchResults();
+        this.searchInput.value = '';
+    }
+
+    executeCommand(command) {
+        // This would typically integrate with a terminal emulator
+        console.log(`Executing command: ${command}`);
+        // You could dispatch an event or call a terminal interface here
+        const event = new CustomEvent('executeCommand', { detail: { command } });
+        document.dispatchEvent(event);
+    }
+
+    showSearchResults() {
+        if (this.searchResults) {
+            this.searchResults.style.display = 'block';
+            this.searchResults.classList.add('active');
+        }
+    }
+
+    hideSearchResults() {
+        if (this.searchResults) {
+            this.searchResults.style.display = 'none';
+            this.searchResults.classList.remove('active');
+        }
+        this.currentHighlight = -1;
+    }
+
+    // Public method to add custom searchable items
+    addSearchableItem(item) {
+        this.searchableItems.push(item);
+    }
+
+    // Public method to refresh the search database
+    refreshDatabase() {
+        this.buildSearchDatabase();
+    }
+}
+
+// Initialize the search when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    const terminalSearch = new TerminalSearch();
+    
+    // Make it globally accessible if needed
+    window.terminalSearch = terminalSearch;
+});
+// --- END TerminalSearch from test.js ---
+    </script>
+    <script>
     // Timer Script for Fullscreen Focus Mode
     let timerInterval, timerStart;
     const showTimerBtn = document.getElementById('showTimerBtn');
