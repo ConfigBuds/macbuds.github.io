@@ -65,45 +65,6 @@
             color: #55ff55;
             font-weight: 500;
         }
-        .terminal-right {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            flex-shrink: 0;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border: 2px solid #00ff41;
-            border-radius: 8px;
-            background: rgba(0, 255, 65, 0.05);
-            transition: all 0.3s ease;
-        }
-        .logo-container:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
-            background: rgba(0, 255, 65, 0.1);
-        }
-        .logo-img {
-            max-width: 120px;
-            max-height: 40px;
-            width: auto;
-            height: auto;
-            border-radius: 4px;
-            display: block;
-        }
-        .logo-fallback {
-            width: 120px;
-            height: 40px;
-            border-radius: 4px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background: #0d1b0d;
-            font-size: 24px;
-            color: #00ff41;
-        }
         .terminal-content-wrapper {
             flex: 1;
             display: flex;
@@ -113,336 +74,6 @@
             padding: 30px;
             background: #0a0e0a;
             position: relative;
-        }
-        .welcome-section {
-            display: flex;
-            align-items: flex-start;
-            gap: 30px;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
-        }
-        .welcome-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
-            text-align: left;
-        }
-        .downloads-section {
-            margin-bottom: 30px;
-        }
-        .resources-section {
-            margin-bottom: 20px;
-        }
-        .terminal-logo-section {
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 16px;
-        }
-        .main-logo-container {
-            border: 3px solid #00ff41;
-            border-radius: 12px;
-            padding: 16px;
-            background: rgba(0, 255, 65, 0.05);
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
-            display: flex;
-            align-items: center;
-        }
-        .main-logo-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
-            background: rgba(0, 255, 65, 0.1);
-        }
-        .main-logo-img {
-            max-width: 150px;
-            max-height: 100px;
-            width: auto;
-            height: auto;
-            border-radius: 8px;
-            display: block;
-        }
-        .main-logo-fallback {
-            width: 150px;
-            height: 100px;
-            border-radius: 8px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background: #0d1b0d;
-            font-size: 36px;
-            color: #00ff41;
-            border: 2px solid #33ff33;
-        }
-        .search-container {
-            width: 100%;
-            max-width: 250px;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
-        .search-box {
-            position: relative;
-            width: 100%;
-        }
-        .search-input {
-            width: 100%;
-            background: #0d1b0d;
-            border: 2px solid #33ff33;
-            border-radius: 6px;
-            padding: 8px 12px 8px 32px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: #00ff41;
-            outline: none;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-        }
-        .search-input::placeholder {
-            color: #55ff55;
-            opacity: 0.7;
-        }
-        .search-input:focus {
-            border-color: #00ff41;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
-            background: #112211;
-        }
-        .search-icon {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #55ff55;
-            font-size: 12px;
-            z-index: 1;
-        }
-        .search-results {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: #0d1b0d;
-            border: 2px solid #33ff33;
-            border-top: none;
-            border-radius: 0 0 6px 6px;
-            max-height: 300px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-        }
-        .search-result-item {
-            padding: 10px 12px;
-            border-bottom: 1px solid rgba(51, 255, 51, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .search-result-item:hover {
-            background: #112211;
-            border-left: 3px solid #00ff41;
-        }
-        .search-result-item:last-child {
-            border-bottom: none;
-        }
-        .search-result-title {
-            color: #00ff41;
-            font-weight: 600;
-            font-size: 12px;
-            margin-bottom: 2px;
-        }
-        .search-result-desc {
-            color: #77ff77;
-            font-size: 10px;
-            line-height: 1.4;
-        }
-        .search-result-category {
-            color: #55ff55;
-            font-size: 9px;
-            text-transform: uppercase;
-            margin-bottom: 2px;
-        }
-        .no-results {
-            padding: 12px;
-            text-align: center;
-            color: #77ff77;
-            font-size: 11px;
-        }
-        .prompt {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-        }
-        .prompt-symbol {
-            color: #00ff41;
-            margin-right: 8px;
-            font-weight: 700;
-        }
-        .user-host {
-            color: #33ff33;
-            font-weight: 500;
-        }
-        .path {
-            color: #55ff55;
-            font-weight: 500;
-        }
-        .command {
-            color: #77ff77;
-            font-weight: 400;
-        }
-        .output {
-            margin-left: 16px;
-            margin-bottom: 16px;
-            color: #99ff99;
-        }
-        .ascii-art {
-            color: #00ff41;
-            font-size: 14px;
-            line-height: 1.2;
-            margin: 20px 0;
-            text-align: center;
-            animation: matrix-glow 2s ease-in-out infinite alternate;
-        }
-        @keyframes matrix-glow {
-            from { text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41; }
-            to { text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41; }
-        }
-        .section-header {
-            color: #00ff41;
-            font-size: 16px;
-            font-weight: 700;
-            margin: 24px 0 12px 0;
-            border-bottom: 1px solid #00ff41;
-            padding-bottom: 8px;
-        }
-        .download-item {
-            background: #0d1b0d;
-            border: 1px solid #33ff33;
-            border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 12px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .download-item:hover {
-            border-color: #00ff41;
-            background: #112211;
-            transform: translateX(4px);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-        }
-        .download-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, #00ff41, #33ff33);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .download-item:hover::before {
-            opacity: 1;
-            box-shadow: 0 0 10px #00ff41;
-        }
-        .download-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-        .download-title {
-            color: #00ff41;
-            font-weight: 700;
-            font-size: 14px;
-        }
-        .download-version {
-            color: #55ff55;
-            font-size: 12px;
-            background: rgba(0, 255, 65, 0.1);
-            padding: 2px 8px;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 255, 65, 0.3);
-        }
-        .download-description {
-            color: #77ff77;
-            font-size: 12px;
-            margin-bottom: 12px;
-        }
-        .download-command {
-            background: #001100;
-            border: 1px solid #33ff33;
-            border-radius: 4px;
-            padding: 8px 12px;
-            font-size: 12px;
-            color: #99ff99;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            word-break: break-all;
-        }
-        .download-command:hover {
-            background: #0d1b0d;
-            border-color: #00ff41;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
-            color: #00ff41;
-        }
-        .download-command::after {
-            content: 'Click to downlod';
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 10px;
-            color: #00ff41;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            background: #0d1b0d;
-            padding: 2px 4px;
-            border-radius: 2px;
-        }
-        .download-command:hover::after {
-            opacity: 1;
-        }
-        .quick-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-            margin-top: 16px;
-        }
-        .quick-link {
-            background: #0d1b0d;
-            border: 1px solid #33ff33;
-            border-radius: 6px;
-            padding: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-        .quick-link:hover {
-            border-color: #00ff41;
-            background: #112211;
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-        }
-        .quick-link i {
-            color: #00ff41;
-            font-size: 18px;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .quick-link-text {
-            color: #77ff77;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        .quick-link:hover .quick-link-text {
-            color: #00ff41;
         }
         .status-bar {
             background: #0d1b0d;
@@ -476,23 +107,6 @@
             50% { box-shadow: 0 0 15px #00ff41, 0 0 25px #00ff41; }
             100% { box-shadow: 0 0 5px #00ff41; }
         }
-        .blinking-cursor {
-            animation: blink 1s infinite;
-            color: #00ff41;
-        }
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        .typewriter {
-            overflow: hidden;
-            white-space: nowrap;
-            animation: typing 3s steps(40, end);
-        }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
         .github-link {
             color: #55ff55;
             text-decoration: none;
@@ -501,138 +115,6 @@
         .github-link:hover {
             color: #00ff41;
             text-decoration: underline;
-        }
-        .coming-soon {
-            background: rgba(0, 255, 65, 0.1);
-            border: 1px solid rgba(0, 255, 65, 0.3);
-            border-radius: 6px;
-            padding: 16px;
-            margin-top: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .coming-soon:hover {
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-        }
-        .coming-soon .icon {
-            color: #00ff41;
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-        .coming-soon-title {
-            color: #00ff41;
-            font-weight: 700;
-        }
-        .coming-soon-text {
-            color: #77ff77;
-            font-size: 12px;
-            margin-top: 4px;
-        }
-        .matrix-char {
-            position: fixed;
-            color: #00ff41;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            z-index: -1;
-            animation: matrix-fall 3s linear infinite;
-            opacity: 0.3;
-        }
-        @keyframes matrix-fall {
-            0% { transform: translateY(-100vh); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-        .terminal-content-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00ff41, transparent);
-            animation: scan-line 3s linear infinite;
-            opacity: 0.1;
-        }
-        @keyframes scan-line {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(500px); }
-        }
-        .welcome-output {
-            color: #55ff55;
-            font-size: 16px;
-            font-weight: 500;
-            text-align: left;
-            margin: 8px 0;
-        }
-        .emoji {
-            filter: hue-rotate(90deg) brightness(1.2);
-        }
-        @media (max-width: 1024px) {
-            .welcome-section {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-            .welcome-content {
-                text-align: center;
-            }
-            .main-logo-container {
-                padding: 12px;
-            }
-            .main-logo-img {
-                max-width: 120px;
-                max-height: 80px;
-            }
-            .main-logo-fallback {
-                width: 120px;
-                height: 80px;
-                font-size: 24px;
-            }
-        }
-        @media (max-width: 768px) {
-            .terminal-container {
-                padding: 20px 10px;
-            }
-            .terminal-content-wrapper {
-                padding: 20px;
-            }
-            .welcome-section {
-                gap: 15px;
-                margin-bottom: 20px;
-            }
-            .ascii-art {
-                font-size: 10px;
-            }
-            .quick-links {
-                grid-template-columns: 1fr 1fr;
-            }
-            .terminal-header {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
-            .terminal-left {
-                justify-content: center;
-            }
-            .main-logo-img {
-                max-width: 100px;
-                max-height: 70px;
-            }
-            .main-logo-fallback {
-                width: 100px;
-                height: 70px;
-                font-size: 20px;
-            }
-            .search-container {
-                max-width: 200px;
-            }
-            .search-input {
-                font-size: 11px;
-                padding: 6px 10px 6px 28px;
-            }
-            .search-icon {
-                font-size: 10px;
-                left: 8px;
-            }
         }
         .tools-btn {
             background: #0d1b0d;
@@ -643,37 +125,169 @@
             font-size: 1.5rem;
             font-family: 'JetBrains Mono', monospace;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
             margin-bottom: 24px;
-            box-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41 inset;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3), 0 0 20px rgba(0, 255, 65, 0.1) inset;
         }
         .tools-btn:hover {
             background: #112211;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5), 0 0 30px rgba(0, 255, 65, 0.2) inset;
         }
         .timer-overlay {
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98);
-            z-index: 10;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #0a0e0a 100%);
+            z-index: 10000;
+            cursor: none;
         }
         .timer-overlay.active {
             display: flex;
         }
         .timer-display {
             color: #00ff41;
-            font-size: 8vw;
+            font-size: clamp(4rem, 12vw, 8rem);
             font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
             margin-bottom: 48px;
-            text-shadow: 0 0 20px #00ff41, 0 0 40px #00ff41;
+            text-shadow: 
+                0 0 20px #00ff41,
+                0 0 40px #00ff41,
+                0 0 60px #00ff41,
+                0 0 80px #00ff41;
             animation: matrix-glow 2s ease-in-out infinite alternate;
+            letter-spacing: 0.1em;
+            text-align: center;
+        }
+        @keyframes matrix-glow {
+            from { 
+                text-shadow: 
+                    0 0 20px #00ff41,
+                    0 0 40px #00ff41,
+                    0 0 60px #00ff41;
+            }
+            to { 
+                text-shadow: 
+                    0 0 30px #00ff41,
+                    0 0 60px #00ff41,
+                    0 0 90px #00ff41,
+                    0 0 120px #00ff41;
+            }
         }
         .timer-controls {
             display: flex;
             gap: 32px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .timer-overlay:hover .timer-controls {
+            opacity: 1;
+        }
+        .timer-info {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            color: #55ff55;
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .timer-overlay:hover .timer-info {
+            opacity: 1;
+        }
+        .timer-instructions {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #77ff77;
+            font-size: 1rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .timer-overlay:hover .timer-instructions {
+            opacity: 1;
+        }
+        .wake-lock-status {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            color: #55ff55;
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .timer-overlay:hover .wake-lock-status {
+            opacity: 1;
+        }
+        .wake-lock-active {
+            color: #00ff41;
+        }
+        .wake-lock-inactive {
+            color: #ff4444;
+        }
+        /* Fullscreen styles */
+        .timer-overlay:-webkit-full-screen {
+            background: linear-gradient(135deg, #000000 0%, #0a0e0a 100%);
+        }
+        .timer-overlay:-moz-full-screen {
+            background: linear-gradient(135deg, #000000 0%, #0a0e0a 100%);
+        }
+        .timer-overlay:fullscreen {
+            background: linear-gradient(135deg, #000000 0%, #0a0e0a 100%);
+        }
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .timer-display {
+                font-size: clamp(2.5rem, 10vw, 6rem);
+                margin-bottom: 32px;
+            }
+            .timer-info,
+            .wake-lock-status {
+                font-size: 1rem;
+                top: 30px;
+            }
+            .timer-info {
+                left: 30px;
+            }
+            .wake-lock-status {
+                right: 30px;
+            }
+            .timer-instructions {
+                font-size: 0.9rem;
+                bottom: 30px;
+            }
+            .timer-controls {
+                gap: 20px;
+            }
+            .tools-btn {
+                padding: 15px 40px;
+                font-size: 1.2rem;
+            }
+        }
+        /* Animation for digits */
+        .timer-display {
+            background: linear-gradient(45deg, #00ff41, #33ff33, #00ff41);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: matrix-glow 2s ease-in-out infinite alternate,
+                       gradient-shift 3s ease-in-out infinite;
+        }
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
     </style>
 </head>
@@ -691,11 +305,20 @@
                 </div>
             </div>
             <div class="terminal-content-wrapper">
-                <button class="tools-btn" id="startTimerBtn"><i class="fas fa-clock"></i> Start Focus Timer</button>
+                <button class="tools-btn" id="startTimerBtn">
+                    <i class="fas fa-clock"></i> Start Focus Timer
+                </button>
                 <div class="timer-overlay" id="timerOverlay">
+                    <div class="timer-info" id="timerInfo">Focus Timer Active</div>
+                    <div class="wake-lock-status" id="wakeLockStatus">Screen Wake Lock: Inactive</div>
                     <div class="timer-display" id="timerDisplay">00:00:00</div>
                     <div class="timer-controls">
-                        <button class="tools-btn" id="stopTimerBtn"><i class="fas fa-stop"></i> Stop & Exit</button>
+                        <button class="tools-btn" id="stopTimerBtn">
+                            <i class="fas fa-stop"></i> Stop & Exit
+                        </button>
+                    </div>
+                    <div class="timer-instructions">
+                        Hover to show controls • Press ESC to exit • Move mouse to prevent sleep
                     </div>
                 </div>
             </div>
@@ -716,56 +339,216 @@
             </div>
         </div>
     </div>
+
     <script>
-    let timerInterval, timerStart;
-    const startTimerBtn = document.getElementById('startTimerBtn');
-    const timerOverlay = document.getElementById('timerOverlay');
-    const timerDisplay = document.getElementById('timerDisplay');
-    const stopTimerBtn = document.getElementById('stopTimerBtn');
+        let timerInterval, timerStart, wakeLock = null, mouseMoveInterval;
+        const startTimerBtn = document.getElementById('startTimerBtn');
+        const timerOverlay = document.getElementById('timerOverlay');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const stopTimerBtn = document.getElementById('stopTimerBtn');
+        const wakeLockStatus = document.getElementById('wakeLockStatus');
+        const timerInfo = document.getElementById('timerInfo');
 
-    function formatTime(ms) {
-        const totalSeconds = Math.floor(ms / 1000);
-        const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-        const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-        const s = String(totalSeconds % 60).padStart(2, '0');
-        return `${h}:${m}:${s}`;
-    }
+        function formatTime(ms) {
+            const totalSeconds = Math.floor(ms / 1000);
+            const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+            const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+            const s = String(totalSeconds % 60).padStart(2, '0');
+            return `${h}:${m}:${s}`;
+        }
 
-    function moveMouseSlightly() {
-        const evt = new MouseEvent('mousemove', {
-            bubbles: true,
-            clientX: Math.floor(Math.random() * window.innerWidth),
-            clientY: Math.floor(Math.random() * window.innerHeight)
+        function simulateMouseMove() {
+            // Create a very small mouse movement to prevent screen sleep
+            const event = new MouseEvent('mousemove', {
+                view: window,
+                bubbles: true,
+                cancelable: true,
+                clientX: Math.random() * 5,
+                clientY: Math.random() * 5
+            });
+            document.dispatchEvent(event);
+        }
+
+        async function requestWakeLock() {
+            try {
+                if ('wakeLock' in navigator) {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                    wakeLockStatus.textContent = 'Screen Wake Lock: Active';
+                    wakeLockStatus.className = 'wake-lock-status wake-lock-active';
+                    console.log('Wake lock activated');
+                    
+                    wakeLock.addEventListener('release', () => {
+                        wakeLockStatus.textContent = 'Screen Wake Lock: Released';
+                        wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
+                        console.log('Wake lock released');
+                    });
+                } else {
+                    wakeLockStatus.textContent = 'Screen Wake Lock: Not Supported';
+                    wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
+                    console.log('Wake Lock API not supported');
+                }
+            } catch (err) {
+                wakeLockStatus.textContent = 'Screen Wake Lock: Failed';
+                wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
+                console.error('Wake lock failed:', err);
+            }
+        }
+
+        function releaseWakeLock() {
+            if (wakeLock) {
+                wakeLock.release();
+                wakeLock = null;
+            }
+        }
+
+        async function enterFullscreen() {
+            try {
+                if (timerOverlay.requestFullscreen) {
+                    await timerOverlay.requestFullscreen();
+                } else if (timerOverlay.webkitRequestFullscreen) {
+                    await timerOverlay.webkitRequestFullscreen();
+                } else if (timerOverlay.msRequestFullscreen) {
+                    await timerOverlay.msRequestFullscreen();
+                }
+            } catch (err) {
+                console.error('Fullscreen failed:', err);
+            }
+        }
+
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        }
+
+        async function startTimer() {
+            timerStart = Date.now();
+            timerDisplay.textContent = '00:00:00';
+            timerOverlay.classList.add('active');
+            
+            // Hide cursor and prevent scrolling
+            document.body.style.overflow = 'hidden';
+            document.body.style.cursor = 'none';
+            
+            // Enter fullscreen
+            await enterFullscreen();
+            
+            // Request wake lock
+            await requestWakeLock();
+            
+            // Start the timer
+            timerInterval = setInterval(() => {
+                const elapsed = Date.now() - timerStart;
+                timerDisplay.textContent = formatTime(elapsed);
+            }, 1000);
+            
+            // Start mouse movement simulation every 30 seconds
+            mouseMoveInterval = setInterval(simulateMouseMove, 30000);
+            
+            // Also simulate mouse movement every 2 minutes as backup
+            setTimeout(() => {
+                const backupInterval = setInterval(() => {
+                    if (timerOverlay.classList.contains('active')) {
+                        simulateMouseMove();
+                    } else {
+                        clearInterval(backupInterval);
+                    }
+                }, 120000);
+            }, 5000);
+        }
+
+        function stopTimer() {
+            // Clear intervals
+            clearInterval(timerInterval);
+            clearInterval(mouseMoveInterval);
+            
+            // Release wake lock
+            releaseWakeLock();
+            
+            // Exit fullscreen
+            exitFullscreen();
+            
+            // Hide timer overlay
+            timerOverlay.classList.remove('active');
+            
+            // Restore normal cursor and scrolling
+            document.body.style.overflow = '';
+            document.body.style.cursor = '';
+            
+            // Reset status
+            wakeLockStatus.textContent = 'Screen Wake Lock: Inactive';
+            wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
+        }
+
+        // Event listeners
+        if (startTimerBtn) {
+            startTimerBtn.addEventListener('click', startTimer);
+        }
+
+        if (stopTimerBtn) {
+            stopTimerBtn.addEventListener('click', stopTimer);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (timerOverlay.classList.contains('active')) {
+                if (e.key === 'Escape' || e.key === 'Esc') {
+                    stopTimer();
+                }
+            }
         });
-        document.body.dispatchEvent(evt);
-    }
 
-    function startTimer() {
-        timerStart = Date.now();
-        timerDisplay.textContent = '00:00:00';
-        timerOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        const terminalWindow = document.querySelector('.terminal-window');
-        if (terminalWindow.requestFullscreen) terminalWindow.requestFullscreen();
-        timerInterval = setInterval(() => {
-            const elapsed = Date.now() - timerStart;
-            timerDisplay.textContent = formatTime(elapsed);
-            if (elapsed % 30000 < 1000) moveMouseSlightly();
-        }, 1000);
-    }
+        // Handle visibility change (when user switches tabs or minimizes)
+        document.addEventListener('visibilitychange', async () => {
+            if (timerOverlay.classList.contains('active') && !document.hidden) {
+                // Re-request wake lock when page becomes visible again
+                await requestWakeLock();
+            }
+        });
 
-    function stopTimer() {
-        clearInterval(timerInterval);
-        timerOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-        if (document.fullscreenElement) document.exitFullscreen();
-    }
+        // Prevent accidental closing
+        window.addEventListener('beforeunload', (e) => {
+            if (timerOverlay.classList.contains('active')) {
+                e.preventDefault();
+                e.returnValue = 'Timer is running. Are you sure you want to leave?';
+            }
+        });
 
-    if (startTimerBtn) startTimerBtn.onclick = startTimer;
-    if (stopTimerBtn) stopTimerBtn.onclick = stopTimer;
-    document.addEventListener('keydown', e => {
-        if (timerOverlay.classList.contains('active') && (e.key === 'Escape' || e.key === 'Esc')) stopTimer();
-    });
+        // Handle fullscreen change
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement && timerOverlay.classList.contains('active')) {
+                // If fullscreen is exited but timer is still active, try to re-enter
+                setTimeout(() => {
+                    if (timerOverlay.classList.contains('active')) {
+                        enterFullscreen();
+                    }
+                }, 1000);
+            }
+        });
+
+        // Additional mouse movement on user interaction
+        let lastUserInteraction = Date.now();
+        
+        ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'].forEach(event => {
+            document.addEventListener(event, () => {
+                lastUserInteraction = Date.now();
+            });
+        });
+
+        // Periodic check for user inactivity
+        setInterval(() => {
+            if (timerOverlay.classList.contains('active')) {
+                const timeSinceLastInteraction = Date.now() - lastUserInteraction;
+                // If no user interaction for 60 seconds, simulate mouse move
+                if (timeSinceLastInteraction > 60000) {
+                    simulateMouseMove();
+                }
+            }
+        }, 60000);
     </script>
 </body>
-</html> 
+</html>
