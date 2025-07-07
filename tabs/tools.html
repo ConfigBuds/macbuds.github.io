@@ -193,6 +193,16 @@
             align-items: center;
         }
         
+        .timer-controls {
+            display: flex;
+            gap: 32px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .timer-overlay:hover .timer-controls {
+            opacity: 1;
+        }
+        
         .timer-display {
             color: #00ff41;
             font-size: clamp(4rem, 12vw, 8rem);
@@ -237,97 +247,10 @@
             100% { background-position: 0% 50%; }
         }
         
-        .timer-controls {
-            display: flex;
-            gap: 32px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .timer-overlay:hover .timer-controls {
-            opacity: 1;
-        }
-        
-        .timer-info {
-            position: absolute;
-            top: 50px;
-            left: 50px;
-            color: #55ff55;
-            font-size: 1.2rem;
-            font-weight: 500;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .timer-overlay:hover .timer-info {
-            opacity: 1;
-        }
-        
-        .timer-instructions {
-            position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #77ff77;
-            font-size: 1rem;
-            text-align: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .timer-overlay:hover .timer-instructions {
-            opacity: 1;
-        }
-        
-        .wake-lock-status {
-            color: #55ff55;
-            font-size: 1rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .timer-overlay:hover .wake-lock-status {
-            opacity: 1;
-        }
-        
-        .wake-lock-active {
-            color: #00ff41;
-        }
-        
-        .wake-lock-inactive {
-            color: #ff4444;
-        }
-        
-        /* Fullscreen styles */
-        .timer-overlay:-webkit-full-screen {
-            background: linear-gradient(135deg, #000000 0%, #0a0e0a 100%);
-        }
-        .timer-overlay:-moz-full-screen {
-            background: linear-gradient(135deg, #000000 0%, #0a0e0a 100%);
-        }
-        .timer-overlay:fullscreen {
-            background: linear-gradient(135deg, #000000 0%, #0a0e0a 100%);
-        }
-        
         /* Responsive design */
         @media (max-width: 768px) {
             .timer-display {
                 font-size: clamp(2.5rem, 10vw, 6rem);
-                margin-bottom: 32px;
-            }
-            .timer-info,
-            .wake-lock-status {
-                font-size: 1rem;
-                top: 30px;
-            }
-            .timer-info {
-                left: 30px;
-            }
-            .wake-lock-status {
-                right: 30px;
-            }
-            .timer-instructions {
-                font-size: 0.9rem;
-                bottom: 30px;
-            }
-            .timer-controls {
-                gap: 20px;
             }
             .tools-btn {
                 padding: 15px 40px;
@@ -393,9 +316,8 @@
                         <div class="terminal-btn btn-minimize"></div>
                         <div class="terminal-btn btn-maximize"></div>
                     </div>
-                    <div class="terminal-title">macadmin@macbuds — timer — fullscreen</div>
+                    <div class="terminal-title">macadmin@macbuds — zsh — 80×24</div>
                 </div>
-                <div class="wake-lock-status" id="wakeLockStatus"></div>
             </div>
             <div class="timer-terminal-content">
                 <div class="timer-display" id="timerDisplay">00:00:00</div>
@@ -409,11 +331,11 @@
                 <div class="status-left">
                     <div class="status-item">
                         <div class="status-dot"></div>
-                        <span>Timer Running</span>
+                        <span>Connected-Timer Running</span>
                     </div>
                     <div class="status-item">
-                        <i class="fas fa-shield-alt" style="font-size: 10px;"></i>
-                        <span>Sleep Prevention Active</span>
+                        <i class="fab fa-github" style="font-size: 10px;"></i>
+                        <a href="https://github.com/macbuds" class="github-link">macbuds</a>
                     </div>
                 </div>
                 <div class="status-right">
@@ -437,7 +359,6 @@
         const timerOverlay = document.getElementById('timerOverlay');
         const timerDisplay = document.getElementById('timerDisplay');
         const stopTimerBtn = document.getElementById('stopTimerBtn');
-        const wakeLockStatus = document.getElementById('wakeLockStatus');
         const sleepPreventionVideo = document.getElementById('sleepPreventionVideo');
 
         function formatTime(ms) {
@@ -459,7 +380,7 @@
             
             const stream = canvas.captureStream(1);
             sleepPreventionVideo.srcObject = stream;
-            sleepPreventionVideo.play().catch(e => console.log('Video play failed:', e));
+            sleepPreventionVideo.play().catch(e => {});
         }
 
         // Enhanced sleep prevention techniques
@@ -471,7 +392,6 @@
             
             // Method 2: Periodic invisible mouse movements
             sleepPreventionInterval = setInterval(() => {
-                // Create multiple types of events
                 const events = [
                     new MouseEvent('mousemove', {
                         view: window,
@@ -493,17 +413,13 @@
                 });
                 
                 counter++;
-                if (counter % 10 === 0) {
-                    console.log('Sleep prevention active:', counter);
-                }
             }, 5000); // Every 5 seconds
             
             // Method 3: Rapid video restart
             videoPlayInterval = setInterval(() => {
                 if (sleepPreventionVideo.paused) {
-                    sleepPreventionVideo.play().catch(e => console.log('Video restart failed:', e));
+                    sleepPreventionVideo.play().catch(e => {});
                 }
-                // Force video to restart
                 sleepPreventionVideo.currentTime = 0;
             }, 10000); // Every 10 seconds
             
@@ -521,9 +437,8 @@
                 gainNode.gain.setValueAtTime(0.001, audioContext.currentTime);
                 
                 oscillator.start();
-                console.log('Audio context created for sleep prevention');
             } catch (e) {
-                console.log('Audio context creation failed:', e);
+                // Audio context creation failed, continue without it
             }
             
             // Method 5: Keyboard simulation
@@ -584,24 +499,15 @@
             try {
                 if ('wakeLock' in navigator) {
                     wakeLock = await navigator.wakeLock.request('screen');
-                    wakeLockStatus.textContent = 'Sleep Prevention: Wake Lock Active';
-                    wakeLockStatus.className = 'wake-lock-status wake-lock-active';
-                    console.log('Wake lock activated');
                     
                     wakeLock.addEventListener('release', () => {
-                        wakeLockStatus.textContent = 'Sleep Prevention: Wake Lock Released';
-                        wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
-                        console.log('Wake lock released');
+                        // Wake lock released
                     });
                 } else {
-                    wakeLockStatus.textContent = 'Sleep Prevention: Manual Mode';
-                    wakeLockStatus.className = 'wake-lock-status wake-lock-active';
-                    console.log('Wake Lock API not supported, using manual prevention');
+                    // Wake Lock API not supported, using manual prevention
                 }
             } catch (err) {
-                wakeLockStatus.textContent = 'Sleep Prevention: Manual Mode';
-                wakeLockStatus.className = 'wake-lock-status wake-lock-active';
-                console.error('Wake lock failed, using manual prevention:', err);
+                // Wake lock failed, using manual prevention
             }
         }
 
@@ -622,7 +528,7 @@
                     await timerOverlay.msRequestFullscreen();
                 }
             } catch (err) {
-                console.error('Fullscreen failed:', err);
+                // Fullscreen failed
             }
         }
 
@@ -661,9 +567,8 @@
                     timerDisplay.textContent = formatTime(elapsed);
                 }, 100); // Update every 100ms for smoother display
                 
-                console.log('Timer started successfully');
             } catch (error) {
-                console.error('Error starting timer:', error);
+                // Error starting timer
             }
         }
 
@@ -691,13 +596,8 @@
                 document.body.style.overflow = '';
                 document.body.style.cursor = '';
                 
-                // Reset status
-                wakeLockStatus.textContent = '';
-                wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
-                
-                console.log('Timer stopped successfully');
             } catch (error) {
-                console.error('Error stopping timer:', error);
+                // Error stopping timer
             }
         }
 
@@ -714,6 +614,9 @@
                 }
             }
         });
+
+        // Double-click to stop timer
+        timerOverlay.addEventListener('dblclick', stopTimer);
 
         // Handle visibility change
         document.addEventListener('visibilitychange', async () => {
@@ -757,9 +660,6 @@
                 }, 100);
             }
         });
-
-        // Initialize
-        console.log('MacBuds Timer initialized');
     </script>
 </body>
 </html>
