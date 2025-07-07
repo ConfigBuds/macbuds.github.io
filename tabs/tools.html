@@ -136,21 +136,63 @@
         }
         .timer-overlay {
             display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(135deg, #000000 0%, #0a0e0a 100%);
+            background: linear-gradient(135deg, #0a0e0a 0%, #000000 100%);
             z-index: 10000;
             cursor: none;
         }
         .timer-overlay.active {
             display: flex;
         }
+        
+        /* Terminal window styling for fullscreen timer */
+        .timer-terminal-window {
+            background: #001100;
+            border-radius: 12px;
+            border: 2px solid #00ff41;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4), 0 20px 40px rgba(0, 0, 0, 0.5);
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .timer-terminal-header {
+            background: #0d1b0d;
+            padding: 16px 20px;
+            border-bottom: 2px solid #00ff41;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .timer-terminal-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            background: #0a0e0a;
+            position: relative;
+        }
+        
+        .timer-terminal-status {
+            background: #0d1b0d;
+            border-top: 2px solid #00ff41;
+            padding: 8px 16px;
+            font-size: 11px;
+            color: #55ff55;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
         .timer-display {
             color: #00ff41;
             font-size: clamp(4rem, 12vw, 8rem);
@@ -165,7 +207,14 @@
             animation: matrix-glow 2s ease-in-out infinite alternate;
             letter-spacing: 0.1em;
             text-align: center;
+            background: linear-gradient(45deg, #00ff41, #33ff33, #00ff41);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: matrix-glow 2s ease-in-out infinite alternate, gradient-shift 3s ease-in-out infinite;
         }
+        
         @keyframes matrix-glow {
             from { 
                 text-shadow: 
@@ -181,6 +230,13 @@
                     0 0 120px #00ff41;
             }
         }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
         .timer-controls {
             display: flex;
             gap: 32px;
@@ -190,6 +246,7 @@
         .timer-overlay:hover .timer-controls {
             opacity: 1;
         }
+        
         .timer-info {
             position: absolute;
             top: 50px;
@@ -203,6 +260,7 @@
         .timer-overlay:hover .timer-info {
             opacity: 1;
         }
+        
         .timer-instructions {
             position: absolute;
             bottom: 50px;
@@ -217,10 +275,8 @@
         .timer-overlay:hover .timer-instructions {
             opacity: 1;
         }
+        
         .wake-lock-status {
-            position: absolute;
-            top: 50px;
-            right: 50px;
             color: #55ff55;
             font-size: 1rem;
             opacity: 0;
@@ -229,12 +285,15 @@
         .timer-overlay:hover .wake-lock-status {
             opacity: 1;
         }
+        
         .wake-lock-active {
             color: #00ff41;
         }
+        
         .wake-lock-inactive {
             color: #ff4444;
         }
+        
         /* Fullscreen styles */
         .timer-overlay:-webkit-full-screen {
             background: linear-gradient(135deg, #000000 0%, #0a0e0a 100%);
@@ -245,6 +304,7 @@
         .timer-overlay:fullscreen {
             background: linear-gradient(135deg, #000000 0%, #0a0e0a 100%);
         }
+        
         /* Responsive design */
         @media (max-width: 768px) {
             .timer-display {
@@ -273,21 +333,6 @@
                 padding: 15px 40px;
                 font-size: 1.2rem;
             }
-        }
-        /* Animation for digits */
-        .timer-display {
-            background: linear-gradient(45deg, #00ff41, #33ff33, #00ff41);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 200% 200%;
-            animation: matrix-glow 2s ease-in-out infinite alternate,
-                       gradient-shift 3s ease-in-out infinite;
-        }
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
         
         /* Hidden video for sleep prevention */
@@ -319,14 +364,6 @@
                 <button class="tools-btn" id="startTimerBtn">
                     <i class="fas fa-clock"></i> Start Timer
                 </button>
-                <div class="timer-overlay" id="timerOverlay">
-                    <div class="timer-display" id="timerDisplay">00:00:00</div>
-                    <div class="timer-controls">
-                        <button class="tools-btn" id="stopTimerBtn">
-                            <i class="fas fa-stop"></i> Stop & Exit
-                        </button>
-                    </div>
-                </div>
             </div>
             <div class="status-bar">
                 <div class="status-left">
@@ -337,6 +374,52 @@
                     <div class="status-item">
                         <i class="fab fa-github" style="font-size: 10px;"></i>
                         <a href="https://github.com/macbuds" class="github-link">macbuds</a>
+                    </div>
+                </div>
+                <div class="status-right">
+                    <span>© 2025 MacBuds</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timer Overlay with Terminal Styling -->
+    <div class="timer-overlay" id="timerOverlay">
+        <div class="timer-terminal-window">
+            <div class="timer-terminal-header">
+                <div class="terminal-left">
+                    <div class="terminal-buttons">
+                        <div class="terminal-btn btn-close"></div>
+                        <div class="terminal-btn btn-minimize"></div>
+                        <div class="terminal-btn btn-maximize"></div>
+                    </div>
+                    <div class="terminal-title">macadmin@macbuds — timer — fullscreen</div>
+                </div>
+                <div class="wake-lock-status" id="wakeLockStatus">Sleep Prevention: Inactive</div>
+            </div>
+            <div class="timer-terminal-content">
+                <div class="timer-display" id="timerDisplay">00:00:00</div>
+                <div class="timer-controls">
+                    <button class="tools-btn" id="stopTimerBtn">
+                        <i class="fas fa-stop"></i> Stop & Exit
+                    </button>
+                </div>
+                <div class="timer-info">
+                    Timer Active - Press ESC to exit
+                </div>
+                <div class="timer-instructions">
+                    Hover to show controls • ESC to exit • Fullscreen active
+                </div>
+            </div>
+            <div class="timer-terminal-status">
+                <div class="status-left">
+                    <div class="status-item">
+                        <div class="status-dot"></div>
+                        <span>Timer Running</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-shield-alt" style="font-size: 10px;"></i>
+                        <span>Sleep Prevention Active</span>
                     </div>
                 </div>
                 <div class="status-right">
@@ -560,71 +643,79 @@
         }
 
         async function startTimer() {
-            timerStart = Date.now();
-            timerDisplay.textContent = '00:00:00';
-            timerOverlay.classList.add('active');
-            
-            // Hide cursor and prevent scrolling
-            document.body.style.overflow = 'hidden';
-            document.body.style.cursor = 'none';
-            
-            // Enter fullscreen
-            await enterFullscreen();
-            
-            // Start aggressive sleep prevention
-            startSleepPrevention();
-            
-            // Request wake lock
-            await requestWakeLock();
-            
-            // Start the timer
-            timerInterval = setInterval(() => {
-                const elapsed = Date.now() - timerStart;
-                timerDisplay.textContent = formatTime(elapsed);
-            }, 1000);
+            try {
+                timerStart = Date.now();
+                timerDisplay.textContent = '00:00:00';
+                timerOverlay.classList.add('active');
+                
+                // Hide cursor and prevent scrolling
+                document.body.style.overflow = 'hidden';
+                document.body.style.cursor = 'none';
+                
+                // Enter fullscreen
+                await enterFullscreen();
+                
+                // Start aggressive sleep prevention
+                startSleepPrevention();
+                
+                // Request wake lock
+                await requestWakeLock();
+                
+                // Start the timer
+                timerInterval = setInterval(() => {
+                    const elapsed = Date.now() - timerStart;
+                    timerDisplay.textContent = formatTime(elapsed);
+                }, 100); // Update every 100ms for smoother display
+                
+                console.log('Timer started successfully');
+            } catch (error) {
+                console.error('Error starting timer:', error);
+            }
         }
 
         function stopTimer() {
-            // Clear timer interval
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
+            try {
+                // Clear timer interval
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+                
+                // Stop sleep prevention
+                stopSleepPrevention();
+                
+                // Release wake lock
+                releaseWakeLock();
+                
+                // Exit fullscreen
+                exitFullscreen();
+                
+                // Hide timer overlay
+                timerOverlay.classList.remove('active');
+                
+                // Restore normal cursor and scrolling
+                document.body.style.overflow = '';
+                document.body.style.cursor = '';
+                
+                // Reset status
+                wakeLockStatus.textContent = 'Sleep Prevention: Inactive';
+                wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
+                
+                console.log('Timer stopped successfully');
+            } catch (error) {
+                console.error('Error stopping timer:', error);
             }
-            
-            // Stop sleep prevention
-            stopSleepPrevention();
-            
-            // Release wake lock
-            releaseWakeLock();
-            
-            // Exit fullscreen
-            exitFullscreen();
-            
-            // Hide timer overlay
-            timerOverlay.classList.remove('active');
-            
-            // Restore normal cursor and scrolling
-            document.body.style.overflow = '';
-            document.body.style.cursor = '';
-            
-            // Reset status
-            wakeLockStatus.textContent = 'Sleep Prevention: Inactive';
-            wakeLockStatus.className = 'wake-lock-status wake-lock-inactive';
         }
 
         // Event listeners
-        if (startTimerBtn) {
-            startTimerBtn.addEventListener('click', startTimer);
-        }
-
-        if (stopTimerBtn) {
-            stopTimerBtn.addEventListener('click', stopTimer);
-        }
+        startTimerBtn.addEventListener('click', startTimer);
+        stopTimerBtn.addEventListener('click', stopTimer);
 
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (timerOverlay.classList.contains('active')) {
                 if (e.key === 'Escape' || e.key === 'Esc') {
+                    e.preventDefault();
                     stopTimer();
                 }
             }
@@ -672,6 +763,9 @@
                 }, 100);
             }
         });
+
+        // Initialize
+        console.log('MacBuds Timer initialized');
     </script>
 </body>
 </html>
