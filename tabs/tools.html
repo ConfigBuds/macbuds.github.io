@@ -75,6 +75,31 @@
             background: #0a0e0a;
             position: relative;
         }
+        .back-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #55ff55;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid #00ff41;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(0, 255, 65, 0.1);
+        }
+        .back-link:hover {
+            color: #00ff41;
+            background: rgba(0, 255, 65, 0.2);
+            transform: translateX(2px);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+        .back-link i {
+            font-size: 0.8rem;
+        }
         .status-bar {
             background: #0d1b0d;
             border-top: 2px solid #00ff41;
@@ -233,6 +258,12 @@
                 padding: 15px 40px;
                 font-size: 1.2rem;
             }
+            .back-link {
+                top: 15px;
+                right: 15px;
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
         }
         
         /* Hidden video for sleep prevention */
@@ -261,6 +292,10 @@
                 </div>
             </div>
             <div class="terminal-content-wrapper">
+                <a href="#" class="back-link" id="backLink">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Mac Buds
+                </a>
                 <button class="tools-btn" id="startTimerBtn">
                     <i class="fas fa-clock"></i> Start Timer
                 </button>
@@ -337,6 +372,7 @@
         const timerDisplay = document.getElementById('timerDisplay');
         const stopTimerBtn = document.getElementById('stopTimerBtn');
         const sleepPreventionVideo = document.getElementById('sleepPreventionVideo');
+        const backLink = document.getElementById('backLink');
 
         function formatTime(ms) {
             const totalSeconds = Math.floor(ms / 1000);
@@ -581,6 +617,13 @@
         // Event listeners
         startTimerBtn.addEventListener('click', startTimer);
         stopTimerBtn.addEventListener('click', stopTimer);
+
+        // Back link event listener
+        backLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            // You can customize this to navigate to your main MacBuds page
+            window.history.back();
+        });
 
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
