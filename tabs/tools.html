@@ -17,9 +17,9 @@
             overflow-x: hidden;
         }
         .terminal-container {
-            max-width: 1400px;
+            max-width: 1800px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px 8px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -29,7 +29,8 @@
             border-radius: 12px;
             border: 2px solid #00ff41;
             box-shadow: 0 0 30px rgba(0, 255, 65, 0.4), 0 20px 40px rgba(0, 0, 0, 0.5);
-            width: 100%;
+            width: 98%;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
             min-height: 600px;
@@ -66,16 +67,21 @@
             font-weight: 500;
         }
         .terminal-content-wrapper {
-            padding: 30px;
+            padding: 30px 20px 30px 20px;
             background: #0a0e0a;
             position: relative;
             flex: 1 1 auto;
             overflow-y: auto;
         }
+        .top-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-bottom: 24px;
+        }
         .back-link {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            position: static;
+            margin: 0;
             color: #55ff55;
             text-decoration: none;
             font-size: 0.9rem;
@@ -155,6 +161,13 @@
             background: #112211;
             transform: translateY(-2px);
             box-shadow: 0 0 20px rgba(0, 255, 65, 0.5), 0 0 30px rgba(0, 255, 65, 0.2) inset;
+        }
+        .tools-btn.small {
+            padding: 8px 16px;
+            font-size: 1rem;
+            margin-bottom: 0;
+            border-radius: 8px;
+            margin-top: 8px;
         }
         .timer-overlay {
             display: none;
@@ -289,13 +302,15 @@
                 </div>
             </div>
             <div class="terminal-content-wrapper">
-                <a href="#" class="back-link" id="backLink">
-                    <i class="fas fa-arrow-left"></i>
-                    Back to Mac Buds
-                </a>
-                <button class="tools-btn" id="startTimerBtn">
-                    <i class="fas fa-clock"></i> Start Timer
-                </button>
+                <div class="top-actions">
+                    <a href="#" class="back-link" id="backLink">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Mac Buds
+                    </a>
+                    <button class="tools-btn small" id="startTimerBtn">
+                        <i class="fas fa-clock"></i> Start Timer
+                    </button>
+                </div>
             </div>
             <div class="status-bar">
                 <div class="status-left">
