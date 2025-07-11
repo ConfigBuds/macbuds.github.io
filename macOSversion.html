@@ -36,16 +36,13 @@
             align-items: center;
             gap: 6px;
             font-family: inherit;
-            box-shadow: 0 2px 8px rgba(0, 255, 65, 0.3);
         }
         .back-button:hover {
             background: linear-gradient(135deg, #00ff41 0%, #33ff33 100%);
             transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(0, 255, 65, 0.4);
         }
         .back-button:active {
             transform: translateY(0);
-            box-shadow: 0 2px 8px rgba(0, 255, 65, 0.3);
         }
         .back-button i {
             font-size: 12px;
@@ -143,7 +140,6 @@
             border-color: #00ff41;
             background: #112211;
             transform: translateX(4px);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
         }
         .download-item::before {
             content: '';
@@ -158,7 +154,6 @@
         }
         .download-item:hover::before {
             opacity: 1;
-            box-shadow: 0 0 10px #00ff41;
         }
         .download-header {
             display: flex;
@@ -199,16 +194,13 @@
             align-items: center;
             gap: 8px;
             font-family: inherit;
-            box-shadow: 0 2px 10px rgba(0, 255, 65, 0.3);
         }
         .download-button:hover {
             background: linear-gradient(135deg, #33ff33 0%, #00ff41 100%);
             transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 255, 65, 0.5);
         }
         .download-button:active {
             transform: translateY(0);
-            box-shadow: 0 2px 10px rgba(0, 255, 65, 0.3);
         }
         .download-button i {
             font-size: 14px;
@@ -237,13 +229,12 @@
             height: 6px;
             border-radius: 50%;
             background: #00ff41;
-            box-shadow: 0 0 5px #00ff41;
             animation: pulse 2s infinite;
         }
         @keyframes pulse {
-            0% { box-shadow: 0 0 5px #00ff41; }
-            50% { box-shadow: 0 0 15px #00ff41, 0 0 25px #00ff41; }
-            100% { box-shadow: 0 0 5px #00ff41; }
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
         .blinking-cursor {
             animation: blink 1s infinite;
