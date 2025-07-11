@@ -21,6 +21,35 @@
             margin: 0 auto;
             padding: 40px 20px;
         }
+        .back-button {
+            background: linear-gradient(135deg, #33ff33 0%, #00ff41 100%);
+            color: #000000;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 18px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+            box-shadow: 0 2px 8px rgba(0, 255, 65, 0.3);
+        }
+        .back-button:hover {
+            background: linear-gradient(135deg, #00ff41 0%, #33ff33 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 255, 65, 0.4);
+        }
+        .back-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 255, 65, 0.3);
+        }
+        .back-button i {
+            font-size: 12px;
+        }
         .terminal-window {
             background: #001100;
             border-radius: 12px;
@@ -35,7 +64,7 @@
             border-bottom: 2px solid #00ff41;
             display: flex;
             align-items: center;
-            gap: 20px;
+            justify-content: center;
         }
         .terminal-left {
             display: flex;
@@ -58,23 +87,6 @@
             font-size: 13px;
             color: #55ff55;
             font-weight: 500;
-        }
-        .terminal-right {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            flex-shrink: 0;
-            margin-left: auto;
-        }
-        .nav-link {
-            color: #77ff77;
-            text-decoration: none;
-            font-size: 12px;
-            transition: all 0.3s ease;
-        }
-        .nav-link:hover {
-            color: #00ff41;
-            text-decoration: underline;
         }
         .terminal-content-wrapper {
             padding: 30px;
@@ -316,11 +328,14 @@
                     </div>
                     <div class="terminal-title">macadmin@macbuds — zsh — 80×24</div>
                 </div>
-                <div class="terminal-right">
-                    <a href="https://macbuds.github.io" class="nav-link">← Back to Mac Buds</a>
-                </div>
             </div>
             <div class="terminal-content-wrapper">
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+                    <a href="https://macbuds.github.io" class="back-button">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Mac Buds
+                    </a>
+                </div>
                 <div class="prompt">
                     <span class="prompt-symbol">$</span>
                     <span class="user-host">macadmin@macbuds</span>
