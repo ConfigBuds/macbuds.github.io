@@ -1,83 +1,517 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>macOS Installer Downloads</title>
-  <style>
-    body {
-      font-family: "Courier New", Courier, monospace;
-      line-height: 1.6;
-      background-color: #000; /* Black background */
-      color: #0f0; /* Green text */
-      margin: 0;
-      padding: 0;
-    }
-    a {
-      color: #0f0; /* Green text for links */
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    header {
-      text-align: center;
-      padding: 20px;
-      border-bottom: 1px solid #0f0;
-    }
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    ul li {
-      margin: 10px 0;
-    }
-    h1, h2 {
-      color: #0f0; /* Green text */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MacBuds - macOS Installer Downloads</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0e0a 0%, #000000 100%);
+            color: #00ff41;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .terminal-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .terminal-window {
+            background: #001100;
+            border-radius: 12px;
+            border: 2px solid #00ff41;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4), 0 20px 40px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .terminal-header {
+            background: #0d1b0d;
+            padding: 16px 20px;
+            border-bottom: 2px solid #00ff41;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .terminal-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .btn-close { background: #ff4444; }
+        .btn-minimize { background: #ffaa00; }
+        .btn-maximize { background: #00ff41; }
+        .terminal-title {
+            font-size: 13px;
+            color: #55ff55;
+            font-weight: 500;
+        }
+        .terminal-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+        .nav-link {
+            color: #77ff77;
+            text-decoration: none;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #00ff41;
+            text-decoration: underline;
+        }
+        .terminal-content-wrapper {
+            padding: 30px;
+            background: #0a0e0a;
+            position: relative;
+        }
+        .prompt {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        .prompt-symbol {
+            color: #00ff41;
+            margin-right: 8px;
+            font-weight: 700;
+        }
+        .user-host {
+            color: #33ff33;
+            font-weight: 500;
+        }
+        .path {
+            color: #55ff55;
+            font-weight: 500;
+        }
+        .command {
+            color: #77ff77;
+            font-weight: 400;
+        }
+        .output {
+            margin-left: 16px;
+            margin-bottom: 16px;
+            color: #99ff99;
+        }
+        .section-header {
+            color: #00ff41;
+            font-size: 16px;
+            font-weight: 700;
+            margin: 24px 0 12px 0;
+            border-bottom: 1px solid #00ff41;
+            padding-bottom: 8px;
+        }
+        .download-item {
+            background: #0d1b0d;
+            border: 1px solid #33ff33;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .download-item:hover {
+            border-color: #00ff41;
+            background: #112211;
+            transform: translateX(4px);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+        .download-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #00ff41, #33ff33);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .download-item:hover::before {
+            opacity: 1;
+            box-shadow: 0 0 10px #00ff41;
+        }
+        .download-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .download-title {
+            color: #00ff41;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .download-version {
+            color: #55ff55;
+            font-size: 12px;
+            background: rgba(0, 255, 65, 0.1);
+            padding: 2px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        .download-description {
+            color: #77ff77;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        .download-button {
+            background: linear-gradient(135deg, #00ff41 0%, #33ff33 100%);
+            color: #000000;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+            box-shadow: 0 2px 10px rgba(0, 255, 65, 0.3);
+        }
+        .download-button:hover {
+            background: linear-gradient(135deg, #33ff33 0%, #00ff41 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 255, 65, 0.5);
+        }
+        .download-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0, 255, 65, 0.3);
+        }
+        .download-button i {
+            font-size: 14px;
+        }
+        .status-bar {
+            background: #0d1b0d;
+            border-top: 2px solid #00ff41;
+            padding: 8px 16px;
+            font-size: 11px;
+            color: #55ff55;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .status-left {
+            display: flex;
+            gap: 16px;
+        }
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #00ff41;
+            box-shadow: 0 0 5px #00ff41;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px #00ff41; }
+            50% { box-shadow: 0 0 15px #00ff41, 0 0 25px #00ff41; }
+            100% { box-shadow: 0 0 5px #00ff41; }
+        }
+        .blinking-cursor {
+            animation: blink 1s infinite;
+            color: #00ff41;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        .github-link {
+            color: #55ff55;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .github-link:hover {
+            color: #00ff41;
+            text-decoration: underline;
+        }
+        .terminal-content-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff41, transparent);
+            animation: scan-line 3s linear infinite;
+            opacity: 0.1;
+        }
+        @keyframes scan-line {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(500px); }
+        }
+        .warning-box {
+            background: rgba(255, 255, 0, 0.1);
+            border: 1px solid #ffff00;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 16px 0;
+            color: #ffff00;
+            font-size: 12px;
+        }
+        .warning-box::before {
+            content: "⚠️ ";
+            color: #ffff00;
+        }
+        .page-title {
+            color: #00ff41;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+        @media (max-width: 768px) {
+            .terminal-container {
+                padding: 20px 10px;
+            }
+            .terminal-content-wrapper {
+                padding: 20px;
+            }
+            .terminal-header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+            .terminal-left {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    
-  <h1>Mac Buds</h1>
-  <p>Contact</p>
-  <p>Hello Mac Admins</p>
-  <p>I’m here to help Mac admins manage their Apple devices in their work environment.</p>
-    <h2>macOS Installer Downloads</h2>
-    <p>Official macOS installer links for supported macOS versions</p>
-  </header>
-  <div class="container">
-    <h2>macOS 15 Series</h2>
-    <ul>
-      <li><a href="https://updates.cdn-apple.com/2025SummerFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_15.4.1.pkg" target="_blank">macOS 15.4.1 Installer (Latest)</a></li>
-      <li><a href="https://updates.cdn-apple.com/2025SpringFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_15.4.0.pkg" target="_blank">macOS 15.4.0 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2025SpringFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_15.3.2.pkg" target="_blank">macOS 15.3.2 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2025SpringFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_15.3.0.pkg" target="_blank">macOS 15.3.0 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2025WinterFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_15.2.0.pkg" target="_blank">macOS 15.2.0 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2024WinterFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_15.1.0.pkg" target="_blank">macOS 15.1.0 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2024FallFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_15.0.0.pkg" target="_blank">macOS 15.0.0 Installer</a></li>
-    </ul>
+    <div class="terminal-container">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-left">
+                    <div class="terminal-buttons">
+                        <div class="terminal-btn btn-close"></div>
+                        <div class="terminal-btn btn-minimize"></div>
+                        <div class="terminal-btn btn-maximize"></div>
+                    </div>
+                    <div class="terminal-title">macadmin@macbuds — zsh — 80×24</div>
+                </div>
+                <div class="terminal-right">
+                    <a href="https://macbuds.github.io" class="nav-link">← Back to Mac Buds</a>
+                </div>
+            </div>
+            <div class="terminal-content-wrapper">
+                <div class="prompt">
+                    <span class="prompt-symbol">$</span>
+                    <span class="user-host">macadmin@macbuds</span>
+                    <span class="prompt-symbol">:</span>
+                    <span class="path">~/Downloads</span>
+                    <span class="prompt-symbol">$</span>
+                    <span class="command">ls -la macOS_installers/</span>
+                </div>
+                <div class="output">
+                    <div class="page-title">macOS Installer Downloads</div>
+                    
+                    <div class="warning-box">
+                        Official Apple macOS installer packages. Always verify downloads and use official Apple sources for production environments.
+                    </div>
 
-    <h2>macOS 14 Series</h2>
-    <ul>
-      <li><a href="https://updates.cdn-apple.com/2024SummerFCS/fullinstallers/062-52859/932E0A8F-6644-4759-82DA-F8FA8DEA806A/macOS_14.6.1.pkg" target="_blank">macOS 14.6.1 Installer (Latest)</a></li>
-      <li><a href="https://updates.cdn-apple.com/2024SummerFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_14.6.0.pkg" target="_blank">macOS 14.6.0 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2024SpringFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_14.5.0.pkg" target="_blank">macOS 14.5.0 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2024SpringFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_14.4.1.pkg" target="_blank">macOS 14.4.1 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2024SpringFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_14.4.0.pkg" target="_blank">macOS 14.4.0 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2024WinterFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_14.3.1.pkg" target="_blank">macOS 14.3.1 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2024WinterFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_14.3.0.pkg" target="_blank">macOS 14.3.0 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2023FallFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_14.2.1.pkg" target="_blank">macOS 14.2.1 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2023FallFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_14.2.0.pkg" target="_blank">macOS 14.2.0 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2023FallFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_14.1.0.pkg" target="_blank">macOS 14.1.0 Installer</a></li>
-      <li><a href="https://updates.cdn-apple.com/2023FallFCS/fullinstallers/XXX-XXXXX/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/macOS_14.0.0.pkg" target="_blank">macOS 14.0.0 Installer</a></li>
-    </ul>
-  </div>
+                    <div class="section-header">📦 macOS 15 Series (Sequoia)</div>
+                    
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sequoia 15.5</div>
+                            <div class="download-version">LATEST</div>
+                        </div>
+                        <div class="download-description">Latest stable release - InstallAssistant.pkg</div>
+                        <a href="https://swcdn.apple.com/content/downloads/51/28/082-44432-A_4NJSZXK8G5/v10fo5dlwd50fja3qbnhj7z9tp1dx41vq2/InstallAssistant.pkg" class="download-button" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Click to Download
+                        </a>
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sequoia 15.4.1</div>
+                            <div class="download-version">15.4.1</div>
+                        </div>
+                        <div class="download-description">Previous stable release</div>
+                        <a href="https://updates.cdn-apple.com/2025SummerFCS/fullinstallers/xxx-xxxxx/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/macOS_15.4.1.pkg" class="download-button" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Click to Download
+                        </a>
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sequoia 15.4.0</div>
+                            <div class="download-version">15.4.0</div>
+                        </div>
+                        <div class="download-description">Spring 2025 release</div>
+                        <a href="https://updates.cdn-apple.com/2025SpringFCS/fullinstallers/xxx-xxxxx/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/macOS_15.4.0.pkg" class="download-button" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Click to Download
+                        </a>
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sequoia 15.3.2</div>
+                            <div class="download-version">15.3.2</div>
+                        </div>
+                        <div class="download-description">Spring 2025 patch release</div>
+                        <a href="https://updates.cdn-apple.com/2025SpringFCS/fullinstallers/xxx-xxxxx/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/macOS_15.3.2.pkg" class="download-button" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Click to Download
+                        </a>
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sequoia 15.3.0</div>
+                            <div class="download-version">15.3.0</div>
+                        </div>
+                        <div class="download-description">Spring 2025 feature release</div>
+                        <a href="https://updates.cdn-apple.com/2025SpringFCS/fullinstallers/xxx-xxxxx/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/macOS_15.3.0.pkg" class="download-button" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Click to Download
+                        </a>
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sequoia 15.2.0</div>
+                            <div class="download-version">15.2.0</div>
+                        </div>
+                        <div class="download-description">Winter 2025 release</div>
+                        <a href="https://updates.cdn-apple.com/2025WinterFCS/fullinstallers/xxx-xxxxx/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/macOS_15.2.0.pkg" class="download-button" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Click to Download
+                        </a>
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sequoia 15.1.0</div>
+                            <div class="download-version">15.1.0</div>
+                        </div>
+                        <div class="download-description">Winter 2024 release</div>
+                        <a href="https://updates.cdn-apple.com/2024WinterFCS/fullinstallers/xxx-xxxxx/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/macOS_15.1.0.pkg" class="download-button" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Click to Download
+                        </a>
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sequoia 15.0.0</div>
+                            <div class="download-version">15.0.0</div>
+                        </div>
+                        <div class="download-description">Initial Sequoia release</div>
+                        <a href="https://updates.cdn-apple.com/2024FallFCS/fullinstallers/xxx-xxxxx/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/macOS_15.0.0.pkg" class="download-button" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Click to Download
+                        </a>
+                    </div>
+
+                    <div class="section-header">📦 macOS 14 Series (Sonoma)</div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sonoma 14.6.1</div>
+                            <div class="download-version">LATEST v14</div>
+                        </div>
+                        <div class="download-description">Latest Sonoma release</div>
+                        <a href="https://updates.cdn-apple.com/2024SummerFCS/fullinstallers/062-52859/932E0A8F-6644-4759-82DA-F8FA8DEA806A/macOS_14.6.1.pkg" class="download-button" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Click to Download
+                        </a>
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sonoma 14.6.0</div>
+                            <div class="download-version">14.6.0</div>
+                        </div>
+                        <div class="download-description">Summer 2024 release</div>
+                        <a href="https://updates.cdn-apple.com/2024SummerFCS/fullinstallers/xxx-xxxxx/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/macOS_14.6.0.pkg" class="download-button" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Click to Download
+                        </a>
+                    </div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">macOS Sonoma 14.5.0</div>
+                            <div class="download-version">14.5.0</div>
+                        </div>
+                        <div class="download-description">Spring 2024 release</div>
+                        <a href="https://updates.cdn-apple.com/2024SpringFCS/fullinstallers/xxx-xxxxx/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/macOS_14.5.0.pkg" class="download-button" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Click to Download
+                        </a>
+                    </div>
+
+                    <div class="section-header">🔧 Additional Resources</div>
+
+                    <div class="download-item">
+                        <div class="download-header">
+                            <div class="download-title">Safari 18.5 (Sonoma)</div>
+                            <div class="download-version">18.5</div>
+                        </div>
+                        <div class="download-description">Safari browser update for Sonoma</div>
+                        <a href="https://swcdn.apple.com/content/downloads/08/26/082-18361-A_O3VSRCP8K3/5vlwh79cz177ia1ws5w2aep4d46pknikt2/Safari18.5SonomaAuto.pkg" class="download-button" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Click to Download
+                        </a>
+                    </div>
+
+                    <div class="prompt">
+                        <span class="prompt-symbol">$</span>
+                        <span class="user-host">macadmin@macbuds</span>
+                        <span class="prompt-symbol">:</span>
+                        <span class="path">~/Downloads</span>
+                        <span class="prompt-symbol">$</span>
+                        <span class="blinking-cursor">_</span>
+                    </div>
+                </div>
+            </div>
+            <div class="status-bar">
+                <div class="status-left">
+                    <div class="status-item">
+                        <div class="status-dot"></div>
+                        <span>Connected</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fab fa-github" style="font-size: 10px;"></i>
+                        <a href="https://github.com/macbuds" class="github-link">macbuds</a>
+                    </div>
+                </div>
+                <div class="status-right">
+                    <span>© 2024 MacBuds</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
