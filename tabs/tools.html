@@ -17,16 +17,22 @@
             overflow-x: hidden;
         }
         .terminal-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
         }
         .terminal-window {
             background: #001100;
             border-radius: 12px;
             border: 2px solid #00ff41;
             box-shadow: 0 0 30px rgba(0, 255, 65, 0.4), 0 20px 40px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
         }
         .terminal-header {
@@ -59,379 +65,40 @@
             color: #55ff55;
             font-weight: 500;
         }
-        .terminal-right {
+        .terminal-content-wrapper {
+            flex: 1;
             display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            flex-shrink: 0;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            border: 2px solid #00ff41;
-            border-radius: 8px;
-            background: rgba(0, 255, 65, 0.05);
-            transition: all 0.3s ease;
-        }
-        .logo-container:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
-            background: rgba(0, 255, 65, 0.1);
-        }
-        .logo-img {
-            max-width: 120px;
-            max-height: 40px;
-            width: auto;
-            height: auto;
-            border-radius: 4px;
-            display: block;
-        }
-        .logo-fallback {
-            width: 120px;
-            height: 40px;
-            border-radius: 4px;
-            display: none;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: #0d1b0d;
-            font-size: 24px;
-            color: #00ff41;
-        }
-        .terminal-content-wrapper {
             padding: 30px;
             background: #0a0e0a;
             position: relative;
         }
-        .welcome-section {
+        .back-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #55ff55;
+            text-decoration: none;
+            font-size: 0.9rem;
             display: flex;
-            align-items: flex-start;
-            gap: 30px;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
-        }
-        .welcome-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
-            text-align: left;
-        }
-        .downloads-section {
-            margin-bottom: 30px;
-        }
-        .resources-section {
-            margin-bottom: 20px;
-        }
-        .terminal-logo-section {
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: row;
             align-items: center;
-            gap: 16px;
-        }
-        .main-logo-container {
-            border: 3px solid #00ff41;
-            border-radius: 12px;
-            padding: 16px;
-            background: rgba(0, 255, 65, 0.05);
+            gap: 8px;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
-            display: flex;
-            align-items: center;
-        }
-        .main-logo-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
+            border: 1px solid #00ff41;
+            padding: 8px 16px;
+            border-radius: 8px;
             background: rgba(0, 255, 65, 0.1);
         }
-        .main-logo-img {
-            max-width: 150px;
-            max-height: 100px;
-            width: auto;
-            height: auto;
-            border-radius: 8px;
-            display: block;
-        }
-        .main-logo-fallback {
-            width: 150px;
-            height: 100px;
-            border-radius: 8px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background: #0d1b0d;
-            font-size: 36px;
+        .back-link:hover {
             color: #00ff41;
-            border: 2px solid #33ff33;
-        }
-        .search-container {
-            width: 100%;
-            max-width: 250px;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
-        .search-box {
-            position: relative;
-            width: 100%;
-        }
-        .search-input {
-            width: 100%;
-            background: #0d1b0d;
-            border: 2px solid #33ff33;
-            border-radius: 6px;
-            padding: 8px 12px 8px 32px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: #00ff41;
-            outline: none;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-        }
-        .search-input::placeholder {
-            color: #55ff55;
-            opacity: 0.7;
-        }
-        .search-input:focus {
-            border-color: #00ff41;
+            background: rgba(0, 255, 65, 0.2);
+            transform: translateX(2px);
             box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
-            background: #112211;
         }
-        .search-icon {
-            position: absolute;
-            left: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #55ff55;
-            font-size: 12px;
-            z-index: 1;
-        }
-        .search-results {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: #0d1b0d;
-            border: 2px solid #33ff33;
-            border-top: none;
-            border-radius: 0 0 6px 6px;
-            max-height: 300px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-        }
-        .search-result-item {
-            padding: 10px 12px;
-            border-bottom: 1px solid rgba(51, 255, 51, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .search-result-item:hover {
-            background: #112211;
-            border-left: 3px solid #00ff41;
-        }
-        .search-result-item:last-child {
-            border-bottom: none;
-        }
-        .search-result-title {
-            color: #00ff41;
-            font-weight: 600;
-            font-size: 12px;
-            margin-bottom: 2px;
-        }
-        .search-result-desc {
-            color: #77ff77;
-            font-size: 10px;
-            line-height: 1.4;
-        }
-        .search-result-category {
-            color: #55ff55;
-            font-size: 9px;
-            text-transform: uppercase;
-            margin-bottom: 2px;
-        }
-        .no-results {
-            padding: 12px;
-            text-align: center;
-            color: #77ff77;
-            font-size: 11px;
-        }
-        .prompt {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-        }
-        .prompt-symbol {
-            color: #00ff41;
-            margin-right: 8px;
-            font-weight: 700;
-        }
-        .user-host {
-            color: #33ff33;
-            font-weight: 500;
-        }
-        .path {
-            color: #55ff55;
-            font-weight: 500;
-        }
-        .command {
-            color: #77ff77;
-            font-weight: 400;
-        }
-        .output {
-            margin-left: 16px;
-            margin-bottom: 16px;
-            color: #99ff99;
-        }
-        .ascii-art {
-            color: #00ff41;
-            font-size: 14px;
-            line-height: 1.2;
-            margin: 20px 0;
-            text-align: center;
-            animation: matrix-glow 2s ease-in-out infinite alternate;
-        }
-        @keyframes matrix-glow {
-            from { text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41; }
-            to { text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41; }
-        }
-        .section-header {
-            color: #00ff41;
-            font-size: 16px;
-            font-weight: 700;
-            margin: 24px 0 12px 0;
-            border-bottom: 1px solid #00ff41;
-            padding-bottom: 8px;
-        }
-        .download-item {
-            background: #0d1b0d;
-            border: 1px solid #33ff33;
-            border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 12px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .download-item:hover {
-            border-color: #00ff41;
-            background: #112211;
-            transform: translateX(4px);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-        }
-        .download-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, #00ff41, #33ff33);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .download-item:hover::before {
-            opacity: 1;
-            box-shadow: 0 0 10px #00ff41;
-        }
-        .download-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-        .download-title {
-            color: #00ff41;
-            font-weight: 700;
-            font-size: 14px;
-        }
-        .download-version {
-            color: #55ff55;
-            font-size: 12px;
-            background: rgba(0, 255, 65, 0.1);
-            padding: 2px 8px;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 255, 65, 0.3);
-        }
-        .download-description {
-            color: #77ff77;
-            font-size: 12px;
-            margin-bottom: 12px;
-        }
-        .download-command {
-            background: #001100;
-            border: 1px solid #33ff33;
-            border-radius: 4px;
-            padding: 8px 12px;
-            font-size: 12px;
-            color: #99ff99;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            word-break: break-all;
-        }
-        .download-command:hover {
-            background: #0d1b0d;
-            border-color: #00ff41;
-            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
-            color: #00ff41;
-        }
-        .download-command::after {
-            content: 'Click to downlod';
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 10px;
-            color: #00ff41;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            background: #0d1b0d;
-            padding: 2px 4px;
-            border-radius: 2px;
-        }
-        .download-command:hover::after {
-            opacity: 1;
-        }
-        .quick-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-            margin-top: 16px;
-        }
-        .quick-link {
-            background: #0d1b0d;
-            border: 1px solid #33ff33;
-            border-radius: 6px;
-            padding: 12px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-        .quick-link:hover {
-            border-color: #00ff41;
-            background: #112211;
-            transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-        }
-        .quick-link i {
-            color: #00ff41;
-            font-size: 18px;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .quick-link-text {
-            color: #77ff77;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        .quick-link:hover .quick-link-text {
-            color: #00ff41;
+        .back-link i {
+            font-size: 0.8rem;
         }
         .status-bar {
             background: #0d1b0d;
@@ -465,23 +132,6 @@
             50% { box-shadow: 0 0 15px #00ff41, 0 0 25px #00ff41; }
             100% { box-shadow: 0 0 5px #00ff41; }
         }
-        .blinking-cursor {
-            animation: blink 1s infinite;
-            color: #00ff41;
-        }
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        .typewriter {
-            overflow: hidden;
-            white-space: nowrap;
-            animation: typing 3s steps(40, end);
-        }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
         .github-link {
             color: #55ff55;
             text-decoration: none;
@@ -490,138 +140,6 @@
         .github-link:hover {
             color: #00ff41;
             text-decoration: underline;
-        }
-        .coming-soon {
-            background: rgba(0, 255, 65, 0.1);
-            border: 1px solid rgba(0, 255, 65, 0.3);
-            border-radius: 6px;
-            padding: 16px;
-            margin-top: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        .coming-soon:hover {
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-        }
-        .coming-soon .icon {
-            color: #00ff41;
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-        .coming-soon-title {
-            color: #00ff41;
-            font-weight: 700;
-        }
-        .coming-soon-text {
-            color: #77ff77;
-            font-size: 12px;
-            margin-top: 4px;
-        }
-        .matrix-char {
-            position: fixed;
-            color: #00ff41;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            z-index: -1;
-            animation: matrix-fall 3s linear infinite;
-            opacity: 0.3;
-        }
-        @keyframes matrix-fall {
-            0% { transform: translateY(-100vh); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-        .terminal-content-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00ff41, transparent);
-            animation: scan-line 3s linear infinite;
-            opacity: 0.1;
-        }
-        @keyframes scan-line {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(500px); }
-        }
-        .welcome-output {
-            color: #55ff55;
-            font-size: 16px;
-            font-weight: 500;
-            text-align: left;
-            margin: 8px 0;
-        }
-        .emoji {
-            filter: hue-rotate(90deg) brightness(1.2);
-        }
-        @media (max-width: 1024px) {
-            .welcome-section {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-            .welcome-content {
-                text-align: center;
-            }
-            .main-logo-container {
-                padding: 12px;
-            }
-            .main-logo-img {
-                max-width: 120px;
-                max-height: 80px;
-            }
-            .main-logo-fallback {
-                width: 120px;
-                height: 80px;
-                font-size: 24px;
-            }
-        }
-        @media (max-width: 768px) {
-            .terminal-container {
-                padding: 20px 10px;
-            }
-            .terminal-content-wrapper {
-                padding: 20px;
-            }
-            .welcome-section {
-                gap: 15px;
-                margin-bottom: 20px;
-            }
-            .ascii-art {
-                font-size: 10px;
-            }
-            .quick-links {
-                grid-template-columns: 1fr 1fr;
-            }
-            .terminal-header {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
-            .terminal-left {
-                justify-content: center;
-            }
-            .main-logo-img {
-                max-width: 100px;
-                max-height: 70px;
-            }
-            .main-logo-fallback {
-                width: 100px;
-                height: 70px;
-                font-size: 20px;
-            }
-            .search-container {
-                max-width: 200px;
-            }
-            .search-input {
-                font-size: 11px;
-                padding: 6px 10px 6px 28px;
-            }
-            .search-icon {
-                font-size: 10px;
-                left: 8px;
-            }
         }
         .tools-btn {
             background: #0d1b0d;
@@ -632,37 +150,131 @@
             font-size: 1.5rem;
             font-family: 'JetBrains Mono', monospace;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.3s ease;
             margin-bottom: 24px;
-            box-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41 inset;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3), 0 0 20px rgba(0, 255, 65, 0.1) inset;
         }
         .tools-btn:hover {
             background: #112211;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5), 0 0 30px rgba(0, 255, 65, 0.2) inset;
         }
         .timer-overlay {
             display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.98);
-            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0e0a 0%, #000000 100%);
+            z-index: 10000;
+            cursor: none;
         }
         .timer-overlay.active {
             display: flex;
         }
-        .timer-display {
-            color: #00ff41;
-            font-size: 8vw;
-            font-family: 'JetBrains Mono', monospace;
-            margin-bottom: 48px;
-            text-shadow: 0 0 20px #00ff41, 0 0 40px #00ff41;
-            animation: matrix-glow 2s ease-in-out infinite alternate;
+        
+        /* Terminal window styling for fullscreen timer */
+        .timer-terminal-window {
+            background: #001100;
+            border-radius: 12px;
+            border: 2px solid #00ff41;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4), 0 20px 40px rgba(0, 0, 0, 0.5);
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
+        
+        .timer-terminal-header {
+            background: #0d1b0d;
+            padding: 16px 20px;
+            border-bottom: 2px solid #00ff41;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .timer-terminal-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            background: #0a0e0a;
+            position: relative;
+        }
+        
+        .timer-terminal-status {
+            background: #0d1b0d;
+            border-top: 2px solid #00ff41;
+            padding: 8px 16px;
+            font-size: 11px;
+            color: #55ff55;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
         .timer-controls {
             display: flex;
             gap: 32px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .timer-overlay:hover .timer-controls {
+            opacity: 1;
+        }
+        
+        .timer-display {
+            color: #00ff41;
+            font-size: clamp(4rem, 12vw, 8rem);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            margin-bottom: 48px;
+            letter-spacing: 0.1em;
+            text-align: center;
+            background: linear-gradient(45deg, #00ff41, #33ff33, #00ff41);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .timer-display {
+                font-size: clamp(2.5rem, 10vw, 6rem);
+            }
+            .tools-btn {
+                padding: 15px 40px;
+                font-size: 1.2rem;
+            }
+            .back-link {
+                top: 15px;
+                right: 15px;
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+        
+        /* Hidden video for sleep prevention */
+        .sleep-prevention-video {
+            position: absolute;
+            top: -1000px;
+            left: -1000px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -680,8 +292,13 @@
                 </div>
             </div>
             <div class="terminal-content-wrapper">
-                <!-- Add your content here -->
-                <button class="tools-btn" id="startTimerBtn"><i class="fas fa-clock"></i> Start Focus Timer</button>
+                <a href="#" class="back-link" id="backLink">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Mac Buds
+                </a>
+                <button class="tools-btn" id="startTimerBtn">
+                    <i class="fas fa-clock"></i> Start Timer
+                </button>
             </div>
             <div class="status-bar">
                 <div class="status-left">
@@ -700,61 +317,369 @@
             </div>
         </div>
     </div>
+
+    <!-- Timer Overlay with Terminal Styling -->
     <div class="timer-overlay" id="timerOverlay">
-        <div class="timer-display" id="timerDisplay">00:00:00</div>
-        <div class="timer-controls">
-            <button class="tools-btn" id="stopTimerBtn"><i class="fas fa-stop"></i> Stop & Exit</button>
+        <div class="timer-terminal-window">
+            <div class="timer-terminal-header">
+                <div class="terminal-left">
+                    <div class="terminal-buttons">
+                        <div class="terminal-btn btn-close"></div>
+                        <div class="terminal-btn btn-minimize"></div>
+                        <div class="terminal-btn btn-maximize"></div>
+                    </div>
+                    <div class="terminal-title">macadmin@macbuds — zsh — 80×24</div>
+                </div>
+            </div>
+            <div class="timer-terminal-content">
+                <div class="timer-display" id="timerDisplay">00:00:00</div>
+                <div class="timer-controls">
+                    <button class="tools-btn" id="stopTimerBtn">
+                        <i class="fas fa-stop"></i> Stop & Exit
+                    </button>
+                </div>
+            </div>
+            <div class="timer-terminal-status">
+                <div class="status-left">
+                    <div class="status-item">
+                        <div class="status-dot"></div>
+                        <span>Connected-Timer Running</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fab fa-github" style="font-size: 10px;"></i>
+                        <a href="https://github.com/macbuds" class="github-link">macbuds</a>
+                    </div>
+                </div>
+                <div class="status-right">
+                    <span>© 2025 MacBuds</span>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Hidden video for sleep prevention -->
+    <video class="sleep-prevention-video" id="sleepPreventionVideo" muted loop>
+        <source src="data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAAM5tZGF0AAACrwYF//+p3EXpvebZSLeWLNgg2SPu73gyNjQgLSBjb3JlIDE2MyByMzA2MCA1ZGI2YWE2IC0gSC4yNjQvTVBFRy00IEFWQyBjb2RlYyAtIENvcHlsZWZ0IDIwMDMtMjAyMSAtIGh0dHA6Ly93d3cudmlkZW9sYW4ub3JnL3gyNjQuaHRtbCAtIG9wdGlvbnM6IGNhYmFjPTEgcmVmPTMgZGVibG9jaz0xOjA6MCBhbmFseXNlPTB4MzoweDExMyBtZT1oZXggc3VibWU9NyBwc3k9MSBwc3lfcmQ9MS4wMDowLjAwIG1peGVkX3JlZj0xIG1lX3JhbmdlPTE2IGNocm9tYV9tZT0xIHRyZWxsaXM9MSA4eDhkY3Q9MSBjcW09MCBkZWFkem9uZT0yMSwxMSBmYXN0X3Bza2lwPTEgY2hyb21hX3FwX29mZnNldD0tMiB0aHJlYWRzPTEgbG9va2FoZWFkX3RocmVhZHM9MSBzbGljZWRfdGhyZWFkcz0wIG5yPTAgZGVjaW1hdGU9MSBpbnRlcmxhY2VkPTAgYmx1cmF5X2NvbXBhdD0wIGNvbnN0cmFpbmVkX2ludHJhPTAgYnVyYW1lcz0xIGNyZj0yMy4wIHFwPTAgaXBfcmF0aW89MS40MCAqPV8=" type="video/mp4">
+    </video>
+
     <script>
-    let timerInterval, timerStart;
-    const startTimerBtn = document.getElementById('startTimerBtn');
-    const timerOverlay = document.getElementById('timerOverlay');
-    const timerDisplay = document.getElementById('timerDisplay');
-    const stopTimerBtn = document.getElementById('stopTimerBtn');
+        let timerInterval, timerStart, wakeLock = null;
+        let sleepPreventionInterval, videoPlayInterval, keyboardSimulationInterval;
+        let audioContext, oscillator;
+        
+        const startTimerBtn = document.getElementById('startTimerBtn');
+        const timerOverlay = document.getElementById('timerOverlay');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const stopTimerBtn = document.getElementById('stopTimerBtn');
+        const sleepPreventionVideo = document.getElementById('sleepPreventionVideo');
+        const backLink = document.getElementById('backLink');
 
-    function formatTime(ms) {
-        const totalSeconds = Math.floor(ms / 1000);
-        const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-        const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-        const s = String(totalSeconds % 60).padStart(2, '0');
-        return `${h}:${m}:${s}`;
-    }
+        function formatTime(ms) {
+            const totalSeconds = Math.floor(ms / 1000);
+            const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+            const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+            const s = String(totalSeconds % 60).padStart(2, '0');
+            return `${h}:${m}:${s}`;
+        }
 
-    function moveMouseSlightly() {
-        const evt = new MouseEvent('mousemove', {
-            bubbles: true,
-            clientX: Math.floor(Math.random() * window.innerWidth),
-            clientY: Math.floor(Math.random() * window.innerHeight)
+        // Create a minimal video data URL for sleep prevention
+        function createSleepPreventionVideo() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1;
+            canvas.height = 1;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, 1, 1);
+            
+            const stream = canvas.captureStream(1);
+            sleepPreventionVideo.srcObject = stream;
+            sleepPreventionVideo.play().catch(e => {});
+        }
+
+        // Enhanced sleep prevention techniques
+        function startSleepPrevention() {
+            let counter = 0;
+            
+            // Method 1: Continuous video playback
+            createSleepPreventionVideo();
+            
+            // Method 2: Periodic invisible mouse movements
+            sleepPreventionInterval = setInterval(() => {
+                const events = [
+                    new MouseEvent('mousemove', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true,
+                        clientX: Math.random() * 10,
+                        clientY: Math.random() * 10
+                    }),
+                    new KeyboardEvent('keydown', {
+                        key: 'F15', // F15 key rarely used, won't interfere
+                        bubbles: true,
+                        cancelable: true
+                    }),
+                    new Event('scroll', { bubbles: true })
+                ];
+                
+                events.forEach(event => {
+                    document.dispatchEvent(event);
+                });
+                
+                counter++;
+            }, 5000); // Every 5 seconds
+            
+            // Method 3: Rapid video restart
+            videoPlayInterval = setInterval(() => {
+                if (sleepPreventionVideo.paused) {
+                    sleepPreventionVideo.play().catch(e => {});
+                }
+                sleepPreventionVideo.currentTime = 0;
+            }, 10000); // Every 10 seconds
+            
+            // Method 4: Audio context to prevent audio sleep
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                // Inaudible frequency
+                oscillator.frequency.setValueAtTime(20000, audioContext.currentTime);
+                gainNode.gain.setValueAtTime(0.001, audioContext.currentTime);
+                
+                oscillator.start();
+            } catch (e) {
+                // Audio context creation failed, continue without it
+            }
+            
+            // Method 5: Keyboard simulation
+            keyboardSimulationInterval = setInterval(() => {
+                const keyEvent = new KeyboardEvent('keypress', {
+                    key: 'F24', // F24 key rarely used
+                    bubbles: true,
+                    cancelable: true
+                });
+                document.dispatchEvent(keyEvent);
+            }, 15000); // Every 15 seconds
+            
+            // Method 6: Page focus and blur simulation
+            setInterval(() => {
+                window.dispatchEvent(new Event('focus'));
+                setTimeout(() => {
+                    window.dispatchEvent(new Event('blur'));
+                }, 100);
+            }, 30000); // Every 30 seconds
+        }
+
+        function stopSleepPrevention() {
+            // Clear all intervals
+            if (sleepPreventionInterval) {
+                clearInterval(sleepPreventionInterval);
+                sleepPreventionInterval = null;
+            }
+            
+            if (videoPlayInterval) {
+                clearInterval(videoPlayInterval);
+                videoPlayInterval = null;
+            }
+            
+            if (keyboardSimulationInterval) {
+                clearInterval(keyboardSimulationInterval);
+                keyboardSimulationInterval = null;
+            }
+            
+            // Stop video
+            if (sleepPreventionVideo.srcObject) {
+                sleepPreventionVideo.srcObject.getTracks().forEach(track => track.stop());
+                sleepPreventionVideo.srcObject = null;
+            }
+            
+            // Stop audio
+            if (oscillator) {
+                oscillator.stop();
+                oscillator = null;
+            }
+            
+            if (audioContext) {
+                audioContext.close();
+                audioContext = null;
+            }
+        }
+
+        async function requestWakeLock() {
+            try {
+                if ('wakeLock' in navigator) {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                    
+                    wakeLock.addEventListener('release', () => {
+                        // Wake lock released
+                    });
+                } else {
+                    // Wake Lock API not supported, using manual prevention
+                }
+            } catch (err) {
+                // Wake lock failed, using manual prevention
+            }
+        }
+
+        function releaseWakeLock() {
+            if (wakeLock) {
+                wakeLock.release();
+                wakeLock = null;
+            }
+        }
+
+        async function enterFullscreen() {
+            try {
+                if (timerOverlay.requestFullscreen) {
+                    await timerOverlay.requestFullscreen();
+                } else if (timerOverlay.webkitRequestFullscreen) {
+                    await timerOverlay.webkitRequestFullscreen();
+                } else if (timerOverlay.msRequestFullscreen) {
+                    await timerOverlay.msRequestFullscreen();
+                }
+            } catch (err) {
+                // Fullscreen failed
+            }
+        }
+
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        }
+
+        async function startTimer() {
+            try {
+                timerStart = Date.now();
+                timerDisplay.textContent = '00:00:00';
+                timerOverlay.classList.add('active');
+                
+                // Hide cursor and prevent scrolling
+                document.body.style.overflow = 'hidden';
+                document.body.style.cursor = 'none';
+                
+                // Enter fullscreen
+                await enterFullscreen();
+                
+                // Start aggressive sleep prevention
+                startSleepPrevention();
+                
+                // Request wake lock
+                await requestWakeLock();
+                
+                // Start the timer
+                timerInterval = setInterval(() => {
+                    const elapsed = Date.now() - timerStart;
+                    timerDisplay.textContent = formatTime(elapsed);
+                }, 100); // Update every 100ms for smoother display
+                
+            } catch (error) {
+                // Error starting timer
+            }
+        }
+
+        function stopTimer() {
+            try {
+                // Clear timer interval
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+                
+                // Stop sleep prevention
+                stopSleepPrevention();
+                
+                // Release wake lock
+                releaseWakeLock();
+                
+                // Exit fullscreen
+                exitFullscreen();
+                
+                // Hide timer overlay
+                timerOverlay.classList.remove('active');
+                
+                // Restore normal cursor and scrolling
+                document.body.style.overflow = '';
+                document.body.style.cursor = '';
+                
+            } catch (error) {
+                // Error stopping timer
+            }
+        }
+
+        // Event listeners
+        startTimerBtn.addEventListener('click', startTimer);
+        stopTimerBtn.addEventListener('click', stopTimer);
+
+        // Back link event listener
+        backLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Navigate to MacBuds main page
+            window.location.href = 'https://macbuds.github.io';
         });
-        document.body.dispatchEvent(evt);
-    }
 
-    function startTimer() {
-        timerStart = Date.now();
-        timerDisplay.textContent = '00:00:00';
-        timerOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        if (timerOverlay.requestFullscreen) timerOverlay.requestFullscreen();
-        timerInterval = setInterval(() => {
-            const elapsed = Date.now() - timerStart;
-            timerDisplay.textContent = formatTime(elapsed);
-            if (elapsed % 30000 < 1000) moveMouseSlightly();
-        }, 1000);
-    }
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (timerOverlay.classList.contains('active')) {
+                if (e.key === 'Escape' || e.key === 'Esc') {
+                    e.preventDefault();
+                    stopTimer();
+                }
+            }
+        });
 
-    function stopTimer() {
-        clearInterval(timerInterval);
-        timerOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-        if (document.fullscreenElement) document.exitFullscreen();
-    }
+        // Double-click to stop timer
+        timerOverlay.addEventListener('dblclick', stopTimer);
 
-    if (startTimerBtn) startTimerBtn.onclick = startTimer;
-    if (stopTimerBtn) stopTimerBtn.onclick = stopTimer;
-    document.addEventListener('keydown', e => {
-        if (timerOverlay.classList.contains('active') && (e.key === 'Escape' || e.key === 'Esc')) stopTimer();
-    });
+        // Handle visibility change
+        document.addEventListener('visibilitychange', async () => {
+            if (timerOverlay.classList.contains('active') && !document.hidden) {
+                await requestWakeLock();
+                startSleepPrevention();
+            }
+        });
+
+        // Prevent accidental closing
+        window.addEventListener('beforeunload', (e) => {
+            if (timerOverlay.classList.contains('active')) {
+                e.preventDefault();
+                e.returnValue = 'Timer is running. Are you sure you want to leave?';
+            }
+        });
+
+        // Handle fullscreen change
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement && timerOverlay.classList.contains('active')) {
+                setTimeout(() => {
+                    if (timerOverlay.classList.contains('active')) {
+                        enterFullscreen();
+                    }
+                }, 1000);
+            }
+        });
+
+        // Page focus management
+        window.addEventListener('focus', () => {
+            if (timerOverlay.classList.contains('active')) {
+                requestWakeLock();
+            }
+        });
+
+        window.addEventListener('blur', () => {
+            if (timerOverlay.classList.contains('active')) {
+                // Immediately try to regain focus
+                setTimeout(() => {
+                    window.focus();
+                }, 100);
+            }
+        });
     </script>
 </body>
-</html> 
+</html>
