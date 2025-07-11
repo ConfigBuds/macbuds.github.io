@@ -17,44 +17,22 @@
             overflow-x: hidden;
         }
         .terminal-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        .back-button {
-            background: transparent;
-            color: #00ff41;
-            border: 1px solid #00ff41;
-            border-radius: 6px;
-            padding: 10px 18px;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
             align-items: center;
-            gap: 6px;
-            font-family: inherit;
-        }
-        .back-button:hover {
-            background: rgba(0, 255, 65, 0.1);
-            color: #33ff33;
-            border-color: #33ff33;
-            transform: translateY(-1px);
-        }
-        .back-button:active {
-            transform: translateY(0);
-        }
-        .back-button i {
-            font-size: 12px;
+            justify-content: center;
+            padding: 0;
         }
         .terminal-window {
             background: #001100;
             border-radius: 12px;
             border: 2px solid #00ff41;
             box-shadow: 0 0 30px rgba(0, 255, 65, 0.4), 0 20px 40px rgba(0, 0, 0, 0.5);
-            margin-bottom: 20px;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow: hidden;
         }
         .terminal-header {
@@ -63,7 +41,7 @@
             border-bottom: 2px solid #00ff41;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 20px;
         }
         .terminal-left {
             display: flex;
@@ -88,6 +66,11 @@
             font-weight: 500;
         }
         .terminal-content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             padding: 30px;
             background: #0a0e0a;
             position: relative;
@@ -242,12 +225,13 @@
             height: 6px;
             border-radius: 50%;
             background: #00ff41;
+            box-shadow: 0 0 5px #00ff41;
             animation: pulse 2s infinite;
         }
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0% { box-shadow: 0 0 5px #00ff41; }
+            50% { box-shadow: 0 0 15px #00ff41, 0 0 25px #00ff41; }
+            100% { box-shadow: 0 0 5px #00ff41; }
         }
         .blinking-cursor {
             animation: blink 1s infinite;
@@ -337,12 +321,6 @@
                 </div>
             </div>
             <div class="terminal-content-wrapper">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
-                    <a href="https://macbuds.github.io" class="back-button">
-                        <i class="fas fa-arrow-left"></i>
-                        Back to Mac Buds
-                    </a>
-                </div>
                 <div class="prompt">
                     <span class="prompt-symbol">$</span>
                     <span class="user-host">macadmin@macbuds</span>
