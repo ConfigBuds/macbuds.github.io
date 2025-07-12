@@ -506,13 +506,17 @@
             padding-bottom: 6px;
         }
         
-        .ipsw-chip-section {
-            margin: 30px 0 20px 0;
+        .ipsw-version-section {
+            margin: 40px 0 30px 0;
+            padding: 20px;
+            background: rgba(0, 255, 65, 0.02);
+            border: 1px solid rgba(0, 255, 65, 0.1);
+            border-radius: 12px;
             page-break-inside: avoid;
         }
         
-        .ipsw-chip-header {
-            display: inline-flex;
+        .ipsw-section-header {
+            display: flex;
             align-items: center;
             gap: 12px;
             background: linear-gradient(135deg, rgba(0, 255, 65, 0.1) 0%, rgba(0, 255, 65, 0.05) 100%);
@@ -528,9 +532,10 @@
                 0 0 0 1px rgba(0, 255, 65, 0.1) inset;
             position: relative;
             overflow: hidden;
+            margin-bottom: 20px;
         }
         
-        .ipsw-chip-header::before {
+        .ipsw-section-header::before {
             content: '';
             position: absolute;
             top: 0;
@@ -542,7 +547,7 @@
             animation: shimmer 3s ease-in-out infinite;
         }
         
-        .ipsw-chip-header i {
+        .ipsw-section-header i {
             font-size: 18px;
             animation: pulse 2s infinite;
         }
@@ -1293,66 +1298,65 @@
                     </div>
 
                     <div class="section-content downloads-grid" id="ipsw-content">
-                        <!-- macOS 15 Sequoia IPSW Files -->
-                        <div class="ipsw-chip-section">
-                            <div class="ipsw-chip-header">
+                        <!-- macOS 15 Sequoia IPSW Section -->
+                        <div class="ipsw-version-section">
+                            <div class="ipsw-section-header">
                                 <i class="fas fa-microchip" style="color: #00ff41;"></i>
                                 <span>macOS 15 Sequoia IPSW Files</span>
                             </div>
-                        </div>
-                        
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Sequoia 15.5 IPSW</div>
-                                <div class="download-version latest">LATEST</div>
+                            
+                            <div class="download-item">
+                                <div class="download-header">
+                                    <div class="download-title">macOS Sequoia 15.5 IPSW</div>
+                                    <div class="download-version latest">LATEST</div>
+                                </div>
+                                <div class="download-description">Apple Silicon M1/M2/M3/M4 Firmware Restore File</div>
+                                <div class="download-meta">
+                                    <a href="https://mrmacintosh.com/macos-15-sequoia-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
+                                        <i class="fas fa-download"></i>
+                                        Download IPSW
+                                        <span class="download-size">~13.2 GB</span>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="download-description">Apple Silicon M1/M2/M3/M4 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://mrmacintosh.com/macos-15-sequoia-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~13.2 GB</span>
-                                </a>
+
+                            <div class="download-item">
+                                <div class="download-header">
+                                    <div class="download-title">macOS Sequoia 15.4.1 IPSW</div>
+                                    <div class="download-version">15.4.1</div>
+                                </div>
+                                <div class="download-description">Apple Silicon M1/M2/M3/M4 Firmware Restore File</div>
+                                <div class="download-meta">
+                                    <a href="https://mrmacintosh.com/macos-15-sequoia-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
+                                        <i class="fas fa-download"></i>
+                                        Download IPSW
+                                        <span class="download-size">~13.1 GB</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="download-item">
+                                <div class="download-header">
+                                    <div class="download-title">macOS Sequoia 15.4.0 IPSW</div>
+                                    <div class="download-version">15.4.0</div>
+                                </div>
+                                <div class="download-description">Apple Silicon M1/M2/M3/M4 Firmware Restore File</div>
+                                <div class="download-meta">
+                                    <a href="https://mrmacintosh.com/macos-15-sequoia-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
+                                        <i class="fas fa-download"></i>
+                                        Download IPSW
+                                        <span class="download-size">~13.0 GB</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Sequoia 15.4.1 IPSW</div>
-                                <div class="download-version">15.4.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2/M3/M4 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://mrmacintosh.com/macos-15-sequoia-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~13.1 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Sequoia 15.4.0 IPSW</div>
-                                <div class="download-version">15.4.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2/M3/M4 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://mrmacintosh.com/macos-15-sequoia-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~13.0 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- macOS 14 Sonoma IPSW Files -->
-                        <div class="ipsw-chip-section">
-                            <div class="ipsw-chip-header">
+                        <!-- macOS 14 Sonoma IPSW Section -->
+                        <div class="ipsw-version-section">
+                            <div class="ipsw-section-header">
                                 <i class="fas fa-microchip" style="color: #33ff33;"></i>
                                 <span>macOS 14 Sonoma IPSW Files</span>
                             </div>
-                        </div>
                         
                         <div class="download-item">
                             <div class="download-header">
@@ -1564,14 +1568,12 @@
                             </div>
                         </div>
 
-                        <!-- macOS 13 Ventura IPSW Files -->
-                        <br>
-                        <div class="ipsw-chip-section">
-                            <div class="ipsw-chip-header">
+                        <!-- macOS 13 Ventura IPSW Section -->
+                        <div class="ipsw-version-section">
+                            <div class="ipsw-section-header">
                                 <i class="fas fa-microchip" style="color: #55ff55;"></i>
                                 <span>macOS 13 Ventura IPSW Files</span>
                             </div>
-                        </div>
                         
                         <div class="download-item">
                             <div class="download-header">
