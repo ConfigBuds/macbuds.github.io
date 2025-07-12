@@ -505,6 +505,47 @@
             border-bottom: 2px solid #00ff41;
             padding-bottom: 6px;
         }
+        
+        .ipsw-chip-section {
+            margin: 30px 0 20px 0;
+            page-break-inside: avoid;
+        }
+        
+        .ipsw-chip-header {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.1) 0%, rgba(0, 255, 65, 0.05) 100%);
+            border: 2px solid rgba(0, 255, 65, 0.3);
+            border-radius: 25px;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #00ff41;
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
+            box-shadow: 
+                0 4px 12px rgba(0, 255, 65, 0.15),
+                0 0 0 1px rgba(0, 255, 65, 0.1) inset;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ipsw-chip-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ff41, #33ff33, #55ff55, #00ff41);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .ipsw-chip-header i {
+            font-size: 18px;
+            animation: pulse 2s infinite;
+        }
     </style>
 </head>
 <body>
@@ -1253,7 +1294,12 @@
 
                     <div class="section-content downloads-grid" id="ipsw-content">
                         <!-- macOS 15 Sequoia IPSW Files -->
-                        <div class="ipsw-main-heading">macOS 15 Sequoia IPSW Files</div>
+                        <div class="ipsw-chip-section">
+                            <div class="ipsw-chip-header">
+                                <i class="fas fa-microchip" style="color: #00ff41;"></i>
+                                <span>macOS 15 Sequoia IPSW Files</span>
+                            </div>
+                        </div>
                         
                         <div class="download-item">
                             <div class="download-header">
@@ -1301,7 +1347,12 @@
                         </div>
 
                         <!-- macOS 14 Sonoma IPSW Files -->
-                        <div class="ipsw-main-heading">macOS 14 Sonoma IPSW Files</div>
+                        <div class="ipsw-chip-section">
+                            <div class="ipsw-chip-header">
+                                <i class="fas fa-microchip" style="color: #33ff33;"></i>
+                                <span>macOS 14 Sonoma IPSW Files</span>
+                            </div>
+                        </div>
                         
                         <div class="download-item">
                             <div class="download-header">
@@ -1514,7 +1565,12 @@
                         </div>
 
                         <!-- macOS 13 Ventura IPSW Files -->
-                        <div class="ipsw-main-heading">macOS 13 Ventura IPSW Files</div>
+                        <div class="ipsw-chip-section">
+                            <div class="ipsw-chip-header">
+                                <i class="fas fa-microchip" style="color: #55ff55;"></i>
+                                <span>macOS 13 Ventura IPSW Files</span>
+                            </div>
+                        </div>
                         
                         <div class="download-item">
                             <div class="download-header">
