@@ -143,6 +143,19 @@
             background: #0a0e0a;
             z-index: 10;
         }
+        .section-subheader {
+            color: #33ff33;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 20px 0 8px 0;
+            padding: 8px 12px;
+            background: rgba(0, 255, 65, 0.05);
+            border-left: 3px solid #33ff33;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
         .section-toggle {
             background: none;
             border: none;
@@ -452,11 +465,6 @@
                         <div class="terminal-btn btn-maximize"></div>
                     </div>
                     <div class="terminal-title">macadmin@macbuds — zsh — 80×24</div>
-                </div>
-                <div class="view-toggle">
-                    <button class="view-btn" onclick="toggleView('grid')">Grid</button>
-                    <button class="view-btn" onclick="toggleView('list')">List</button>
-                    <button class="view-btn active" onclick="toggleView('compact')">Compact</button>
                 </div>
             </div>
             <div class="terminal-content-wrapper">
@@ -1192,6 +1200,10 @@
 
                     <div class="section-content downloads-grid" id="ipsw-content">
                         <!-- macOS 15 Sequoia IPSW Files -->
+                        <div class="section-subheader">
+                            <span>🍎 macOS 15 Sequoia IPSW Files</span>
+                        </div>
+                        
                         <div class="download-item">
                             <div class="download-header">
                                 <div class="download-title">macOS Sequoia 15.5 IPSW</div>
@@ -1199,7 +1211,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3/M4 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2025SpringFCS/fullrestores/082-44534/CE6C1054-99A3-4F67-A823-3EE9E6510CDE/UniversalMac_15.5_24F74_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-15-sequoia-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~13.2 GB</span>
@@ -1214,7 +1226,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3/M4 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2025SpringFCS/fullrestores/082-16524/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_15.4.1_23F79_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-15-sequoia-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~13.1 GB</span>
@@ -1229,7 +1241,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3/M4 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2025SpringFCS/fullrestores/082-01336/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_15.4.0_23F79_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-15-sequoia-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~13.0 GB</span>
@@ -1238,6 +1250,10 @@
                         </div>
 
                         <!-- macOS 14 Sonoma IPSW Files -->
+                        <div class="section-subheader">
+                            <span>🍎 macOS 14 Sonoma IPSW Files</span>
+                        </div>
+                        
                         <div class="download-item">
                             <div class="download-header">
                                 <div class="download-title">macOS Sonoma 14.7.1 IPSW</div>
@@ -1245,7 +1261,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullrestores/062-52859/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.7.1_23G82_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~13.3 GB</span>
@@ -1260,7 +1276,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullrestores/062-52859/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.6.1_23G82_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~13.2 GB</span>
@@ -1275,7 +1291,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullrestores/062-52859/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.6.0_23G82_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~13.1 GB</span>
@@ -1290,7 +1306,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SpringFCS/fullrestores/052-96247/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.5.0_23F79_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~13.0 GB</span>
@@ -1305,7 +1321,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SpringFCS/fullrestores/052-88396/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.4.1_23F79_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~12.9 GB</span>
@@ -1320,7 +1336,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SpringFCS/fullrestores/052-88396/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.4.0_23F79_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~12.8 GB</span>
@@ -1335,7 +1351,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/052-88396/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.3.1_23D60_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~12.7 GB</span>
@@ -1350,7 +1366,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/052-88396/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.3.0_23D60_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~12.6 GB</span>
@@ -1365,7 +1381,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/052-88396/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.2.1_23C71_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~12.5 GB</span>
@@ -1380,7 +1396,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/052-88396/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.2.0_23C71_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~12.4 GB</span>
@@ -1395,7 +1411,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/052-88396/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.1.1_23C71_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~12.3 GB</span>
@@ -1410,7 +1426,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/052-88396/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.1.0_23C71_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~12.2 GB</span>
@@ -1425,7 +1441,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/052-88396/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.0.1_23C71_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~12.1 GB</span>
@@ -1440,7 +1456,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/052-88396/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.0.0_23C71_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-14-sonoma-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~12.0 GB</span>
@@ -1449,6 +1465,10 @@
                         </div>
 
                         <!-- macOS 13 Ventura IPSW Files -->
+                        <div class="section-subheader">
+                            <span>🍎 macOS 13 Ventura IPSW Files</span>
+                        </div>
+                        
                         <div class="download-item">
                             <div class="download-header">
                                 <div class="download-title">macOS Ventura 13.6.7 IPSW</div>
@@ -1456,7 +1476,7 @@
                             </div>
                             <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
                             <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullrestores/062-52859/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.7_22G120_Restore.ipsw" class="download-button" download>
+                                <a href="https://mrmacintosh.com/macos-13-ventura-full-installer-database-download-directly-from-apple/" class="download-button" target="_blank">
                                     <i class="fas fa-download"></i>
                                     Download IPSW
                                     <span class="download-size">~12.8 GB</span>
@@ -1464,635 +1484,7 @@
                             </div>
                         </div>
 
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.6 IPSW</div>
-                                <div class="download-version">13.6.6</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullrestores/062-52859/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.6_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.7 GB</span>
-                                </a>
-                            </div>
-                        </div>
 
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.5 IPSW</div>
-                                <div class="download-version">13.6.5</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SpringFCS/fullrestores/072-70706/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.5_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.6 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.4 IPSW</div>
-                                <div class="download-version">13.6.4</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SpringFCS/fullrestores/072-70706/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.4_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.5 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.3 IPSW</div>
-                                <div class="download-version">13.6.3</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/072-70706/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.3_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.4 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.2 IPSW</div>
-                                <div class="download-version">13.6.2</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/072-08251/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.2_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.3 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.1 IPSW</div>
-                                <div class="download-version">13.6.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/072-44286/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.2 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.0 IPSW</div>
-                                <div class="download-version">13.6.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/072-30111/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.1 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.5.2 IPSW</div>
-                                <div class="download-version">13.5.2</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.5.2_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.0 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.5.1 IPSW</div>
-                                <div class="download-version">13.5.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.5.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.9 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.5.0 IPSW</div>
-                                <div class="download-version">13.5.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.5.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.8 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.4.1 IPSW</div>
-                                <div class="download-version">13.4.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.4.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.7 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.4.0 IPSW</div>
-                                <div class="download-version">13.4.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.4.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.6 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.3.1 IPSW</div>
-                                <div class="download-version">13.3.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SpringFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.3.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.5 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.3.0 IPSW</div>
-                                <div class="download-version">13.3.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SpringFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.3.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.4 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.2.1 IPSW</div>
-                                <div class="download-version">13.2.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.2.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.3 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.2.0 IPSW</div>
-                                <div class="download-version">13.2.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.2.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.2 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.1.2 IPSW</div>
-                                <div class="download-version">13.1.2</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.1.2_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.1 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.1.1 IPSW</div>
-                                <div class="download-version">13.1.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.1.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.0 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.1.0 IPSW</div>
-                                <div class="download-version">13.1.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.1.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~10.9 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.0.1 IPSW</div>
-                                <div class="download-version">13.0.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.0.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~10.8 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.0.0 IPSW</div>
-                                <div class="download-version">13.0.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.0.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~10.7 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.6 IPSW</div>
-                                <div class="download-version">13.6.6</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullrestores/062-52859/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.6_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.7 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.5 IPSW</div>
-                                <div class="download-version">13.6.5</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SpringFCS/fullrestores/072-70706/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.5_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.6 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.4 IPSW</div>
-                                <div class="download-version">13.6.4</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SpringFCS/fullrestores/072-70706/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.4_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.5 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.3 IPSW</div>
-                                <div class="download-version">13.6.3</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/072-70706/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.3_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.4 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.2 IPSW</div>
-                                <div class="download-version">13.6.2</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/072-08251/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.2_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.3 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.1 IPSW</div>
-                                <div class="download-version">13.6.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/072-44286/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.2 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.6.0 IPSW</div>
-                                <div class="download-version">13.6.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/072-30111/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.1 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.5.2 IPSW</div>
-                                <div class="download-version">13.5.2</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.5.2_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~12.0 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.5.1 IPSW</div>
-                                <div class="download-version">13.5.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.5.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.9 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.5.0 IPSW</div>
-                                <div class="download-version">13.5.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.5.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.8 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.4.1 IPSW</div>
-                                <div class="download-version">13.4.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.4.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.7 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.4.0 IPSW</div>
-                                <div class="download-version">13.4.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.4.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.6 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.3.1 IPSW</div>
-                                <div class="download-version">13.3.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SpringFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.3.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.5 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.3.0 IPSW</div>
-                                <div class="download-version">13.3.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024SpringFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.3.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.4 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.2.1 IPSW</div>
-                                <div class="download-version">13.2.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.2.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.3 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.2.0 IPSW</div>
-                                <div class="download-version">13.2.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024WinterFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.2.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.2 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.1.2 IPSW</div>
-                                <div class="download-version">13.1.2</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.1.2_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.1 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.1.1 IPSW</div>
-                                <div class="download-version">13.1.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.1.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~11.0 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.1.0 IPSW</div>
-                                <div class="download-version">13.1.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.1.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~10.9 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.0.1 IPSW</div>
-                                <div class="download-version">13.0.1</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.0.1_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~10.8 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Ventura 13.0.0 IPSW</div>
-                                <div class="download-version">13.0.0</div>
-                            </div>
-                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
-                            <div class="download-meta">
-                                <a href="https://updates.cdn-apple.com/2024FallFCS/fullrestores/072-29965/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.0.0_22G120_Restore.ipsw" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download IPSW
-                                    <span class="download-size">~10.7 GB</span>
-                                </a>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="section-header">
@@ -2193,21 +1585,7 @@
     </div>
 
     <script>
-        // View toggle functionality
-        function toggleView(viewType) {
-            const container = document.querySelector('.terminal-content-wrapper');
-            const buttons = document.querySelectorAll('.view-btn');
-            
-            // Remove all view classes
-            container.classList.remove('grid-view', 'list-view', 'compact-view');
-            
-            // Add new view class
-            container.classList.add(viewType + '-view');
-            
-            // Update button states
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-        }
+        // View toggle functionality (removed - using compact view by default)
 
         // Section toggle functionality
         function toggleSection(sectionId) {
@@ -2244,27 +1622,7 @@
             container.classList.add('compact-view');
         });
 
-        // Add keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Ctrl/Cmd + G for grid view
-            if ((e.ctrlKey || e.metaKey) && e.key === 'g') {
-                e.preventDefault();
-                toggleView('grid');
-                document.querySelector('.view-btn[onclick*="grid"]').classList.add('active');
-            }
-            // Ctrl/Cmd + L for list view
-            if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
-                e.preventDefault();
-                toggleView('list');
-                document.querySelector('.view-btn[onclick*="list"]').classList.add('active');
-            }
-            // Ctrl/Cmd + C for compact view
-            if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
-                e.preventDefault();
-                toggleView('compact');
-                document.querySelector('.view-btn[onclick*="compact"]').classList.add('active');
-            }
-        });
+        // Keyboard shortcuts removed - using compact view by default
 
         // Add download tracking
         document.querySelectorAll('.download-button').forEach(button => {
