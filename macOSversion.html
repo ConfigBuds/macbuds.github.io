@@ -1184,6 +1184,60 @@
                     </div>
 
                     <div class="section-header">
+                        <span>📱 macOS IPSW Firmware Files</span>
+                        <button class="section-toggle" onclick="toggleSection('ipsw')">
+                            <i class="fas fa-chevron-down" id="ipsw-icon"></i>
+                        </button>
+                    </div>
+
+                    <div class="section-content downloads-grid" id="ipsw-content">
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sequoia 15.5 IPSW</div>
+                                <div class="download-version latest">LATEST</div>
+                            </div>
+                            <div class="download-description">Apple Silicon M1/M2/M3/M4 Firmware Restore File</div>
+                            <div class="download-meta">
+                                <a href="https://updates.cdn-apple.com/2025SpringFCS/fullrestores/082-44534/CE6C1054-99A3-4F67-A823-3EE9E6510CDE/UniversalMac_15.5_24F74_Restore.ipsw" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download IPSW
+                                    <span class="download-size">~13.2 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.7.1 IPSW</div>
+                                <div class="download-version">14.7.1</div>
+                            </div>
+                            <div class="download-description">Apple Silicon M1/M2/M3 Firmware Restore File</div>
+                            <div class="download-meta">
+                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullrestores/062-52859/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_14.7.1_23G82_Restore.ipsw" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download IPSW
+                                    <span class="download-size">~13.3 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.6.7 IPSW</div>
+                                <div class="download-version">13.6.7</div>
+                            </div>
+                            <div class="download-description">Apple Silicon M1/M2 Firmware Restore File</div>
+                            <div class="download-meta">
+                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullrestores/062-52859/932E0A8F-6644-4759-82DA-F8FA8DEA806A/UniversalMac_13.6.7_22G120_Restore.ipsw" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download IPSW
+                                    <span class="download-size">~12.8 GB</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-header">
                         <span>🔧 Additional Resources</span>
                         <button class="section-toggle" onclick="toggleSection('resources')">
                             <i class="fas fa-chevron-down" id="resources-icon"></i>
@@ -1316,7 +1370,7 @@
         // Initialize sections as expanded
         document.addEventListener('DOMContentLoaded', function() {
             // All sections start expanded by default
-            const sections = ['sequoia', 'sonoma', 'ventura', 'resources'];
+            const sections = ['sequoia', 'sonoma', 'ventura', 'ipsw', 'resources'];
             sections.forEach(section => {
                 const content = document.getElementById(section + '-content');
                 const icon = document.getElementById(section + '-icon');
