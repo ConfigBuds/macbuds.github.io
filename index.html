@@ -299,6 +299,32 @@
             border-left: 3px solid #00ff41;
         }
 
+        .search-category {
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+            margin-bottom: 8px;
+        }
+
+        .search-category-title {
+            color: #00ff41;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            background: rgba(0, 255, 65, 0.1);
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+        }
+
+        .search-category-items {
+            padding: 4px 0;
+        }
+
+        .search-no-results {
+            padding: 16px;
+            text-align: center;
+            color: #77ff77;
+            font-style: italic;
+        }
+
         .search-result-item:last-child {
             border-bottom: none;
         }
@@ -824,7 +850,7 @@
                 </div>
 
                 <!-- Announcement Section -->
-                <div class="announcement-section" style="margin-top:32px;">
+                <div class="announcement-section" style="margin-top:32px;" data-section="announcements">
                     <div class="section-header">
                         <i class="fas fa-bullhorn"></i> macadmin@macbuds:~/announcements/
                     </div>
@@ -905,7 +931,7 @@
                 </div>
 
                 <!-- Resources Section -->
-                <div class="resources-section">
+                <div class="resources-section" data-section="resources">
                     <div class="section-header">
                         <i class="fas fa-folder"></i> macadmin@macbuds:~./resources/
                     </div>
@@ -931,7 +957,7 @@
                 </div>
 
                 <!-- Downloads Section -->
-                <div class="resources-section">
+                <div class="resources-section" data-section="downloads">
                     <div class="section-header">
                         <i class="fas fa-download"></i> macadmin@macbuds:~./downloads/
                     </div>
@@ -976,7 +1002,7 @@
                 </div>
             
                 <!-- Archives Files Section above Coming Soon -->
-                <div class="resources-macos-archives" style="margin-top:32px;">
+                <div class="resources-macos-archives" style="margin-top:32px;" data-section="archives">
                     <div class="section-header">
                         <i class="fas fa-archive" style="color: #00ff41;"></i>
                         <span>macOS Vintage Vault - Retro Collection</span>
@@ -1065,6 +1091,60 @@ class TerminalSearch {
                 keywords: keywords.toLowerCase(),
                 element: item,
                 action: () => downloadLink.click()
+            });
+        });
+
+        // Add announcements
+        document.querySelectorAll('.download-item').forEach(item => {
+            const title = item.querySelector('.download-title').textContent;
+            const description = item.querySelector('.download-description').textContent;
+            const version = item.querySelector('.download-version')?.textContent || '';
+            this.searchableItems.push({
+                title: title,
+                description: description,
+                category: 'Announcements',
+                keywords: `${title} ${description} ${version}`.toLowerCase(),
+                element: item,
+                action: () => item.scrollIntoView({ behavior: 'smooth' })
+            });
+        });
+
+        // Add section headers
+        document.querySelectorAll('.section-header').forEach(header => {
+            const text = header.textContent.trim();
+            this.searchableItems.push({
+                title: text,
+                description: `Navigate to ${text.toLowerCase()} section`,
+                category: 'Navigation',
+                keywords: text.toLowerCase(),
+                element: header,
+                action: () => header.scrollIntoView({ behavior: 'smooth' })
+            });
+        });
+
+        // Add macOS versions and features
+        const macOSFeatures = [
+            { title: 'macOS Sequoia 15.5', description: 'Latest macOS version with AI features and enhanced security', category: 'macOS' },
+            { title: 'macOS Tahoe 26.0', description: 'Upcoming macOS with revolutionary AI integration', category: 'macOS' },
+            { title: 'Apple Silicon M4', description: 'Latest Apple chip with enhanced performance', category: 'Hardware' },
+            { title: 'IPSW Files', description: 'macOS firmware restore files for Apple Silicon', category: 'Downloads' },
+            { title: 'Safari 18.5', description: 'Latest Safari browser with security enhancements', category: 'Downloads' },
+            { title: 'Enterprise Security', description: 'Zero-trust architecture and enhanced MDM capabilities', category: 'Security' },
+            { title: 'AI-Powered Management', description: 'Intelligent automation for device deployment', category: 'AI' },
+            { title: 'MDM Capabilities', description: 'Mobile Device Management features and tools', category: 'Management' },
+            { title: 'Vintage Vault', description: 'macOS legacy versions and retro collection', category: 'Archives' },
+            { title: 'GitHub Repos', description: 'Access to MacBuds GitHub repositories', category: 'Resources' },
+            { title: 'Tools Section', description: 'Mac administration tools and utilities', category: 'Resources' }
+        ];
+
+        macOSFeatures.forEach(feature => {
+            this.searchableItems.push({
+                title: feature.title,
+                description: feature.description,
+                category: feature.category,
+                keywords: `${feature.title} ${feature.description}`.toLowerCase(),
+                element: null,
+                action: () => this.navigateToFeature(feature.title)
             });
         });
 
@@ -1279,6 +1359,27 @@ class TerminalSearch {
         // You could dispatch an event or call a terminal interface here
         const event = new CustomEvent('executeCommand', { detail: { command } });
         document.dispatchEvent(event);
+    }
+
+    navigateToFeature(featureTitle) {
+        // Navigate to specific features or sections
+        switch(featureTitle) {
+            case 'Vintage Vault':
+                window.location.href = '/macOSversion';
+                break;
+            case 'Tools Section':
+                window.location.href = 'tabs/tools.html';
+                break;
+            case 'GitHub Repos':
+                window.open('https://github.com/macbuds', '_blank');
+                break;
+            default:
+                // Scroll to relevant section if it exists
+                const section = document.querySelector(`[data-section="${featureTitle}"]`);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+        }
     }
 
     showSearchResults() {
