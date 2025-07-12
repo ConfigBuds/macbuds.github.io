@@ -1906,75 +1906,6 @@
 
                     </div>
 
-                    <div class="section-header">
-                        <span>🛠️ Additional Resources</span>
-                        <button class="section-toggle" onclick="toggleSection('resources')">
-                            <i class="fas fa-chevron-down" id="resources-icon"></i>
-                        </button>
-                    </div>
-
-                    <div class="section-content downloads-grid" id="resources-content">
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">Safari 18.5 (Sonoma)</div>
-                                <div class="download-version">18.5</div>
-                            </div>
-                            <div class="download-description">Safari browser update for Sonoma</div>
-                            <div class="download-meta">
-                                <a href="https://swcdn.apple.com/content/downloads/08/26/082-18361-A_O3VSRCP8K3/5vlwh79cz177ia1ws5w2aep4d46pknikt2/Safari18.5SonomaAuto.pkg" class="download-button" download>
-                                    <i class="fas fa-download"></i>
-                                    Download
-                                    <span class="download-size">~215 MB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">Command Line Tools</div>
-                                <div class="download-version">15.3</div>
-                            </div>
-                            <div class="download-description">Xcode Command Line Tools for developers</div>
-                            <div class="download-meta">
-                                <a href="https://developer.apple.com/download/more/" class="download-button" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    Developer Portal
-                                    <span class="download-size">~730 MB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">macOS Recovery</div>
-                                <div class="download-version">Recovery</div>
-                            </div>
-                            <div class="download-description">macOS Recovery for system restoration</div>
-                            <div class="download-meta">
-                                <a href="https://support.apple.com/en-us/HT201314" class="download-button" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    Recovery Guide
-                                    <span class="download-size">~1.2 GB</span>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="download-item">
-                            <div class="download-header">
-                                <div class="download-title">Firmware Updates</div>
-                                <div class="download-version">Latest</div>
-                            </div>
-                            <div class="download-description">System firmware and security updates</div>
-                            <div class="download-meta">
-                                <a href="https://support.apple.com/en-us/HT201518" class="download-button" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    Firmware Guide
-                                    <span class="download-size">Varies</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="prompt">
                         <span class="prompt-symbol">$</span>
                         <span class="user-host">macadmin@macbuds</span>
@@ -2025,7 +1956,7 @@
         // Initialize sections as expanded
         document.addEventListener('DOMContentLoaded', function() {
             // All sections start expanded by default
-            const sections = ['sequoia', 'sonoma', 'ventura', 'ipsw', 'resources'];
+            const sections = ['sequoia', 'sonoma', 'ventura', 'ipsw'];
             sections.forEach(section => {
                 const content = document.getElementById(section + '-content');
                 const icon = document.getElementById(section + '-icon');
