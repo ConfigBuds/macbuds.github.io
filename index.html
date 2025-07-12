@@ -159,20 +159,37 @@
         }
 
         .main-logo-container {
-            border: 3px solid #00ff41;
-            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.1) 0%, rgba(0, 255, 65, 0.05) 100%);
+            border: 2px solid rgba(0, 255, 65, 0.3);
+            border-radius: 25px;
             padding: 16px;
-            background: rgba(0, 255, 65, 0.05);
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            box-shadow: 
+                0 4px 12px rgba(0, 255, 65, 0.15),
+                0 0 0 1px rgba(0, 255, 65, 0.1) inset;
             display: flex;
             align-items: center;
+            position: relative;
+            overflow: hidden;
         }
-
+        .main-logo-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ff41, #33ff33, #55ff55, #00ff41);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
         .main-logo-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
-            background: rgba(0, 255, 65, 0.1);
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.2) 0%, rgba(0, 255, 65, 0.1) 100%);
+            border-color: rgba(0, 255, 65, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 
+                0 8px 20px rgba(0, 255, 65, 0.25),
+                0 0 0 1px rgba(0, 255, 65, 0.2) inset;
         }
 
         .main-logo-img {
