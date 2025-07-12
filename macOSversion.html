@@ -148,15 +148,50 @@
             font-size: 15px;
             font-weight: 700;
             margin: 24px 0 12px 0;
-            padding: 12px 16px;
-            background: linear-gradient(90deg, rgba(0, 255, 65, 0.1) 0%, rgba(0, 255, 65, 0.05) 100%);
-            border-left: 4px solid #00ff41;
-            border-radius: 6px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(0, 255, 65, 0.15) 0%, rgba(0, 255, 65, 0.05) 50%, rgba(0, 255, 65, 0.1) 100%);
+            border: 2px solid rgba(0, 255, 65, 0.3);
+            border-left: 6px solid #00ff41;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            text-shadow: 0 0 8px rgba(0, 255, 65, 0.3);
-            box-shadow: 0 2px 8px rgba(0, 255, 65, 0.1);
+            gap: 12px;
+            text-shadow: 0 0 12px rgba(0, 255, 65, 0.4);
+            box-shadow: 
+                0 4px 12px rgba(0, 255, 65, 0.15),
+                0 0 0 1px rgba(0, 255, 65, 0.1) inset,
+                0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-subheader::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ff41, #33ff33, #55ff55, #00ff41);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .section-subheader::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 12px 12px 0;
+            border-color: transparent rgba(0, 255, 65, 0.2) transparent transparent;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
         .section-toggle {
             background: none;
