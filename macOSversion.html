@@ -17,7 +17,7 @@
             overflow-x: hidden;
         }
         .terminal-container {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             padding: 40px 20px;
             display: flex;
@@ -41,6 +41,7 @@
             border-bottom: 2px solid #00ff41;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 20px;
         }
         .terminal-left {
@@ -65,12 +66,39 @@
             color: #55ff55;
             font-weight: 500;
         }
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+            background: rgba(0, 255, 65, 0.1);
+            border-radius: 6px;
+            padding: 4px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        .view-btn {
+            padding: 6px 12px;
+            background: transparent;
+            border: none;
+            color: #55ff55;
+            font-size: 11px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .view-btn.active {
+            background: rgba(0, 255, 65, 0.2);
+            color: #00ff41;
+        }
+        .view-btn:hover {
+            color: #00ff41;
+        }
         .terminal-content-wrapper {
             padding: 30px;
             background: #0a0e0a;
             position: relative;
             flex: 1 1 auto;
             overflow-y: auto;
+            max-height: 80vh;
         }
         .prompt {
             display: flex;
@@ -107,24 +135,56 @@
             margin: 24px 0 12px 0;
             border-bottom: 1px solid #00ff41;
             padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: sticky;
+            top: 0;
+            background: #0a0e0a;
+            z-index: 10;
+        }
+        .section-toggle {
+            background: none;
+            border: none;
+            color: #55ff55;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 2px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        .section-toggle:hover {
+            color: #00ff41;
+            background: rgba(0, 255, 65, 0.1);
+        }
+        .downloads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .downloads-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
         }
         .download-item {
             background: #0d1b0d;
             border: 1px solid #33ff33;
             border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 12px;
+            padding: 12px;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
         .download-item:hover {
             border-color: #00ff41;
             background: #112211;
-            transform: translateX(4px);
+            transform: translateX(2px);
         }
         .download-item::before {
             content: '';
@@ -144,46 +204,51 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
         .download-title {
             color: #00ff41;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
         }
         .download-version {
             color: #55ff55;
-            font-size: 12px;
+            font-size: 11px;
             background: rgba(0, 255, 65, 0.1);
-            padding: 2px 8px;
+            padding: 2px 6px;
             border-radius: 12px;
             border: 1px solid rgba(0, 255, 65, 0.3);
         }
+        .download-version.latest {
+            background: rgba(255, 255, 0, 0.1);
+            border-color: rgba(255, 255, 0, 0.3);
+            color: #ffff00;
+        }
         .download-description {
             color: #77ff77;
-            font-size: 12px;
-            margin-bottom: 12px;
+            font-size: 11px;
+            margin-bottom: 8px;
         }
         .download-meta {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: space-between;
             width: 100%;
         }
         .download-button {
             background: transparent;
             color: #00ff41;
             border: 1px solid #00ff41;
-            border-radius: 6px;
-            padding: 12px 20px;
-            font-size: 12px;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 11px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-family: inherit;
             position: relative;
         }
@@ -191,21 +256,20 @@
             background: rgba(0, 255, 65, 0.1);
             color: #33ff33;
             border-color: #33ff33;
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
         .download-button:active {
             transform: translateY(0);
         }
         .download-button i {
-            font-size: 14px;
+            font-size: 12px;
         }
         .download-size {
             color: #888;
-            font-size: 10px;
+            font-size: 9px;
             background: rgba(136, 136, 136, 0.1);
-            padding: 2px 6px;
+            padding: 2px 4px;
             border-radius: 4px;
-            margin-left: 8px;
             white-space: nowrap;
         }
         .status-bar {
@@ -257,21 +321,6 @@
             color: #00ff41;
             text-decoration: underline;
         }
-        .terminal-content-wrapper::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00ff41, transparent);
-            animation: scan-line 3s linear infinite;
-            opacity: 0.1;
-        }
-        @keyframes scan-line {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(500px); }
-        }
         .warning-box {
             background: rgba(255, 255, 0, 0.1);
             border: 1px solid #ffff00;
@@ -322,6 +371,46 @@
         .back-button i {
             font-size: 12px;
         }
+        .section-content {
+            transition: all 0.3s ease;
+        }
+        .section-content.collapsed {
+            display: none;
+        }
+        .compact-view .downloads-grid {
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+        .compact-view .download-item {
+            padding: 8px;
+        }
+        .compact-view .download-title {
+            font-size: 12px;
+        }
+        .compact-view .download-description {
+            font-size: 10px;
+        }
+        .list-view .downloads-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .list-view .download-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+            padding: 10px 16px;
+        }
+        .list-view .download-header {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        .list-view .download-description {
+            margin-bottom: 0;
+        }
+        .list-view .download-meta {
+            flex-shrink: 0;
+        }
         @media (max-width: 768px) {
             .terminal-container {
                 padding: 20px 10px;
@@ -338,17 +427,16 @@
             .terminal-left {
                 justify-content: center;
             }
+            .downloads-grid {
+                grid-template-columns: 1fr;
+            }
             .download-meta {
                 flex-direction: column;
-                gap: 8px;
-                align-items: flex-end;
+                gap: 6px;
+                align-items: flex-start;
             }
             .terminal-window {
                 max-height: 95vh;
-            }
-            .download-button {
-                flex-direction: column;
-                gap: 4px;
             }
         }
     </style>
@@ -364,6 +452,11 @@
                         <div class="terminal-btn btn-maximize"></div>
                     </div>
                     <div class="terminal-title">macadmin@macbuds — zsh — 80×24</div>
+                </div>
+                <div class="view-toggle">
+                    <button class="view-btn active" onclick="toggleView('grid')">Grid</button>
+                    <button class="view-btn" onclick="toggleView('list')">List</button>
+                    <button class="view-btn" onclick="toggleView('compact')">Compact</button>
                 </div>
             </div>
             <div class="terminal-content-wrapper">
@@ -388,219 +481,774 @@
                         Official Apple macOS installer packages directly from Apple's CDN. Always verify downloads and use official Apple sources for production environments.
                     </div>
 
-                    <div class="section-header">📦 macOS 15 Series (Sequoia) - Latest</div>
+                    <div class="section-header">
+                        <span>📦 macOS 15 Series (Sequoia) - Latest</span>
+                        <button class="section-toggle" onclick="toggleSection('sequoia')">
+                            <i class="fas fa-chevron-down" id="sequoia-icon"></i>
+                        </button>
+                    </div>
                     
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sequoia 15.5</div>
-                            <div class="download-version">LATEST</div>
+                    <div class="section-content downloads-grid" id="sequoia-content">
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sequoia 15.5</div>
+                                <div class="download-version latest">LATEST</div>
+                            </div>
+                            <div class="download-description">Latest stable release - InstallAssistant.pkg</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/09/16/082-33200-A_9FRARUF9NM/jnf31ewnvxlmf5ld7l7n7hzv6lkd6fiuz9/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~13.2 GB</span>
+                                </a>
+                            </div>
                         </div>
-                        <div class="download-description">Latest stable release - InstallAssistant.pkg</div>
-                        <div class="download-meta">
-                            <a href="https://swcdn.apple.com/content/downloads/09/16/082-33200-A_9FRARUF9NM/jnf31ewnvxlmf5ld7l7n7hzv6lkd6fiuz9/InstallAssistant.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download Latest PKG
-                                <span class="download-size">~13.2 GB</span>
-                            </a>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sequoia 15.4.1</div>
+                                <div class="download-version">15.4.1</div>
+                            </div>
+                            <div class="download-description">Previous stable release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/43/58/082-16524-A_VHRNGIT194/ksdv19dcxx90ja7nronzpb4kr4val0imsz/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~13.1 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sequoia 15.4.0</div>
+                                <div class="download-version">15.4.0</div>
+                            </div>
+                            <div class="download-description">Spring 2025 release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/62/63/082-01336-A_QFPSTWIJMM/yjbdoqrcvwy4hwiwxiu1aiwouljw5o2ayx/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~13.0 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sequoia 15.3.1</div>
+                                <div class="download-version">15.3.1</div>
+                            </div>
+                            <div class="download-description">Spring 2025 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/01/51/082-04099-A_5FSIOBKFKK/xjz2e7x52ajvp10tytehv9364baqaanrim/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.9 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sequoia 15.3.0</div>
+                                <div class="download-version">15.3.0</div>
+                            </div>
+                            <div class="download-description">Spring 2025 feature release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/39/51/072-70706-A_Q2E9RWYCSD/oddej58reimcphudve8mgtxmcjjp0t3cve/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.8 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sequoia 15.2.0</div>
+                                <div class="download-version">15.2.0</div>
+                            </div>
+                            <div class="download-description">Winter 2025 release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/11/60/072-08251-A_VJ2TWIZ7CM/mrkdsdl45umr07vwe27n8hfvubidmxgcbk/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.7 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sequoia 15.1.0</div>
+                                <div class="download-version">15.1.0</div>
+                            </div>
+                            <div class="download-description">Winter 2024 release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/52/42/072-44286-A_45NJHEFEDY/nxk2stn9edtjgfr3dqsh046dx4ti2h7w2s/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.6 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sequoia 15.0.1</div>
+                                <div class="download-version">15.0.1</div>
+                            </div>
+                            <div class="download-description">Initial Sequoia patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/21/19/072-30111-A_4V7Y0VVH1Q/ie1hmy1uaj094z769s4zqmdaojp2vk4dkj/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.5 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sequoia 15.0.0</div>
+                                <div class="download-version">15.0.0</div>
+                            </div>
+                            <div class="download-description">Initial Sequoia release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/14/63/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.4 GB</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sequoia 15.4.1</div>
-                            <div class="download-version">15.4.1</div>
+                    <div class="section-header">
+                        <span>📦 macOS 14 Series (Sonoma)</span>
+                        <button class="section-toggle" onclick="toggleSection('sonoma')">
+                            <i class="fas fa-chevron-down" id="sonoma-icon"></i>
+                        </button>
+                    </div>
+
+                    <div class="section-content downloads-grid" id="sonoma-content">
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.7.1</div>
+                                <div class="download-version latest">LATEST v14</div>
+                            </div>
+                            <div class="download-description">Latest Sonoma release with security updates</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/51/28/082-44432-A_4NJSZXK8G5/v10fo5dlwd50fja3qbnhj7z9tp1dx41vq2/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~13.3 GB</span>
+                                </a>
+                            </div>
                         </div>
-                        <div class="download-description">Previous stable release</div>
-                        <div class="download-meta">
-                            <a href="https://swcdn.apple.com/content/downloads/43/58/082-16524-A_VHRNGIT194/ksdv19dcxx90ja7nronzpb4kr4val0imsz/InstallAssistant.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download PKG
-                                <span class="download-size">~13.1 GB</span>
-                            </a>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.6.1</div>
+                                <div class="download-version">14.6.1</div>
+                            </div>
+                            <div class="download-description">Previous Sonoma release</div>
+                            <div class="download-meta">
+                                <a href="https://updates.cdn-apple.com/2024SummerFCS/fullinstallers/062-52859/932E0A8F-6644-4759-82DA-F8FA8DEA806A/macOS_14.6.1.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~13.2 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.6.0</div>
+                                <div class="download-version">14.6.0</div>
+                            </div>
+                            <div class="download-description">Summer 2024 release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/52/01/052-96247-A_FUZBJ84CYF/u9szu6bpqkzxat5wfkxjjdogsip/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~13.1 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.5.0</div>
+                                <div class="download-version">14.5.0</div>
+                            </div>
+                            <div class="download-description">Spring 2024 release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/00/41/052-96247-A_FUZBJ84CYF/u9szu6bpqkzxat5wfkxjjdogsip/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~13.0 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.4.1</div>
+                                <div class="download-version">14.4.1</div>
+                            </div>
+                            <div class="download-description">Spring 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/55/30/052-88396-A_QZFXKFBQ8K/k8w1j9vfzjmxfvvyqfuq7gkjzwf4gp9x3e/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.9 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.4.0</div>
+                                <div class="download-version">14.4.0</div>
+                            </div>
+                            <div class="download-description">Spring 2024 feature release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/44/15/052-88396-A_QZFXKFBQ8K/k8w1j9vfzjmxfvvyqfuq7gkjzwf4gp9x3e/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.8 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.3.1</div>
+                                <div class="download-version">14.3.1</div>
+                            </div>
+                            <div class="download-description">Winter 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/33/00/052-88396-A_QZFXKFBQ8K/k8w1j9vfzjmxfvvyqfuq7gkjzwf4gp9x3e/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.7 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.3.0</div>
+                                <div class="download-version">14.3.0</div>
+                            </div>
+                            <div class="download-description">Winter 2024 feature release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/22/45/052-88396-A_QZFXKFBQ8K/k8w1j9vfzjmxfvvyqfuq7gkjzwf4gp9x3e/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.6 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.2.1</div>
+                                <div class="download-version">14.2.1</div>
+                            </div>
+                            <div class="download-description">Fall 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/11/30/052-88396-A_QZFXKFBQ8K/k8w1j9vfzjmxfvvyqfuq7gkjzwf4gp9x3e/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.5 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.2.0</div>
+                                <div class="download-version">14.2.0</div>
+                            </div>
+                            <div class="download-description">Fall 2024 feature release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/00/15/052-88396-A_QZFXKFBQ8K/k8w1j9vfzjmxfvvyqfuq7gkjzwf4gp9x3e/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.4 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.1.1</div>
+                                <div class="download-version">14.1.1</div>
+                            </div>
+                            <div class="download-description">Fall 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/89/00/052-88396-A_QZFXKFBQ8K/k8w1j9vfzjmxfvvyqfuq7gkjzwf4gp9x3e/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.3 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.1.0</div>
+                                <div class="download-version">14.1.0</div>
+                            </div>
+                            <div class="download-description">Fall 2024 feature release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/78/45/052-88396-A_QZFXKFBQ8K/k8w1j9vfzjmxfvvyqfuq7gkjzwf4gp9x3e/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.2 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.0.1</div>
+                                <div class="download-version">14.0.1</div>
+                            </div>
+                            <div class="download-description">Initial Sonoma patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/67/30/052-88396-A_QZFXKFBQ8K/k8w1j9vfzjmxfvvyqfuq7gkjzwf4gp9x3e/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.1 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Sonoma 14.0.0</div>
+                                <div class="download-version">14.0.0</div>
+                            </div>
+                            <div class="download-description">Initial Sonoma release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/56/15/052-88396-A_QZFXKFBQ8K/k8w1j9vfzjmxfvvyqfuq7gkjzwf4gp9x3e/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.0 GB</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sequoia 15.4.0</div>
-                            <div class="download-version">15.4.0</div>
+                    <div class="section-header">
+                        <span>📦 macOS 13 Series (Ventura)</span>
+                        <button class="section-toggle" onclick="toggleSection('ventura')">
+                            <i class="fas fa-chevron-down" id="ventura-icon"></i>
+                        </button>
+                    </div>
+
+                    <div class="section-content downloads-grid" id="ventura-content">
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.6.7</div>
+                                <div class="download-version latest">LATEST v13</div>
+                            </div>
+                            <div class="download-description">Latest Ventura release with security updates</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/51/28/082-44432-A_4NJSZXK8G5/v10fo5dlwd50fja3qbnhj7z9tp1dx41vq2/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.8 GB</span>
+                                </a>
+                            </div>
                         </div>
-                        <div class="download-description">Spring 2025 release</div>
-                        <div class="download-meta">
-                            <a href="https://swcdn.apple.com/content/downloads/62/63/082-01336-A_QFPSTWIJMM/yjbdoqrcvwy4hwiwxiu1aiwouljw5o2ayx/InstallAssistant.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download PKG
-                                <span class="download-size">~13.0 GB</span>
-                            </a>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.6.6</div>
+                                <div class="download-version">13.6.6</div>
+                            </div>
+                            <div class="download-description">Previous Ventura release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/43/58/082-16524-A_VHRNGIT194/ksdv19dcxx90ja7nronzpb4kr4val0imsz/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.7 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.6.5</div>
+                                <div class="download-version">13.6.5</div>
+                            </div>
+                            <div class="download-description">Spring 2024 release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/62/63/082-01336-A_QFPSTWIJMM/yjbdoqrcvwy4hwiwxiu1aiwouljw5o2ayx/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.6 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.6.4</div>
+                                <div class="download-version">13.6.4</div>
+                            </div>
+                            <div class="download-description">Spring 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/01/51/082-04099-A_5FSIOBKFKK/xjz2e7x52ajvp10tytehv9364baqaanrim/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.5 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.6.3</div>
+                                <div class="download-version">13.6.3</div>
+                            </div>
+                            <div class="download-description">Winter 2024 feature release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/39/51/072-70706-A_Q2E9RWYCSD/oddej58reimcphudve8mgtxmcjjp0t3cve/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.4 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.6.2</div>
+                                <div class="download-version">13.6.2</div>
+                            </div>
+                            <div class="download-description">Winter 2024 release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/11/60/072-08251-A_VJ2TWIZ7CM/mrkdsdl45umr07vwe27n8hfvubidmxgcbk/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.3 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.6.1</div>
+                                <div class="download-version">13.6.1</div>
+                            </div>
+                            <div class="download-description">Winter 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/52/42/072-44286-A_45NJHEFEDY/nxk2stn9edtjgfr3dqsh046dx4ti2h7w2s/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.2 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.6.0</div>
+                                <div class="download-version">13.6.0</div>
+                            </div>
+                            <div class="download-description">Winter 2024 feature release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/21/19/072-30111-A_4V7Y0VVH1Q/ie1hmy1uaj094z769s4zqmdaojp2vk4dkj/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.1 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.5.2</div>
+                                <div class="download-version">13.5.2</div>
+                            </div>
+                            <div class="download-description">Fall 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/14/63/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~12.0 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.5.1</div>
+                                <div class="download-version">13.5.1</div>
+                            </div>
+                            <div class="download-description">Fall 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/07/42/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~11.9 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.5.0</div>
+                                <div class="download-version">13.5.0</div>
+                            </div>
+                            <div class="download-description">Fall 2024 feature release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/00/21/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~11.8 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.4.1</div>
+                                <div class="download-version">13.4.1</div>
+                            </div>
+                            <div class="download-description">Summer 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/93/00/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~11.7 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.4.0</div>
+                                <div class="download-version">13.4.0</div>
+                            </div>
+                            <div class="download-description">Summer 2024 feature release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/86/39/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~11.6 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.3.1</div>
+                                <div class="download-version">13.3.1</div>
+                            </div>
+                            <div class="download-description">Spring 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/79/18/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~11.5 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.3.0</div>
+                                <div class="download-version">13.3.0</div>
+                            </div>
+                            <div class="download-description">Spring 2024 feature release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/72/57/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~11.4 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.2.1</div>
+                                <div class="download-version">13.2.1</div>
+                            </div>
+                            <div class="download-description">Winter 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/65/36/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~11.3 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.2.0</div>
+                                <div class="download-version">13.2.0</div>
+                            </div>
+                            <div class="download-description">Winter 2024 feature release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/58/15/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~11.2 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.1.2</div>
+                                <div class="download-version">13.1.2</div>
+                            </div>
+                            <div class="download-description">Fall 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/50/54/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~11.1 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.1.1</div>
+                                <div class="download-version">13.1.1</div>
+                            </div>
+                            <div class="download-description">Fall 2024 patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/43/33/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~11.0 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.1.0</div>
+                                <div class="download-version">13.1.0</div>
+                            </div>
+                            <div class="download-description">Fall 2024 feature release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/36/12/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~10.9 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.0.1</div>
+                                <div class="download-version">13.0.1</div>
+                            </div>
+                            <div class="download-description">Initial Ventura patch release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/28/51/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~10.8 GB</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Ventura 13.0.0</div>
+                                <div class="download-version">13.0.0</div>
+                            </div>
+                            <div class="download-description">Initial Ventura release</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/21/30/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~10.7 GB</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sequoia 15.3.1</div>
-                            <div class="download-version">15.3.1</div>
-                        </div>
-                        <div class="download-description">Spring 2025 patch release</div>
-                        <div class="download-meta">
-                            <a href="https://swcdn.apple.com/content/downloads/01/51/082-04099-A_5FSIOBKFKK/xjz2e7x52ajvp10tytehv9364baqaanrim/InstallAssistant.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download PKG
-                                <span class="download-size">~12.9 GB</span>
-                            </a>
-                        </div>
+                    <div class="section-header">
+                        <span>🔧 Additional Resources</span>
+                        <button class="section-toggle" onclick="toggleSection('resources')">
+                            <i class="fas fa-chevron-down" id="resources-icon"></i>
+                        </button>
                     </div>
 
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sequoia 15.3.0</div>
-                            <div class="download-version">15.3.0</div>
+                    <div class="section-content downloads-grid" id="resources-content">
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">Safari 18.5 (Sonoma)</div>
+                                <div class="download-version">18.5</div>
+                            </div>
+                            <div class="download-description">Safari browser update for Sonoma</div>
+                            <div class="download-meta">
+                                <a href="https://swcdn.apple.com/content/downloads/08/26/082-18361-A_O3VSRCP8K3/5vlwh79cz177ia1ws5w2aep4d46pknikt2/Safari18.5SonomaAuto.pkg" class="download-button" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                    <span class="download-size">~215 MB</span>
+                                </a>
+                            </div>
                         </div>
-                        <div class="download-description">Spring 2025 feature release</div>
-                        <div class="download-meta">
-                            <a href="https://swcdn.apple.com/content/downloads/39/51/072-70706-A_Q2E9RWYCSD/oddej58reimcphudve8mgtxmcjjp0t3cve/InstallAssistant.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download PKG
-                                <span class="download-size">~12.8 GB</span>
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sequoia 15.2.0</div>
-                            <div class="download-version">15.2.0</div>
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">Command Line Tools</div>
+                                <div class="download-version">15.3</div>
+                            </div>
+                            <div class="download-description">Xcode Command Line Tools for developers</div>
+                            <div class="download-meta">
+                                <a href="https://developer.apple.com/download/more/" class="download-button" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Developer Portal
+                                    <span class="download-size">~730 MB</span>
+                                </a>
+                            </div>
                         </div>
-                        <div class="download-description">Winter 2025 release</div>
-                        <div class="download-meta">
-                            <a href="https://swcdn.apple.com/content/downloads/11/60/072-08251-A_VJ2TWIZ7CM/mrkdsdl45umr07vwe27n8hfvubidmxgcbk/InstallAssistant.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download PKG
-                                <span class="download-size">~12.7 GB</span>
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sequoia 15.1.0</div>
-                            <div class="download-version">15.1.0</div>
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">macOS Recovery</div>
+                                <div class="download-version">Recovery</div>
+                            </div>
+                            <div class="download-description">macOS Recovery for system restoration</div>
+                            <div class="download-meta">
+                                <a href="https://support.apple.com/en-us/HT201314" class="download-button" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Recovery Guide
+                                    <span class="download-size">~1.2 GB</span>
+                                </a>
+                            </div>
                         </div>
-                        <div class="download-description">Winter 2024 release</div>
-                        <div class="download-meta">
-                            <a href="https://swcdn.apple.com/content/downloads/52/42/072-44286-A_45NJHEFEDY/nxk2stn9edtjgfr3dqsh046dx4ti2h7w2s/InstallAssistant.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download PKG
-                                <span class="download-size">~12.6 GB</span>
-                            </a>
-                        </div>
-                    </div>
 
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sequoia 15.0.1</div>
-                            <div class="download-version">15.0.1</div>
-                        </div>
-                        <div class="download-description">Initial Sequoia patch release</div>
-                        <div class="download-meta">
-                            <a href="https://swcdn.apple.com/content/downloads/21/19/072-30111-A_4V7Y0VVH1Q/ie1hmy1uaj094z769s4zqmdaojp2vk4dkj/InstallAssistant.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download PKG
-                                <span class="download-size">~12.5 GB</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sequoia 15.0.0</div>
-                            <div class="download-version">15.0.0</div>
-                        </div>
-                        <div class="download-description">Initial Sequoia release</div>
-                        <div class="download-meta">
-                            <a href="https://swcdn.apple.com/content/downloads/14/63/072-29965-A_JR3Q5P9LW7/qtu6yl2s14vidrhfnunfi1t7wid5dzxajm/InstallAssistant.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download PKG
-                                <span class="download-size">~12.4 GB</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="section-header">📦 macOS 14 Series (Sonoma)</div>
-
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sonoma 14.7.1</div>
-                            <div class="download-version">LATEST v14</div>
-                        </div>
-                        <div class="download-description">Latest Sonoma release with security updates</div>
-                        <div class="download-meta">
-                            <a href="https://swcdn.apple.com/content/downloads/51/28/082-44432-A_4NJSZXK8G5/v10fo5dlwd50fja3qbnhj7z9tp1dx41vq2/InstallAssistant.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download PKG
-                                <span class="download-size">~13.3 GB</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sonoma 14.6.1</div>
-                            <div class="download-version">14.6.1</div>
-                        </div>
-                        <div class="download-description">Previous Sonoma release</div>
-                        <div class="download-meta">
-                            <a href="https://updates.cdn-apple.com/2024SummerFCS/fullinstallers/062-52859/932E0A8F-6644-4759-82DA-F8FA8DEA806A/macOS_14.6.1.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download PKG
-                                <span class="download-size">~13.2 GB</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">macOS Sonoma 14.5.0</div>
-                            <div class="download-version">14.5.0</div>
-                        </div>
-                        <div class="download-description">Spring 2024 release</div>
-                        <div class="download-meta">
-                            <a href="https://swcdn.apple.com/content/downloads/00/41/052-96247-A_FUZBJ84CYF/u9szu6bpqkzxat5wfkxjjdogsip/InstallAssistant.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download PKG
-                                <span class="download-size">~13.0 GB</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="section-header">🔧 Additional Resources</div>
-
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">Safari 18.5 (Sonoma)</div>
-                            <div class="download-version">18.5</div>
-                        </div>
-                        <div class="download-description">Safari browser update for Sonoma</div>
-                        <div class="download-meta">
-                            <a href="https://swcdn.apple.com/content/downloads/08/26/082-18361-A_O3VSRCP8K3/5vlwh79cz177ia1ws5w2aep4d46pknikt2/Safari18.5SonomaAuto.pkg" class="download-button" download>
-                                <i class="fas fa-download"></i>
-                                Download PKG
-                                <span class="download-size">~215 MB</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="download-item">
-                        <div class="download-header">
-                            <div class="download-title">Command Line Tools</div>
-                            <div class="download-version">15.3</div>
-                        </div>
-                        <div class="download-description">Xcode Command Line Tools for developers</div>
-                        <div class="download-meta">
-                            <a href="https://developer.apple.com/download/more/" class="download-button" target="_blank">
-                                <i class="fas fa-external-link-alt"></i>
-                                Developer Portal
-                                <span class="download-size">~730 MB</span>
-                            </a>
+                        <div class="download-item">
+                            <div class="download-header">
+                                <div class="download-title">Firmware Updates</div>
+                                <div class="download-version">Latest</div>
+                            </div>
+                            <div class="download-description">System firmware and security updates</div>
+                            <div class="download-meta">
+                                <a href="https://support.apple.com/en-us/HT201518" class="download-button" target="_blank">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Firmware Guide
+                                    <span class="download-size">Varies</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -631,5 +1279,87 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // View toggle functionality
+        function toggleView(viewType) {
+            const container = document.querySelector('.terminal-content-wrapper');
+            const buttons = document.querySelectorAll('.view-btn');
+            
+            // Remove all view classes
+            container.classList.remove('grid-view', 'list-view', 'compact-view');
+            
+            // Add new view class
+            container.classList.add(viewType + '-view');
+            
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Section toggle functionality
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const icon = document.getElementById(sectionId + '-icon');
+            
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                icon.classList.remove('fa-chevron-right');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                content.classList.add('collapsed');
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-right');
+            }
+        }
+
+        // Initialize sections as expanded
+        document.addEventListener('DOMContentLoaded', function() {
+            // All sections start expanded by default
+            const sections = ['sequoia', 'sonoma', 'ventura', 'resources'];
+            sections.forEach(section => {
+                const content = document.getElementById(section + '-content');
+                const icon = document.getElementById(section + '-icon');
+                if (content && icon) {
+                    content.classList.remove('collapsed');
+                    icon.classList.add('fa-chevron-down');
+                    icon.classList.remove('fa-chevron-right');
+                }
+            });
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + G for grid view
+            if ((e.ctrlKey || e.metaKey) && e.key === 'g') {
+                e.preventDefault();
+                toggleView('grid');
+                document.querySelector('.view-btn[onclick*="grid"]').classList.add('active');
+            }
+            // Ctrl/Cmd + L for list view
+            if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
+                e.preventDefault();
+                toggleView('list');
+                document.querySelector('.view-btn[onclick*="list"]').classList.add('active');
+            }
+            // Ctrl/Cmd + C for compact view
+            if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+                e.preventDefault();
+                toggleView('compact');
+                document.querySelector('.view-btn[onclick*="compact"]').classList.add('active');
+            }
+        });
+
+        // Add download tracking
+        document.querySelectorAll('.download-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const title = this.closest('.download-item').querySelector('.download-title').textContent;
+                console.log(`Download started: ${title}`);
+                
+                // Optional: Add analytics tracking here
+                // gtag('event', 'download', { 'file_name': title });
+            });
+        });
+    </script>
 </body>
 </html>
