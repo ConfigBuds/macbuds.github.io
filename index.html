@@ -6,11 +6,19 @@
   <meta http-equiv="refresh" content="0; url=https://configbuds.github.io/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
+<<<<<<< HEAD
     // JavaScript redirect as fallback
     window.location.replace("https://configbuds.github.io/");
+=======
+    // JavaScript redirect as a fallback if meta refresh is blocked
+    window.location.href = "https://configbuds.github.io/";
+>>>>>>> 2f1928d9e0e029ee5eff678ce3fce1c59e344131
   </script>
 </head>
 <body>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=https://configbuds.github.io/" />
+  </noscript>
   <div style="text-align: center; margin-top: 2em;">
     <p>If you are not redirected automatically, <a href="https://configbuds.github.io/" rel="noopener">click here</a>.</p>
   </div>
